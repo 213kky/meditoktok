@@ -1,0 +1,107 @@
+/* 베너고정 */
+body {
+  font-weight: 600;
+}
+
+body a {
+  color: black;
+  text-decoration: none;
+}
+
+.sign {
+  display: flex;
+  justify-content: flex-end;
+  margin-right: 20%;
+}
+
+.sign span {
+  font-size: 20px;
+  margin-right: 10px;
+}
+
+.mainLogo {
+  display: flex;
+  justify-content: center;
+  font-size: 55px;
+  margin-right: 20%;
+  margin-left: 20%;
+}
+.mainLogo div{
+  font-size: 20px;
+}
+.hospitalName{
+  display: flex;
+  justify-content: flex-start;
+  margin-left: 30%;
+  font-size: 20px;
+}
+.headerNav {
+  width: 1017px;
+  height: 50px;
+  border-top: 2px solid black;
+  border-bottom: 2px solid black;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 30px;
+}
+
+.headerNav ul, .patient ul {
+  padding-inline-start: 0px;
+  margin: auto;
+}
+
+.headerNav ul li, .patient ul li {
+  list-style: none;
+  float: left;
+  font-size: 20px;
+  text-align: center;
+  line-height: 50px;
+  vertical-align: middle;
+  text-align: center;
+}
+
+.headerNav ul li a , .patient ul li a{
+  display: block;
+  width: 339px;
+  height: 50px;
+}
+
+.headerNav ul li a:hover {
+  background: rgba(0, 255, 56, 0.28);
+}
+
+/* 공지사항 */
+.hospital fieldset {
+	border: 1px solid rgb(0, 0, 0);
+	margin: 30px;
+}
+		
+.hospital label, #notice {
+	font-size: 20px;
+  font-weight: lighter;
+	padding-bottom: 10px;	
+}
+			
+.hospital ul li, #notice{
+	line-height: 30px;
+	list-style: none;
+	padding: 10px 30px;
+	margin-bottom: 2px;
+}
+
+.hospital input[type=text], .hospital input[type=tel], .hospital input[type=url] {  /* 속성 선택자 사용 */
+	border: 1px solid #ccc;  /* 텍스트 필드 테두리 지정 */
+	border-radius: 3px;  /* 텍스트 필드 모서리를 둥글게 지정 */
+	font-size: 20px;  /* 텍스트 필드 안의 글자 크기 지정 */
+	padding: 5px;  /* 텍스트 필드와 내용 사이의 패딩 지정 */
+	width: 500px;  /* 텍스트 필드 너비 지정 */
+}
+
+#notice input[type=text] {
+  border: 1px solid #ccc;  /* 텍스트 필드 테두리 지정 */
+	border-radius: 3px;  /* 텍스트 필드 모서리를 둥글게 지정 */
+	font-size: 15px;  /* 텍스트 필드 안의 글자 크기 지정 */
+	padding: 5px;  /* 텍스트 필드와 내용 사이의 패딩 지정 */
+	width: 900px;
+  height: 200px;
+}

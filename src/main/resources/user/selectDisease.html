@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="sample.css">
+    <title>메디톡톡</title>
+</head>
+<body>
+<header>
+    <div class="sign">
+        <span><a href="#">OOO님</a></span>
+        <span>|</span>
+        <span><a href="#">로그아웃</a></span>
+    </div>
+    <div class="mainLogo"><a href="#">메디톡톡</a></div>
+    <nav class="headerNav">
+        <ul>
+            <li style="background: rgba(0, 255, 56, 0.28);"><a href="#">증상 검색</a></li>
+            <li><a href="#">질병 정보</a></li>
+            <li><a href="#">병원 예약</a></li>
+            <li><a href="#">마이페이지</a></li>
+        </ul>
+    </nav>
+</header>
+<section class="contents">
+        <div class="disease" style="width: 790px;">
+            <table border="1" cellspacing="0">
+                <colgroup>
+                    <col width="8%">
+                    <col width="8%">
+                    <col width="8%">
+                    <col width="8%">
+                    <col width="8%">
+                    <col width="8%">
+                    <col width="8%">
+                    <col width="8%">
+                </colgroup>
+                <tr>
+                    <th bgcolor="#98FB98"><a href="#">머리</a></th>
+                    <th><a href="#">목</a></th>
+                    <th><a href="#">가슴</a></th>
+                    <th><a href="#">배</a></th>
+                    <th><a href="#">등</a></th>
+                    <th><a href="#">엉덩이</a></th>
+                    <th><a href="#">다리</a></th>
+                    <th><a href="#">그외</a></th>
+                </tr>
+                <div>
+                <tr>
+                    <td colspan="8">
+                        <table style="width: 100%">
+                            <tbody style="border: hidden">
+                            <tr>
+                                <td><input type="checkbox"></td>
+                                    <td style="height: 40px">두통</td>
+                                <td><input type="checkbox"></td>
+                                    <td style="height: 40px">강박증</td>
+                                <td><input type="checkbox"></td>
+                                    <td style="height: 40px">건망증</td>
+                                <td><input type="checkbox"></td>
+                                    <td style="height: 40px">고산병</td>
+                                <td><input type="checkbox"></td>
+                                    <td style="height: 40px">뇌출혈</td>
+                            </tr>
+                            <tr>
+                                <td><input type="checkbox"></td>
+                                    <td style="height: 40px">어지러움</td>
+                                <td><input type="checkbox"></td>
+                                    <td style="height: 40px">기억장애</td>
+                                <td><input type="checkbox"></td>
+                                    <td style="height: 40px">무의식</td>
+                                <td><input type="checkbox"></td>
+                                    <td style="height: 40px">치매</td>
+                                <td><input type="checkbox"></td>
+                                    <td style="height: 40px">두부외상</td>
+                            </tr>
+                            <tr>
+                                <td><input type="checkbox"></td>
+                                    <td style="height: 40px"><div>안면마비</div></td>
+                                <td><input type="checkbox"></td>
+                                    <td style="height: 40px"><div>편두통</div></td>
+                                <td><input type="checkbox"></td>
+                                    <td style="height: 40px"><div>졸림</div></td>
+                                <td><input type="checkbox"></td>
+                                    <td style="height: 40px"><div>두피건조</div></td>
+                                <td><input type="checkbox"></td>
+                                    <td style="height: 40px"><div>안면통증</div></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </td>
+                </tr>
+            </table>
+        </div>
+    <div class="diseaseSearchFrame">
+        <div class="diseaseSearch">증상 검색
+            <textarea cols="30" rows="4" class="comment"
+                      placeholder="증상을 입력해주세요."></textarea>
+            <div class="search"></div></div>
+        <div class="reset"><a href="#">선택 초기화</a></div>
+        <div class="complete"><a href="#">선택 완료</a></div>
+    </div>
+    <div class="nothing">검색결과가 없습니다.</div>
+    <div class="selectDisease">선택한 증상
+        <div style="margin-left: 70px;">두통</div>
+        <div style="margin-left: 50px;">목의 통증</div>
+    </div>
+    <div class="diseaseResult">
+        <table style="margin-left: auto; margin-right: auto; width: 250px;">
+            <tr>
+                <th style="height: 30px; font-size: 22px"><a href="#">감기</a></th>
+            </tr>
+            <tr >
+                <td style="height: 30px;">관련질환</td>
+                <td style="height: 30px;">A</td>
+                <td style="height: 30px;">B</td>
+                <td style="height: 30px;">C</td>
+                <td style="height: 30px;">D</td>
+                <td style="height: 30px;">E</td>
+            </tr>
+            <tr>
+                <td style="height: 30px;">관련용어</td>
+                <td style="height: 30px;">A1</td>
+                <td style="height: 30px;">B1</td>
+                <td style="height: 30px;">C1</td>
+                <td style="height: 30px;">D1</td>
+                <td style="height: 30px;">E1</td>
+            </tr>
+            <tr>
+                <td style="height: 30px;">동의어</td>
+                <td style="height: 30px;">A2</td>
+                <td style="height: 30px;">B2</td>
+                <td style="height: 30px;">C2</td>
+                <td style="height: 30px;">D2</td>
+                <td style="height: 30px;">E2</td>
+            </tr>
+        </table>
+    </div>
+    <div class="selectPage">
+        <div class="page1"><a href="#">1</a></div>
+        <div class="page2"><a href="#">2</a></div>
+        <div class="page3"><a href="#">3</a></div>
+    </div>
+</section>
+<aside>
+    <div class="quickHospital">
+        자주 찾는 병원
+        <ul>
+            <span>로그인이 필요한 서비스입니다.</span>
+            <li><a href="#">OOO 병원</a></li>
+            <li><a href="#">OOO 병원</a></li>
+            <li><a href="#">OOO 병원</a></li>
+        </ul>
+    </div>
+    <div class="quickDisease">
+        자주 찾는 질병
+        <ul>
+            <span>로그인이 필요한 서비스입니다.</span>
+            <li><a href="#">A 질병</a></li>
+            <li><a href="#">B 질병</a></li>
+            <li><a href="#">C 질병</a></li>
+        </ul>
+    </div>
+</aside>
+<footer>
+
+</footer>
+</body>
+</html>
+<style>
+.disease {
+  width: 725px; height:175px;
+  overflow: auto;
+  border:2px solid black;
+  margin-left: 140px;
+}
+table {
+  border-spacing: 0;
+  border-collapse: collapse;
+}
+th {
+  padding: 12px;
+}
+td {
+    text-align: center;
+}
+.diseaseSearchFrame {
+    display: flex;
+}
+.diseaseSearch {
+    width: 450px;
+    height: 20px;
+    border: 2px solid black;
+    margin-left: 140px;
+    margin-top: 50px;
+    line-height: 20px;
+    padding: 15px;
+}
+.comment {
+    width: 290px;
+    height: 14px;
+    margin-top: -7px;
+    margin-left: 7px;
+    vertical-align: top;
+    resize: none;
+    border: 1.5px solid #000000;
+    padding: 10px;
+    }
+.search {
+    display: inline-block;
+    float: right;
+    width: 40px;
+    height: 30px;
+    border: 2px solid black;
+    margin-top: -5px;
+}
+.reset {
+    width: 100px;
+    height: 20px;
+    border: 2px solid black;
+    margin-left: 20px;
+    margin-top: 50px;
+    line-height: 20px;
+    padding: 15px;
+    text-align: center;
+}
+.complete {
+    width: 100px;
+    height: 20px;
+    border: 2px solid black;
+    margin-left: 20px;
+    margin-top: 50px;
+    line-height: 20px;
+    padding: 15px;
+    text-align: center;
+}
+.nothing {
+    margin-left: 140px;
+}
+.selectDisease {
+    display: flex;
+    width: 760px;
+    height: 20px;
+    border: 2px solid black;
+    margin-left: 140px;
+    margin-top: 20px;
+    line-height: 20px;
+    padding: 15px;
+}
+.diseaseResult {
+    width: 760px;
+    height: 150px;
+    border: 2px solid black;
+    margin-left: 140px;
+    margin-top: 20px;
+    line-height: 20px;
+    padding: 15px;
+}
+.selectPage {
+    display: flex;
+    margin-bottom: 50px;
+}
+.page1 {
+    width: 10px;
+    height: 10px;
+    border: 2px solid black;
+    margin-left: 450px;
+    margin-top: 50px;
+    line-height: 10px;
+    padding: 15px;
+    text-align: center;
+    background: rgba(0, 255, 56, 0.28);
+}
+.page2 {
+    width: 10px;
+    height: 10px;
+    border: 2px solid black;
+    margin-left: 20px;
+    margin-top: 50px;
+    line-height: 10px;
+    padding: 15px;
+    text-align: center;
+}
+.page3 {
+    width: 10px;
+    height: 10px;
+    border: 2px solid black;
+    margin-left: 20px;
+    margin-top: 50px;
+    line-height: 10px;
+    padding: 15px;
+    text-align: center;
+}
+
+</style>

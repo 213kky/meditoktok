@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="managerSample.css">
+  <link rel="stylesheet" href="notice.css">
+  <title>메디톡톡 관리자</title>
+</head>
+<body>
+<header>
+  <div class="sign">
+    <span><a href="#">로그인</a></span>
+    <span>|</span>
+    <span><a href="#">회원가입</a></span>
+  </div>
+  <div class="mainLogo"><a href="#">메디톡톡</a><div>관리자</div></div>
+  <div class="hospitalName">OOO 병원</div>
+  <nav class="headerNav">
+    <ul>
+      <li><a href="#">병원 정보 수정 / 공지사항</a></li>
+      <li><a href="#">예약시간 관리</a></li>
+      <li><a href="#">예약자 관리</a></li>
+    </ul>
+  </nav>
+</header>
+<section class="contents">
+<h1>병원 이름</h1>
+  <form>
+    <fieldset class="hospital">
+      <ul>
+        <li>
+          <label for="medical">진료과목</label>
+          <input type="text" id="medical">
+        </li>
+        <li>
+          <label for="doctorName">의료진</label>
+          <input type="text" id="doctorName">
+        </li>
+        <li>
+          <label for="time">운영시간</label>
+          <input type="text" id="time">
+        </li>        
+        <li>
+          <label for="addr">주소</label>
+          <input type="text" id="addr">
+        </li>
+        <li>
+          <label for="phone">전화번호</label>
+          <input type="tel" id="phone">
+        </li>
+        <li>
+          <label for="hospitalUrl">병원 URL</label>
+          <input type="url" id="hospitalUrl">
+        </li>
+      </ul>
+    </fieldset><br>
+    <fieldset>
+      <ul id="notice">
+        <li>
+          <label for="no">공지사항</label><br>
+          <input type="text" id="no">
+        </li>
+      </ul>
+    </fieldset>
+  </form>
+</section>
+<footer>
+
+</footer>
+</body>
+</html>
