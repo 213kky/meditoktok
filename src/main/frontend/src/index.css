@@ -811,9 +811,10 @@ aside span{
   padding: 15px;
   text-align: center;
 }
+
 .foundDisease {
-  margin-left: 350px;
-}
+   margin-left: 350px;
+ }
 .diseaseList {
   display: flex;
   flex-wrap: wrap;
@@ -824,13 +825,6 @@ aside span{
   margin-bottom: 50px;
   padding: 15px;
 }
-/*
-
-
-
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-
-*/
 .disease0 {
   border: 2px solid black;
   width: 350px;
@@ -841,14 +835,13 @@ aside span{
   padding: 30px;
 }
 .FDTable {
-  border: hidden;
-  margin-left: auto;
-  margin-top: -10px;
+  margin-top: -25px;
   font-size: 20px;
+  line-height: 200%;
+}
+.FDTable th {
+  vertical-align: middle;
 }
 .FDTable:first-child {
   width: 500px;
-}
-.disease1-1 {
-  width: 165px;
 }

@@ -6,24 +6,30 @@ import jakarta.persistence.*;
 @Inheritance(strategy = InheritanceType.JOINED)
 public class Member {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long serial_number;
-    private String id;
+    private Long id;
+    private String account;
     private String pw;
-
-    public Long getSerial_number() {
-        return serial_number;
-    }
-
-    public void setSerial_number(Long serial_number) {
-        this.serial_number = serial_number;
-    }
-
-    public String getId() {
+    private String eMail;
+    private String phoneNumber;
+    private String name;
+    private String birth;
+    private Boolean isAdmin;
+    private Gender gender; //MALE, FEMALE
+    private Boolean mailAgree;
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getAccount() {
+        return account;
+    }
+
+    public void setAccount(String account) {
+        this.account = account;
     }
 
     public String geteMail() {
@@ -90,13 +96,7 @@ public class Member {
         this.pw = pw;
     }
 
-    private String eMail;
-    private String phoneNumber;
-    private String name;
-    private String birth;
-    private Boolean isAdmin;
-    private Gender gender; //MALE, FEMALE
-    private Boolean mailAgree;
+
 
 
 }
