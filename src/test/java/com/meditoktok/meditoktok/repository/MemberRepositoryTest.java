@@ -22,10 +22,14 @@ class MemberRepositoryTest {
         Member member= new Member();
         member.setId("제발요");
         member.setPw("plz");
-        memberRepository.save(member);
-
-        List<Member> list = memberRepository.findAll();
-        System.out.println("list = " + list);
+        Long serialNumber = member.getSerial_number();
+        System.out.println("serialNumber = " + serialNumber);
+        String id = member.getId();
+        System.out.println("id = " + id);
+//        memberRepository.save(member);
+//
+//        List<Member> list = memberRepository.findAll();
+//        System.out.println("list = " + list);
         
     }
 }

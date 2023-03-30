@@ -1,16 +1,22 @@
 package com.meditoktok.meditoktok.domain;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Inheritance;
-import jakarta.persistence.InheritanceType;
+import jakarta.persistence.*;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
 public class Member {
-    @Id
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long serial_number;
     private String id;
     private String pw;
+
+    public Long getSerial_number() {
+        return serial_number;
+    }
+
+    public void setSerial_number(Long serial_number) {
+        this.serial_number = serial_number;
+    }
 
     public String getId() {
         return id;
