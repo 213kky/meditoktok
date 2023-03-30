@@ -1,6 +1,9 @@
 package com.meditoktok.meditoktok.repository;
 
+import com.meditoktok.meditoktok.domain.Admin;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-public interface AdminRepository extends JpaRepository {
+@Repository
+public interface AdminRepository extends JpaRepository<Admin, Long> {
 }
