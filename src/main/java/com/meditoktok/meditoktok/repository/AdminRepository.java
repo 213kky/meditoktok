@@ -1,4 +1,6 @@
 package com.meditoktok.meditoktok.repository;
 
-public interface AdminRepository extends JpaR{
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface AdminRepository extends JpaRepository {
 }

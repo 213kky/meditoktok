@@ -1,5 +1,7 @@
 package com.meditoktok.meditoktok.domain;
 
+import com.fasterxml.jackson.annotation.JsonTypeId;
+
 public class Member {
     String id;
     String pw;
