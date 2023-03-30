@@ -8,8 +8,8 @@ export default function Manager() {
         <BrowserRouter>
             <Header />
             <Routes>
-                <Route path="/manager" element={<Page1 />} />
-                <Route path="/a" element={<Page2/>} />
+                <Route path="/manager1" element={<Page1 />} />
+                <Route path="/manager2" element={<Page2/>} />
                 {/* <Route path="/b" element={<Page3 />} /> */}
             </Routes>
         </BrowserRouter>

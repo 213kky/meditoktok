@@ -8,7 +8,7 @@ public class Member {
     String name;
     String birth;
     Boolean isAdmin;
-    String gender;
+    Gender gender; //MALE, FEMALE
     Boolean mailAgree;
 
 }
