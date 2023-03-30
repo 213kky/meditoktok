@@ -22,7 +22,7 @@ class MemberRepositoryTest {
         member.setId("제발요");
         member.setPw("plz");
         memberRepository.save(member);
-
+    //커밋용 주석
         List<Member> list = memberRepository.findAll();
         System.out.println("list = " + list);
         
