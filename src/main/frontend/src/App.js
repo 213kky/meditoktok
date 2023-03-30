@@ -13,6 +13,7 @@ import Two1 from "./component/two1";
 import Change from "./component/change";
 import EmptyPage from "./component/EmptyPage";
 import Sign from "./component/Sign";
+import Signup from "./component/SignUp";
 
 
 function App() {
@@ -33,6 +34,7 @@ function App() {
                         <Route path="/hospital_reservation/2" element={<Two1/>}/>
                         <Route path="/my_page/change" element={<Change/>}/>
                         <Route path="/sign" element={<Sign/>}/>
+                        <Route path="/signup" element={<Signup/>}/>
                         <Route path="*" element={<EmptyPage/>}/>
                     </Routes>
                     <QuickMenu/>
