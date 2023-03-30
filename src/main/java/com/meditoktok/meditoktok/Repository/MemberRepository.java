@@ -1,4 +1,4 @@
-package com.meditoktok.meditoktok.repository;
+package com.meditoktok.meditoktok.Repository;
 
 import com.meditoktok.meditoktok.domain.Member;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -8,6 +8,6 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface MemberRepository extends JpaRepository<Member, Long> {
+public interface MemberRepository extends JpaRepository<Member, String> {
 
 }
