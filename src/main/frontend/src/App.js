@@ -13,16 +13,13 @@ import Two1 from "./component/two1";
 import Change from "./component/change";
 import EmptyPage from "./component/EmptyPage";
 import Sign from "./component/Sign";
-import Page1 from "./component/mananger/Page1";
-import Page2 from "./component/mananger/Page2";
-import Page3 from "./component/mananger/Page3";
-import mHeader from "./component/mananger/component/Header"
+import Manager from "./Manager";
 
 function App() {
 
         return (
             <BrowserRouter>
-                <div className="App">
+
                     <Header/>
                     <Routes>
                         <Route path="/" element={<SymptomSearch/>}/>
@@ -36,10 +33,11 @@ function App() {
                         <Route path="/hospital_reservation/2" element={<Two1/>}/>
                         <Route path="/my_page/change" element={<Change/>}/>
                         <Route path="/sign" element={<Sign/>}/>
+                        <Route path="/manager" element={<Manager/>}/>
                         <Route path="*" element={<EmptyPage/>}/>
                     </Routes>
                     <QuickMenu/>
-                </div>
+
 
             </BrowserRouter>
         );

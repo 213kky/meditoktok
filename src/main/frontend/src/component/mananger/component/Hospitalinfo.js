@@ -1,4 +1,4 @@
-import './Hospitalinfo.css'
+// import './Hospitalinfo.css'
 
 export default function Hospitalinfo() {
 
