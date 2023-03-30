@@ -7,7 +7,7 @@ export default function Header() {
             <div className="sign">
                 <span><Link to="/sign">로그인</Link></span>
                 <span>|</span>
-                <span><Link to="/">회원가입</Link></span>
+                <span><Link to="/signup">회원가입</Link></span>
             </div>
             <div className="mainLogo"><Link to="/">메디톡톡</Link></div>
             <div className="headerNav">

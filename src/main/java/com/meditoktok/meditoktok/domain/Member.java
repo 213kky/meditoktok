@@ -1,8 +1,14 @@
 package com.meditoktok.meditoktok.domain;
 
-import com.fasterxml.jackson.annotation.JsonTypeId;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Inheritance;
+import jakarta.persistence.InheritanceType;
 
+@Entity
+@Inheritance(strategy = InheritanceType.JOINED)
 public class Member {
+    @Id
     String id;
     String pw;
     String eMail;
