@@ -20,6 +20,62 @@ public class Member {
         this.id = id;
     }
 
+    public String geteMail() {
+        return eMail;
+    }
+
+    public void seteMail(String eMail) {
+        this.eMail = eMail;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getBirth() {
+        return birth;
+    }
+
+    public void setBirth(String birth) {
+        this.birth = birth;
+    }
+
+    public Boolean getAdmin() {
+        return isAdmin;
+    }
+
+    public void setAdmin(Boolean admin) {
+        isAdmin = admin;
+    }
+
+    public Gender getGender() {
+        return gender;
+    }
+
+    public void setGender(Gender gender) {
+        this.gender = gender;
+    }
+
+    public Boolean getMailAgree() {
+        return mailAgree;
+    }
+
+    public void setMailAgree(Boolean mailAgree) {
+        this.mailAgree = mailAgree;
+    }
+
     public String getPw() {
         return pw;
     }
@@ -28,13 +84,13 @@ public class Member {
         this.pw = pw;
     }
 
-    String eMail;
-    String phoneNumber;
-    String name;
-    String birth;
-    Boolean isAdmin;
-    Gender gender; //MALE, FEMALE
-    Boolean mailAgree;
+    private String eMail;
+    private String phoneNumber;
+    private String name;
+    private String birth;
+    private Boolean isAdmin;
+    private Gender gender; //MALE, FEMALE
+    private Boolean mailAgree;
 
 
 }
