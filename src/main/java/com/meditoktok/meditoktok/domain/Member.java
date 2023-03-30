@@ -11,4 +11,5 @@ public class Member {
     Gender gender; //MALE, FEMALE
     Boolean mailAgree;
 
+
 }
