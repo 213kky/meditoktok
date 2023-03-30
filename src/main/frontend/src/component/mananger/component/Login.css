@@ -1,0 +1,21 @@
+.Log {
+  width: 1014px;
+  margin-right: auto;
+  margin-left: auto;
+  margin-top: 50px;
+}
+
+.commentBox {
+  margin-left: 10px;
+  margin-top: 10px;
+  font-size: 17px;
+}
+
+.comment {
+  width: 695px;
+  height: 60px;
+  margin-left: 10px;
+  vertical-align: top;
+  resize: none;
+  border: 1.5px solid #000000;
+}

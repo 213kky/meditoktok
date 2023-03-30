@@ -1,0 +1,76 @@
+body {
+  font-weight: 600;
+}
+
+body a {
+  color: black;
+  text-decoration: none;
+}
+
+.sign {
+  display: flex;
+  justify-content: flex-end;
+  margin-right: 20%;
+}
+
+.sign span {
+  font-size: 20px;
+  margin-right: 10px;
+}
+
+.mainLogo {
+  display: flex;
+  justify-content: center;
+  font-size: 55px;
+  margin-right: 20%;
+  margin-left: 20%;
+}
+
+
+.log {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 2%;
+  margin-right: 10%;
+}
+
+.hospitalName {
+  display: flex;
+  justify-content: flex-start;
+  margin-left: 10%;
+}
+
+.headerNav {
+  width: 1017px;
+  height: 50px;
+  border-top: 2px solid black;
+  border-bottom: 2px solid black;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 30px;
+}
+
+.headerNav ul {
+  padding-inline-start: 0px;
+  margin: auto;
+}
+
+.headerNav ul li {
+  list-style: none;
+  float: left;
+  font-size: 20px;
+  text-align: center;
+  line-height: 50px;
+  vertical-align: middle;
+  text-align: center;
+}
+
+.headerNav ul li a {
+  display: block;
+  width: 254px;
+  height: 50px;
+}
+
+.headerNav ul li a:hover {
+  background: rgba(0, 255, 56, 0.28);
+}
