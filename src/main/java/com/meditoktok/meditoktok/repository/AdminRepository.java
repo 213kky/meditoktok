@@ -1,4 +1,4 @@
-package com.meditoktok.meditoktok.Repository;
+package com.meditoktok.meditoktok.repository;
 
 import com.meditoktok.meditoktok.domain.Admin;
 import org.springframework.data.jpa.repository.JpaRepository;
