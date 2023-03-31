@@ -14,7 +14,7 @@ import Change from "./component/change";
 import EmptyPage from "./component/EmptyPage";
 import Sign from "./component/Sign";
 import Signup from "./component/SignUp";
-
+import MainPage from "./component/MainPage";
 
 function App() {
 
@@ -23,7 +23,7 @@ function App() {
 
                     <Header/>
                     <Routes>
-                        <Route path="/" element={<SymptomSearch/>}/>
+                        <Route path="/" element={<MainPage/>}/>
                         <Route path="/symptom_search" element={<SymptomSearch/>}/>
                         <Route path="/disease_search" element={<DiseaseSearch/>}/>
                         <Route path="/hospital_reservation" element={<HospitalReservation/>}/>
