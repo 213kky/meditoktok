@@ -15,6 +15,8 @@ public class Member {
     private String birth;
     private Boolean isAdmin;
     private Boolean mailAgree;
+
+
     public Long getId() {
         return id;
     }
@@ -29,6 +31,14 @@ public class Member {
 
     public void setAccount(String account) {
         this.account = account;
+    }
+
+    public String getPw() {
+        return pw;
+    }
+
+    public void setPw(String pw) {
+        this.pw = pw;
     }
 
     public String geteMail() {
@@ -63,11 +73,11 @@ public class Member {
         this.birth = birth;
     }
 
-    public Boolean getAdmin() {
+    public Boolean getIsAdmin() {
         return isAdmin;
     }
 
-    public void setAdmin(Boolean admin) {
+    public void setIsAdmin(Boolean admin) {
         isAdmin = admin;
     }
 
@@ -78,16 +88,4 @@ public class Member {
     public void setMailAgree(Boolean mailAgree) {
         this.mailAgree = mailAgree;
     }
-
-    public String getPw() {
-        return pw;
-    }
-
-    public void setPw(String pw) {
-        this.pw = pw;
-    }
-
-
-
-
 }
