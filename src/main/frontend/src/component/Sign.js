@@ -1,4 +1,3 @@
-import {Link} from "react-router-dom";
 import React, { useState } from "react";
 export default function Sign() {
     const [username, setUsername] = useState("");
@@ -23,7 +22,6 @@ export default function Sign() {
                 </div>
                 <button type="submit">로그인</button>
             </form>
-
 
         </section>
     );
