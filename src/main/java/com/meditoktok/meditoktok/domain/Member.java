@@ -14,7 +14,6 @@ public class Member {
     private String name;
     private String birth;
     private Boolean isAdmin;
-    private Gender gender; //MALE, FEMALE
     private Boolean mailAgree;
     public Long getId() {
         return id;
@@ -70,14 +69,6 @@ public class Member {
 
     public void setAdmin(Boolean admin) {
         isAdmin = admin;
-    }
-
-    public Gender getGender() {
-        return gender;
-    }
-
-    public void setGender(Gender gender) {
-        this.gender = gender;
     }
 
     public Boolean getMailAgree() {
