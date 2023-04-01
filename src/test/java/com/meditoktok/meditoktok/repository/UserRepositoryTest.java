@@ -19,7 +19,7 @@ class UserRepositoryTest {
 
 //        user.setAccount("ASDd");
         user.setName("asds");
-        user.seteMail("kkkk");
+//        user.seteMail("kkkk");
         user.setPw("sad");
         user.setPhoneNumber("010101");
         user.setBirth("97972");

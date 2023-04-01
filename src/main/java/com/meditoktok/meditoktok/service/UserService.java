@@ -11,7 +11,6 @@ public class UserService {
     /**
      * 로그인
      */
-
     @Autowired
     private UserRepository userRepository;
 
@@ -38,7 +37,15 @@ public class UserService {
         return userRepository.save(user);
     }
 
+    public User findAccount(String name, String birth, String email) {
+        Optional<User> userOptional = Optional.ofNullable(userRepository.findByNameAndBirthAndEmail(name, birth, email));
+        if (userOptional.isPresent()) {
+            return userOptional.get();
 
+        } else {
+            throw new RuntimeException("정보에 해당하는 아이디가 없습니다.");
+        }
+    }
 
 
 }

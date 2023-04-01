@@ -22,7 +22,7 @@ export default function UserSignUp() {
         const formData = {
             account: account,
             pw: password,
-            eMail: email,
+            email: email,
             phoneNumber: phoneNumber,
             name: name,
             birth: birth,
@@ -36,7 +36,9 @@ export default function UserSignUp() {
             .then(response => {
                 // console.log(response);
                 alert(response.data);
+                if(response.data!="이미 사용중인 아이디입니다."){
                 navigate("/login");
+                }
             })
             .catch(error => {
                 console.error(error);

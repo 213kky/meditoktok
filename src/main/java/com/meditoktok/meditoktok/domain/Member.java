@@ -9,7 +9,7 @@ public class Member {
     private Long id;
     private String account;
     private String pw;
-    private String eMail;
+    private String email;
     private String phoneNumber;
     private String name;
     private String birth;
@@ -41,12 +41,12 @@ public class Member {
         this.pw = pw;
     }
 
-    public String geteMail() {
-        return eMail;
+    public String getEmail() {
+        return email;
     }
 
-    public void seteMail(String eMail) {
-        this.eMail = eMail;
+    public void setEmail(String eMail) {
+        this.email = eMail;
     }
 
     public String getPhoneNumber() {

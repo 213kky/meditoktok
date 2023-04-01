@@ -51,4 +51,14 @@ public class UserController {
         }
     }
 
+    @PostMapping("/findAccount")
+    public String findAccount(@RequestBody UserFindAccount userFindAccount){
+        try{
+            User user = userService.findAccount(userFindAccount.getName(), userFindAccount.getBirth(), userFindAccount.getEmail());
+            return user.getAccount() + "입니다.";
+        } catch (Exception e){
+            return e.getMessage();
+        }
+    }
+
 }

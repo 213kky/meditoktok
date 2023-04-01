@@ -17,6 +17,7 @@ import Signup from "./component/SignUp";
 import MainPage from "./component/MainPage";
 import UserSignUp from "./component/UserSignUp";
 import ManagerSignUp from "./component/ManagerSignUp";
+import FindAccount from "./component/FindAccount";
 
 function User() {
 
@@ -39,6 +40,7 @@ function User() {
                 <Route path="/signup" element={<Signup/>}/>
                 <Route path="/signup/user" element={<UserSignUp/>}/>
                 <Route path="/signup/manager" element={<ManagerSignUp/>}/>
+                <Route path="/findAccount" element={<FindAccount/>}/>
                 <Route path="*" element={<EmptyPage/>}/>
             </Routes>
             <QuickMenu/>
