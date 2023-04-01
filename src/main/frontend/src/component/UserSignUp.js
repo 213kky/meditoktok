@@ -1,4 +1,5 @@
 import {useState} from "react";
+import axios from "axios";
 
 export default function UserSignUp() {
     const [account, setAccount] = useState('');
@@ -15,6 +16,26 @@ export default function UserSignUp() {
     const handleSubmit = (event) => {
         event.preventDefault();
         // 회원 가입 폼을 제출하는 코드 작성
+        const formData = {
+            account: account,
+            pw: password,
+            e_mail: email,
+            phone_number: phoneNumber,
+            name: name,
+            birth: birth,
+            is_admin: isAdmin,
+            mail_agree: mailAgree,
+            gender: gender,
+        };
+        console.log(formData);
+
+        axios.post('/signup/user', formData)
+            .then(response => {
+                console.log(response);
+            })
+            .catch(error => {
+                console.error(error);
+            });
     };
 
     return (

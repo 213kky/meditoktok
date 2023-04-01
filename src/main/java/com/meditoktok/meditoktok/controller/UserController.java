@@ -41,7 +41,7 @@ public class UserController {
         }
     }
 
-    @PostMapping("/signup")
+    @PostMapping("/signup/user")
     public String signup(@RequestBody User user) {
         try {
             userService.signup(user);
