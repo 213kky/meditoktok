@@ -1,9 +1,11 @@
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import axios from "axios";
 
 export default function UserSignUp() {
     const [account, setAccount] = useState('');
     const [password, setPassword] = useState('');
+    const [passwordConfirm, setPasswordConfirm] = useState('');
+    const [passwordMismatch, setPasswordMismatch] = useState(false);
     const [email, setEmail] = useState('');
     const [phoneNumber, setPhoneNumber] = useState('');
     const [name, setName] = useState('');
@@ -30,7 +32,8 @@ export default function UserSignUp() {
         if(isFormValid){
         axios.post('/signup/user', formData)
             .then(response => {
-                console.log(response);
+                // console.log(response.data);
+                alert(response.data);
             })
             .catch(error => {
                 console.error(error);
@@ -39,6 +42,14 @@ export default function UserSignUp() {
             alert("값을 모두 입력해주세요")
         }
     };
+
+    useEffect(() => {
+        if (passwordConfirm && password !== passwordConfirm) {
+            setPasswordMismatch(true);
+        } else {
+            setPasswordMismatch(false);
+        }
+    }, [password, passwordConfirm]);
 
     return (
         <section className="contents">
@@ -54,7 +65,8 @@ export default function UserSignUp() {
                 </div>
                 <div>
                     <div>비밀번호 확인</div>
-                    <input type="password" value={password} onChange={(event) => setPassword(event.target.value)}/>
+                    <input type="password" value={passwordConfirm} onChange={(event) => setPasswordConfirm(event.target.value)} />
+                    {passwordMismatch && <p style={{ color: 'red' }}>비밀번호가 일치하지 않습니다.</p>}
                 </div>
                 <div>
                     <div>이름</div>
@@ -83,7 +95,7 @@ export default function UserSignUp() {
                 <div>이메일 수신 동의
                     <input type="checkbox" checked={mailAgree} onChange={(event) => setMailAgree(event.target.checked)}/>
                 </div>
-                <input type="submit" value="가입" />
+                <input type="submit" value="가입" disabled={passwordMismatch}/>
             </form>
         </section>
     );
