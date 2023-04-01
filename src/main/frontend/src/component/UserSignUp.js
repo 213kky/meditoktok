@@ -19,12 +19,12 @@ export default function UserSignUp() {
         const formData = {
             account: account,
             pw: password,
-            e_mail: email,
-            phone_number: phoneNumber,
+            eMail: email,
+            phoneNumber: phoneNumber,
             name: name,
             birth: birth,
-            is_admin: isAdmin,
-            mail_agree: mailAgree,
+            isAdmin: isAdmin,
+            mailAgree: mailAgree,
             gender: gender,
         };
         console.log(formData);
