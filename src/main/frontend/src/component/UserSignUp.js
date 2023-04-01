@@ -32,7 +32,7 @@ export default function UserSignUp() {
         if(isFormValid){
         axios.post('/signup/user', formData)
             .then(response => {
-                // console.log(response.data);
+                // console.log(response);
                 alert(response.data);
             })
             .catch(error => {

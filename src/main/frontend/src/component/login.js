@@ -13,7 +13,7 @@ export default function Login() {
         };
         axios.post('/login', formData)
             .then(response => {
-                // console.log(response.data);
+                // console.log(response);
                 alert(response.data);
             })
             .catch(error => {
