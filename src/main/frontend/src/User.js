@@ -12,7 +12,7 @@ import Two from "./component/two";
 import Two1 from "./component/two1";
 import Change from "./component/change";
 import EmptyPage from "./component/EmptyPage";
-import Sign from "./component/Sign";
+import Login from "./component/login";
 import Signup from "./component/SignUp";
 import MainPage from "./component/MainPage";
 import UserSignUp from "./component/UserSignUp";
@@ -35,7 +35,7 @@ function User() {
                 <Route path="/hospital_reservation/1" element={<Two/>}/>
                 <Route path="/hospital_reservation/2" element={<Two1/>}/>
                 <Route path="/my_page/change" element={<Change/>}/>
-                <Route path="/sign" element={<Sign/>}/>
+                <Route path="/login" element={<Login/>}/>
                 <Route path="/signup" element={<Signup/>}/>
                 <Route path="/signup/user" element={<UserSignUp/>}/>
                 <Route path="/signup/manager" element={<ManagerSignUp/>}/>

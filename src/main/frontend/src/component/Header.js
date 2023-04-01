@@ -5,7 +5,7 @@ export default function Header() {
     return (
         <header>
             <div className="sign">
-                <span><Link to="/sign">로그인</Link></span>
+                <span><Link to="/login">로그인</Link></span>
                 <span>|</span>
                 <span><Link to="/signup">회원가입</Link></span>
             </div>

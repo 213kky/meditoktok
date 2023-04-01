@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-export default function Sign() {
+export default function Login() {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
 
