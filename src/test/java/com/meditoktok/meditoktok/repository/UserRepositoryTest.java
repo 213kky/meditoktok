@@ -23,7 +23,7 @@ class UserRepositoryTest {
         user.setPw("sad");
         user.setPhoneNumber("010101");
         user.setBirth("97972");
-        user.setAdmin(true);
+//        user.setAdmin(true);
         user.setGender(1);
         user.setMailAgree(true);
 

@@ -10,8 +10,7 @@ export default function UserSignUp() {
     const [birth, setBirth] = useState('');
     const [isAdmin, setIsAdmin] = useState(false);
     const [mailAgree, setMailAgree] = useState(false);
-    const [gender, setGender] = useState('');
-
+    const [gender, setGender] = useState(0);
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -27,8 +26,8 @@ export default function UserSignUp() {
             mailAgree: mailAgree,
             gender: gender,
         };
-        console.log(formData);
-
+        const isFormValid = account.length > 0 && password.length > 0 && email.length > 0 && phoneNumber.length > 0 && name.length >0 && birth.length>0 && gender > 0;
+        if(isFormValid){
         axios.post('/signup/user', formData)
             .then(response => {
                 console.log(response);
@@ -36,6 +35,7 @@ export default function UserSignUp() {
             .catch(error => {
                 console.error(error);
             });
+        }
     };
 
     return (
@@ -64,8 +64,8 @@ export default function UserSignUp() {
                 </div>
                 <div>
                     <div>성별</div>
-                    <select value={gender} onChange={(event) => setGender(event.target.value)}>
-                        <option value="">선택하세요</option>
+                    <select  onChange={(event) => setGender(event.target.value == "none" ? 0 :(event.target.value == 'male' ? 1 : 2))}>
+                        <option value="none">선택하세요</option>
                         <option value="male">남성</option>
                         <option value="female">여성</option>
                     </select>
