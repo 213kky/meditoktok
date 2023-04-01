@@ -11,6 +11,9 @@ import java.sql.SQLException;
 @RestController
 public class TestController {
 
+    /**
+     * DB연결 테스트
+     */
     @Autowired
     private DataSource dataSource;
 

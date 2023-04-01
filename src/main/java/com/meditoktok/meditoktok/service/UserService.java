@@ -8,6 +8,9 @@ import java.util.Optional;
 
 @Service
 public class UserService {
+    /**
+     * 로그인
+     */
 
     @Autowired
     UserRepository userRepository;
@@ -20,5 +23,8 @@ public class UserService {
             throw new RuntimeException("아이디 또는 비밀번호가 일치하지 않습니다.");
         }
     }
+
+
+
 
 }

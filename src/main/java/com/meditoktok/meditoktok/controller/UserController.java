@@ -9,7 +9,9 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/index")
 public class UserController {
-
+    /**
+     * 회원가입
+     */
     @Autowired
     private UserRepository userRepository;
 
@@ -21,6 +23,9 @@ public class UserController {
         return user.getName() + "님의 회원가입을 축하드립니다.";
     }
 
+    /**
+     * 로그인
+     */
     @Autowired
     private UserService userService;
 
