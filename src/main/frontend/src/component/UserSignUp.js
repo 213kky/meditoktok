@@ -35,6 +35,8 @@ export default function UserSignUp() {
             .catch(error => {
                 console.error(error);
             });
+        }else{
+            alert("값을 모두 입력해주세요")
         }
     };
 

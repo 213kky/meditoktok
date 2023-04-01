@@ -45,7 +45,6 @@ public class UserController {
     public String signup(@RequestBody User user) {
         try {
             userService.signup(user);
-            System.out.println("user = " + user);
             return "회원가입이 완료되었습니다.";
         } catch (Exception e) {
             return e.getMessage();
