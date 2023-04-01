@@ -1,12 +1,26 @@
-import React, { useState } from "react";
+import React, {useState} from "react";
+import axios from "axios";
+
 export default function Login() {
-    const [username, setUsername] = useState("");
+    const [account, setAccount] = useState("");
     const [password, setPassword] = useState("");
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        // TODO: 로그인 처리
+        const formData = {
+            account: account,
+            pw: password,
+        };
+        axios.post('/login', formData)
+            .then(response => {
+                // console.log(response.data);
+                alert(response.data);
+            })
+            .catch(error => {
+                console.error(error);
+            });
     }
+
     return (
         <section className="contents">
 
@@ -14,7 +28,7 @@ export default function Login() {
             <form onSubmit={handleSubmit}>
                 <div>
                     <label>아이디:</label>
-                    <input type="text" value={username} onChange={(e) => setUsername(e.target.value)}/>
+                    <input type="text" value={account} onChange={(e) => setAccount(e.target.value)}/>
                 </div>
                 <div>
                     <label>비밀번호:</label>
