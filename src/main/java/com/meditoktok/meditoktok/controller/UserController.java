@@ -12,16 +12,18 @@ public class UserController {
     /**
      * 회원가입
      */
-    @Autowired
-    private UserRepository userRepository;
+//    @Autowired
+//    private UserRepository userRepository;
+//
+//    @PostMapping("/join")
+//    public String join(@RequestBody User user) {
+//
+//        User newUser = userRepository.save(user);
+//
+//        return user.getName() + "님의 회원가입을 축하드립니다.";
+//    }
 
-    @PostMapping("/join")
-    public String join(@RequestBody User user) {
 
-        User newUser = userRepository.save(user);
-
-        return user.getName() + "님의 회원가입을 축하드립니다.";
-    }
 
     /**
      * 로그인
@@ -34,6 +36,16 @@ public class UserController {
         try {
             User user = userService.login(account, pw);
             return user.getName() + "님 환영합니다.";
+        } catch (Exception e) {
+            return e.getMessage();
+        }
+    }
+
+    @PostMapping("/register")
+    public String register(@RequestBody User user) {
+        try {
+            userService.register(user);
+            return "회원가입이 완료되었습니다.";
         } catch (Exception e) {
             return e.getMessage();
         }

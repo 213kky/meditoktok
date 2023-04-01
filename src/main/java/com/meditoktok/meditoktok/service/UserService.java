@@ -13,7 +13,7 @@ public class UserService {
      */
 
     @Autowired
-    UserRepository userRepository;
+    private UserRepository userRepository;
 
     public User login(String account, String pw) {
         Optional<User> userOptional = Optional.ofNullable(userRepository.findByAccountAndPw(account, pw));
@@ -22,6 +22,20 @@ public class UserService {
         } else {
             throw new RuntimeException("아이디 또는 비밀번호가 일치하지 않습니다.");
         }
+    }
+
+    /**
+     * 회원가입
+     */
+
+    public User register(User user) {
+        String account = user.getAccount();
+//        String pw = user.getPw();
+        Optional<User> userOptional = Optional.ofNullable(userRepository.findByAccount(account));
+        if (userOptional.isPresent()) {
+            throw new RuntimeException("이미 사용중인 아이디입니다.");
+        }
+        return userRepository.save(user);
     }
 
 
