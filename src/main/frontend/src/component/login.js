@@ -1,10 +1,11 @@
 import React, {useState} from "react";
 import axios from "axios";
+import {Link, useNavigate} from "react-router-dom";
 
 export default function Login() {
     const [account, setAccount] = useState("");
     const [password, setPassword] = useState("");
-
+    const navigate = useNavigate();
     const handleSubmit = (event) => {
         event.preventDefault();
         const formData = {
@@ -15,6 +16,7 @@ export default function Login() {
             .then(response => {
                 // console.log(response);
                 alert(response.data);
+                navigate("/");
             })
             .catch(error => {
                 console.error(error);

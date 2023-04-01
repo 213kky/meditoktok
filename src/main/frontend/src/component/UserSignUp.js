@@ -1,5 +1,6 @@
 import {useEffect, useState} from "react";
 import axios from "axios";
+import {useNavigate} from "react-router-dom";
 
 export default function UserSignUp() {
     const [account, setAccount] = useState('');
@@ -13,6 +14,7 @@ export default function UserSignUp() {
     const [isAdmin, setIsAdmin] = useState(false);
     const [mailAgree, setMailAgree] = useState(false);
     const [gender, setGender] = useState(0);
+    const navigate = useNavigate();
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -34,6 +36,7 @@ export default function UserSignUp() {
             .then(response => {
                 // console.log(response);
                 alert(response.data);
+                navigate("/login");
             })
             .catch(error => {
                 console.error(error);
@@ -57,7 +60,7 @@ export default function UserSignUp() {
             <form onSubmit={handleSubmit}>
                 <div>
                     <div>아이디</div>
-                    <input type="text" value={account} onChange={(event) => setAccount(event.target.value)}/>
+                    <input type="text" value={account} onChange={(event) => setAccount(event.target.value)} required/>
                 </div>
                 <div>
                     <div>비밀번호</div>
