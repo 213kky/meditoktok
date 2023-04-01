@@ -15,6 +15,8 @@ import EmptyPage from "./component/EmptyPage";
 import Sign from "./component/Sign";
 import Signup from "./component/SignUp";
 import MainPage from "./component/MainPage";
+import UserSignUp from "./component/UserSignUp";
+import ManagerSignUp from "./component/ManagerSignUp";
 
 function User() {
 
@@ -35,6 +37,8 @@ function User() {
                 <Route path="/my_page/change" element={<Change/>}/>
                 <Route path="/sign" element={<Sign/>}/>
                 <Route path="/signup" element={<Signup/>}/>
+                <Route path="/signup/user" element={<UserSignUp/>}/>
+                <Route path="/signup/manager" element={<ManagerSignUp/>}/>
                 <Route path="*" element={<EmptyPage/>}/>
             </Routes>
             <QuickMenu/>

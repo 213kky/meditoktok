@@ -845,3 +845,30 @@ aside span{
 .FDTable:first-child {
   width: 500px;
 }
+
+.userSignUp {
+  width: 400px;
+  height: 150px;
+  font-size: 25px;
+  text-align: center;
+  line-height: 75px;
+  float: left;
+  border: 2px solid black;
+  margin-left: 53px;
+}
+.userSignUp div{
+  font-size: 20px;
+}
+.managerSignUp {
+  width: 400px;
+  height: 150px;
+  font-size: 25px;
+  text-align: center;
+  line-height: 75px;
+  display: inline-block;
+  border: 2px solid black;
+  margin-left: 100px;
+}
+.managerSignUp div{
+  font-size: 20px;
+}
