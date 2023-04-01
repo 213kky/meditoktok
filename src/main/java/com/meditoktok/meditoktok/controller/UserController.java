@@ -32,19 +32,19 @@ public class UserController {
     private UserService userService;
 
     @PostMapping("/login")
-    public String login(@RequestParam String account, @RequestParam String pw) {
+    public String login(@RequestBody UserLoginRequest loginRequest) {
         try {
-            User user = userService.login(account, pw);
+            User user = userService.login(loginRequest.getAccount(), loginRequest.getPw());
             return user.getName() + "님 환영합니다.";
         } catch (Exception e) {
             return e.getMessage();
         }
     }
 
-    @PostMapping("/register")
-    public String register(@RequestBody User user) {
+    @PostMapping("/signup")
+    public String signup(@RequestBody User user) {
         try {
-            userService.register(user);
+            userService.signup(user);
             return "회원가입이 완료되었습니다.";
         } catch (Exception e) {
             return e.getMessage();

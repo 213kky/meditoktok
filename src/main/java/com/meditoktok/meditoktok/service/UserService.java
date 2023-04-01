@@ -28,9 +28,9 @@ public class UserService {
      * 회원가입
      */
 
-    public User register(User user) {
+    public User signup(User user) {
         String account = user.getAccount();
-//        String pw = user.getPw();
+        String pw = user.getPw();
         Optional<User> userOptional = Optional.ofNullable(userRepository.findByAccount(account));
         if (userOptional.isPresent()) {
             throw new RuntimeException("이미 사용중인 아이디입니다.");
