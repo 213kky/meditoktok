@@ -38,7 +38,9 @@ export default function Login() {
                 </div>
                 <button type="submit">로그인</button>
             </form>
-
+            <Link to="/findAccount" >아이디 찾기</Link>
+            <span> | </span>
+            <Link to="/" >비밀번호 찾기</Link>
         </section>
     );
 }

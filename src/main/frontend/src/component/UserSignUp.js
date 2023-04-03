@@ -62,7 +62,7 @@ export default function UserSignUp() {
             <form onSubmit={handleSubmit}>
                 <div>
                     <div>아이디</div>
-                    <input type="text" value={account} onChange={(event) => setAccount(event.target.value)} required/>
+                    <input type="text" value={account} onChange={(event) => setAccount(event.target.value)} />
                 </div>
                 <div>
                     <div>비밀번호</div>
