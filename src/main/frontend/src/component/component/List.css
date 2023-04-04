@@ -1,0 +1,22 @@
+.T {
+  border: 2px solid black;
+}
+
+.name {
+  width: 100px;
+  border: none;
+}
+
+.num {
+  width: 200px;
+  border: none;
+}
+
+.not {
+  width: 400px;
+  border: none;
+}
+
+.line {
+  border: none;
+}

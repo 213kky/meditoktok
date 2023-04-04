@@ -1,11 +1,11 @@
-// import './Hospitalinfo.css'
+import './Hospitalinfo.css'
 
 export default function Hospitalinfo() {
 
     return (
-      <section class="contents">
-      <div class="hospital">병원 이름</div>
-      <div class="hospitalInfoBox">
+      <section class="Mcontents">
+      <div class="Mhospital">병원 이름</div>
+      <div class="MhospitalInfoBox">
           <span>진료과목</span>
           <div></div>
           <span>의료진</span>

@@ -58,8 +58,8 @@ export default function UserSignUp() {
 
     return (
         <section className="contents">
-            <h1>일반 사용자 회원가입</h1>
-            <form onSubmit={handleSubmit}>
+            <h1 style={{textAlign:"center",}}>일반 사용자 회원가입</h1>
+            <form onSubmit={handleSubmit} style={{marginLeft:"425px"}}>
                 <div>
                     <div>아이디</div>
                     <input type="text" value={account} onChange={(event) => setAccount(event.target.value)} />

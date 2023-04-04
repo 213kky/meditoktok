@@ -1,4 +1,4 @@
-import Hospitalinfo from './component/Hospitalinfo';
+import Hospitalinfo from "../component/Hospitalinfo";
 
 function Page1() {
   return (
