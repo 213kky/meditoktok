@@ -12,15 +12,25 @@
   font-size: medium; text-align: center;
   margin-left: 450px;
 }
-
-.Ptable th td {
+.Ptime tr td {
+  border: 1px solid black;
+  padding: 15px;
+}
+.Ptime th {
+  border:0;
+  padding: 15px;
+}
+/*
+.Ptable tr td {
   border:1px solid black;
   padding: 15px;
 }
 
 .Ptable th{
   border:0;
+  padding: 15px;
 }
+*/
 
 .List {
   width: 900px;

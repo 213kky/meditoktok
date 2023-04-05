@@ -17,7 +17,7 @@
 
 .Save {
   border: 2px solid black;
-  float: inline-end;
+  /*float: inline-end;*/
   width: 400px;
   height: 500px;
 }
@@ -87,12 +87,13 @@ table th{
   border:0;
 }*/
 
-.time th td {
+.time tr td {
   border:1px solid black;
   padding: 15px;
 }
 
 .time th{
+  padding: 15px;
   border: 0;
 }
 

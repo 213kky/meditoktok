@@ -3,7 +3,7 @@ import User from "./User";
 import Manager from "./Manager";
 
 function App() {
-        const isAdmin = false;
+        const isAdmin = true;
         return (
             <div>
                     {isAdmin ? <Manager /> : <User />}
