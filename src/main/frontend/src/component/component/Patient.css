@@ -1,6 +1,6 @@
 .Cal {
   width: 900px;
-  height: 300px;
+  height: 400px;
   margin-left: 50px;
   margin-top: 10px;
   border: 2px solid black;
@@ -11,6 +11,7 @@
   width: 380px; height: 150px;
   font-size: medium; text-align: center;
   margin-left: 450px;
+  margin-top: 20px;
 }
 .Ptime tr td {
   border: 1px solid black;

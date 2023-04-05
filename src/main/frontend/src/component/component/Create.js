@@ -32,7 +32,7 @@ export default function Create() {
                         </thead>
                         <tbody>
                         <tr>
-                            <td>1/7<br/>9:00</td>
+                            <td>1/7<br/>09:00</td>
                             <td>1/7<br/>10:00</td>
                             <td>1/7<br/>11:00</td>
                             <td>1/7<br/>12:00</td>
