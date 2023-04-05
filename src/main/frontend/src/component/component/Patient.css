@@ -8,12 +8,12 @@
 
 
 .Ptime {
-  width: 380px; height: 150;
+  width: 380px; height: 150px;
   font-size: medium; text-align: center;
   margin-left: 450px;
 }
 
-.Ptable th, td {
+.Ptable th td {
   border:1px solid black;
   padding: 15px;
 }

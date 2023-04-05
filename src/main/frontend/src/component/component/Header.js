@@ -11,7 +11,7 @@ export default function Header() {
     </div>
   <div class="mainLogo"><Link to="/">메디톡톡</Link><div>관리자</div></div>
   <div class="MhospitalName">OOO 병원</div>
-  <nav class="headerNav">
+  <nav class="MheaderNav">
     <ul>
       <li><Link to="/manager1">병원 정보 수정 / 공지사항</Link></li>
       <li><Link to="/manager2">예약시간 관리</Link></li>

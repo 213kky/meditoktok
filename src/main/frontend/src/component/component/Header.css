@@ -42,7 +42,7 @@ body a {
   margin-left: 20%;
 }
 
-.headerNav {
+.MheaderNav {
   width: 1017px;
   height: 50px;
   border-top: 2px solid black;
@@ -52,12 +52,12 @@ body a {
   margin-top: 30px;
 }
 
-.headerNav ul {
+.MheaderNav ul {
   padding-inline-start: 0px;
   margin: auto;
 }
 
-.headerNav ul li {
+.MheaderNav ul li {
   list-style: none;
   float: left;
   font-size: 20px;
@@ -68,12 +68,12 @@ body a {
   margin-left: 70px;
 }
 
-.headerNav ul li a {
+.MheaderNav ul li a {
   display: block;
   width: 254px;
   height: 50px;
 }
 
-.headerNav ul li a:hover {
+.MheaderNav ul li a:hover {
   background: rgba(0, 255, 56, 0.28);
 }

@@ -78,13 +78,22 @@
   margin: 30px 10px;
 }
 
-table th, td {
+/*table th, td {
   border:1px solid black;
   padding: 15px;
 }
 
 table th{
   border:0;
+}*/
+
+.time th td {
+  border:1px solid black;
+  padding: 15px;
+}
+
+.time th{
+  border: 0;
 }
 
 .class input[type=date] {
