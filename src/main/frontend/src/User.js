@@ -18,6 +18,8 @@ import MainPage from "./component/MainPage";
 import UserSignUp from "./component/UserSignUp";
 import ManagerSignUp from "./component/ManagerSignUp";
 import FindAccount from "./component/FindAccount";
+import Test from "./component/Test";
+import React from "react";
 
 function User() {
 
@@ -41,6 +43,8 @@ function User() {
                 <Route path="/signup/user" element={<UserSignUp/>}/>
                 <Route path="/signup/manager" element={<ManagerSignUp/>}/>
                 <Route path="/findAccount" element={<FindAccount/>}/>
+                <Route path="/test11" element={<Test/>}/>
+
                 <Route path="*" element={<EmptyPage/>}/>
             </Routes>
             <QuickMenu/>
