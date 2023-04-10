@@ -1,6 +1,7 @@
 import React, {useState} from "react";
 import axios from "axios";
 import {Link, useNavigate} from "react-router-dom";
+import LoginKakao from "./LoginKakao";
 
 export default function Login() {
     const [account, setAccount] = useState("");
@@ -41,6 +42,7 @@ export default function Login() {
             <Link to="/findAccount" >아이디 찾기</Link>
             <span> | </span>
             <Link to="/" >비밀번호 찾기</Link>
+            <LoginKakao/>
         </section>
     );
 }

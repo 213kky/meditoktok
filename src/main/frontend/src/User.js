@@ -20,6 +20,7 @@ import ManagerSignUp from "./component/ManagerSignUp";
 import FindAccount from "./component/FindAccount";
 import Test from "./component/Test";
 import React from "react";
+import LoginKakao from "./component/LoginKakao";
 
 function User() {
 
@@ -45,7 +46,7 @@ function User() {
                 <Route path="/findAccount" element={<FindAccount/>}/>
                 <Route path="/test11" element={<Test/>}/>
 
-                <Route path="*" element={<EmptyPage/>}/>
+                {/*<Route path="*" element={<EmptyPage/>}/>*/}
             </Routes>
             <QuickMenu/>
 
