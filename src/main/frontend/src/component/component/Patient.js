@@ -1,12 +1,13 @@
 import './Patient.css'
 import List from './List.js'
+import Calendar from "../component/Calendar";
 
 export default function Patient() {
 
   return (
     <div>
     <div className="Cal">
-
+      <div className='Cd'><Calendar/></div>
     <table class="Ptime">
     <thead>
       <tr><th colspan="4">오전</th></tr>

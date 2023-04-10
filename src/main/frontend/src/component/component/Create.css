@@ -6,20 +6,22 @@
   border: 2px solid black;
   float: inline-start;
   width: 400px;
-  height: 500px;
+  height: 550px;
   margin-left: 20px;
   margin-right: 150px;
 }
 
-.SE {
-  margin-top: 300px;
+.CD {
+  margin : 20px;
+  margin-left: 25px;
+  margin-top: 30px;
 }
 
 .Save {
   border: 2px solid black;
   /*float: inline-end;*/
   width: 400px;
-  height: 500px;
+  height: 550px;
 }
 
 .S {

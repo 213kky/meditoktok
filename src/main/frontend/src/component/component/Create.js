@@ -1,10 +1,12 @@
-import './Create.css'
+import './Create.css';
+import Calendar from "../component/Calendar";
 
 export default function Create() {
 
     return (
         <div className="R">
             <div className="Create">
+                <div className='CD'><Calendar/></div>
                 <div className="SE">
                     <div className="start">
                         <div className="S">시작</div>

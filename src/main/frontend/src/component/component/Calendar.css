@@ -1,0 +1,26 @@
+
+/* 달력에 오늘 날짜 표시 */
+  .react-calendar__tile--now {
+    background: whitesmoke;
+    color: black;
+  }
+  .react-calendar__tile--now:enabled:hover,
+  .react-calendar__tile--now:enabled:focus {
+    color: black;
+  }
+
+/* 달력 년 월 표시 */
+  .react-calendar__navigation__label > span {
+    font-size:  20px;
+    font-weight: bolder;
+    color: black;
+  }
+/* 요일 섹션 커스텀 */
+  .react-calendar__month-view__weekdays {
+    font-size:  15px;
+    font-weight: bolder;
+    letter-spacing: 20px;
+    color: black;
+    }
+
+

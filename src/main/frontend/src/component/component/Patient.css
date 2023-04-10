@@ -6,13 +6,19 @@
   border: 2px solid black;
 }
 
+.Cd {
+ float: left;
+ margin: 50px;
+ margin-top: 60px;
+}
 
 .Ptime {
   width: 380px; height: 150px;
   font-size: medium; text-align: center;
-  margin-left: 450px;
+  margin-left: 480px;
   margin-top: 20px;
 }
+
 .Ptime tr td {
   border: 1px solid black;
   padding: 15px;
