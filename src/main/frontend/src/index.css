@@ -634,7 +634,7 @@ aside span{
 
 
 .edge{
-  border: 2px solid;
+  border: 1.5px solid;
   /*//overflow: scroll;*/
 }
 .center{
@@ -877,17 +877,26 @@ aside span{
   margin-left: 260px;
 }
 
-.selectCity {
-  width: 270px;
-  height: 330px;
+.selectCity1 {
+  height: 390px;
   overflow-y: scroll;
 }
 
-.selectCity ul {
+.selectCity2 {
+  width: 270px;
+  height: 390px;
+  overflow-y: scroll;
+}
+
+.selectCity2 ul {
   list-style-type: none;
   padding-inline-start: 0px;
 }
 .renderList {
   height: 400px;
   overflow-y: scroll;
+}
+
+.renderList td{
+  height:70px;
 }
