@@ -87,7 +87,7 @@ export default function Two() {
         return items.map((item, index) => {
             return (
                 <tr key={index}>
-                    <td className="edge"><Link to="/hospital_information">{item.yadmNm}<br/>{item.addr}</Link></td>
+                    <td className="edge"><Link to={`/hospital_information/?yadmNm=${item.yadmNm}&addr=${item.addr}`}>{item.yadmNm}<br/>{item.addr}</Link></td>
                 </tr>
             );
         });
