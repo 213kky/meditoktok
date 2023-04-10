@@ -1,5 +1,5 @@
 import {Link} from "react-router-dom";
-
+import Calendar from "./component/Calendar";
 export default function DoctorList({doctorName}) {
 /*
     function toggleDoctor() {
@@ -21,7 +21,7 @@ export default function DoctorList({doctorName}) {
                 {/*<Link id="show">▼</Link>*/}
             <div id="hide" class="bookBox">
                 <div class="bookSchedule">
-                    <div class="calendar">달력</div>
+                    <div class="calendar"><Calendar/></div>
                     <div class="selectTime">
                         <table border="1" class="timeTable">
                             <th style={{height: "50px"}} colspan="4">오전</th>
