@@ -8,7 +8,7 @@ import MyPage from "./component/MyPage";
 import QuickMenu from "./component/QuickMenu"
 import DiseaseInformation from "./component/DiseaseInformation";
 import HospitalInformation from "./component/HospitalInformation";
-import Two from "./component/two";
+import Two from "./component/Two";
 import Two1 from "./component/two1";
 import Change from "./component/change";
 import EmptyPage from "./component/EmptyPage";

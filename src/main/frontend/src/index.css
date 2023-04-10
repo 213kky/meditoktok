@@ -876,3 +876,18 @@ aside span{
 .kakaoLogin {
   margin-left: 260px;
 }
+
+.selectCity {
+  width: 270px;
+  height: 330px;
+  overflow-y: scroll;
+}
+
+.selectCity ul {
+  list-style-type: none;
+  padding-inline-start: 0px;
+}
+.renderList {
+  height: 400px;
+  overflow-y: scroll;
+}
