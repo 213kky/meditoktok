@@ -61,8 +61,8 @@ export default function Two() {
             setData(response.data);
         });
     };*/
-    const hospList = () => {
-        // setSido(ct);
+    const hospList = (cd) => {
+        setSido(cd);
         setLoading(true);
     }
 
@@ -212,7 +212,7 @@ export default function Two() {
                                                         {selectedRegion === '서울특별시' && (
                                                             <ul>
                                                                 {seoulDistricts.map((cd) => (
-                                                                    <li key={cd} onClick={() => {setSido(cd)}}>
+                                                                    <li key={cd} onClick={() => {hospList(cd)}}>
                                                                         <Link
                                                                             to={`/hospital_reservation/1/?data=${cd}`}>{cd}</Link>
                                                                     </li>
@@ -223,7 +223,7 @@ export default function Two() {
                                                         {selectedRegion === '경기도' && (
                                                             <ul>
                                                                 {gyeonggiCities.map((cd) => (
-                                                                    <li key={cd} onClick={() => {setSido(cd)}}><Link
+                                                                    <li key={cd} onClick={() => {hospList(cd)}}><Link
                                                                         to={`/hospital_reservation/1/?data=${cd}`}>{cd}</Link>
                                                                     </li>
                                                                 ))}
@@ -233,7 +233,7 @@ export default function Two() {
                                                         {selectedRegion === '인천광역시' && (
                                                             <ul>
                                                                 {incheonDistricts.map((cd) => (
-                                                                    <li key={cd} onClick={() => {setSido(cd)}}><Link
+                                                                    <li key={cd} onClick={() => {hospList(cd)}}><Link
                                                                         to={`/hospital_reservation/1/?data=${cd}`}>{cd}</Link>
                                                                     </li>
                                                                 ))}
@@ -242,7 +242,7 @@ export default function Two() {
                                                         {selectedRegion === '충청북도' && (
                                                             <ul>
                                                                 {chungcheongNorthCities.map((cd) => (
-                                                                    <li key={cd} onClick={() => {setSido(cd)}}><Link
+                                                                    <li key={cd} onClick={() => {hospList(cd)}}><Link
                                                                         to={`/hospital_reservation/1/?data=${cd}`}>{cd}</Link>
                                                                     </li>
                                                                 ))}
@@ -251,7 +251,7 @@ export default function Two() {
                                                         {selectedRegion === '충청남도' && (
                                                             <ul>
                                                                 {chungcheongSouthCities.map((cd) => (
-                                                                    <li key={cd} onClick={() => {setSido(cd)}}><Link
+                                                                    <li key={cd} onClick={() => {hospList(cd)}}><Link
                                                                         to={`/hospital_reservation/1/?data=${cd}`}>{cd}</Link>
                                                                     </li>
                                                                 ))}
@@ -260,7 +260,7 @@ export default function Two() {
                                                         {selectedRegion === '대전광역시' && (
                                                             <ul>
                                                                 {daejeonDistricts.map((cd) => (
-                                                                    <li key={cd} onClick={() => {setSido(cd)}}><Link
+                                                                    <li key={cd} onClick={() => {hospList(cd)}}><Link
                                                                         to={`/hospital_reservation/1/?data=${cd}`}>{cd}</Link>
                                                                     </li>
                                                                 ))}
@@ -269,7 +269,7 @@ export default function Two() {
                                                         {selectedRegion === '전라북도' && (
                                                             <ul>
                                                                 {jeollaNorthCities.map((cd) => (
-                                                                    <li key={cd} onClick={() => {setSido(cd)}}><Link
+                                                                    <li key={cd} onClick={() => {hospList(cd)}}><Link
                                                                         to={`/hospital_reservation/1/?data=${cd}`}>{cd}</Link>
                                                                     </li>
                                                                 ))}
@@ -278,7 +278,7 @@ export default function Two() {
                                                         {selectedRegion === '전라남도' && (
                                                             <ul>
                                                                 {jeollaSouthCities.map((cd) => (
-                                                                    <li key={cd} onClick={() => {setSido(cd)}}><Link
+                                                                    <li key={cd} onClick={() => {hospList(cd)}}><Link
                                                                         to={`/hospital_reservation/1/?data=${cd}`}>{cd}</Link>
                                                                     </li>
                                                                 ))}
@@ -287,7 +287,7 @@ export default function Two() {
                                                         {selectedRegion === '광주광역시' && (
                                                             <ul>
                                                                 {gwangjuDistricts.map((cd) => (
-                                                                    <li key={cd} onClick={() => {setSido(cd)}}><Link
+                                                                    <li key={cd} onClick={() => {hospList(cd)}}><Link
                                                                         to={`/hospital_reservation/1/?data=${cd}`}>{cd}</Link>
                                                                     </li>
                                                                 ))}
@@ -296,7 +296,7 @@ export default function Two() {
                                                         {selectedRegion === '경상북도' && (
                                                             <ul>
                                                                 {gyeongsangbukdoCities.map((cd) => (
-                                                                    <li key={cd} onClick={() => {setSido(cd)}}><Link
+                                                                    <li key={cd} onClick={() => {hospList(cd)}}><Link
                                                                         to={`/hospital_reservation/1/?data=${cd}`}>{cd}</Link>
                                                                     </li>
                                                                 ))}
@@ -305,7 +305,7 @@ export default function Two() {
                                                         {selectedRegion === '대구광역시' && (
                                                             <ul>
                                                                 {daeguDistricts.map((cd) => (
-                                                                    <li key={cd} onClick={() => {setSido(cd)}}><Link
+                                                                    <li key={cd} onClick={() => {hospList(cd)}}><Link
                                                                         to={`/hospital_reservation/1/?data=${cd}`}>{cd}</Link>
                                                                     </li>
                                                                 ))}
@@ -314,7 +314,7 @@ export default function Two() {
                                                         {selectedRegion === '경상남도' && (
                                                             <ul>
                                                                 {gyeongsangnamdoCities.map((cd) => (
-                                                                    <li key={cd} onClick={() => {setSido(cd)}}><Link
+                                                                    <li key={cd} onClick={() => {hospList(cd)}}><Link
                                                                         to={`/hospital_reservation/1/?data=${cd}`}>{cd}</Link>
                                                                     </li>
                                                                 ))}
@@ -323,7 +323,7 @@ export default function Two() {
                                                         {selectedRegion === '부산광역시' && (
                                                             <ul>
                                                                 {busanDistricts.map((cd) => (
-                                                                    <li key={cd} onClick={() => {setSido(cd)}}><Link
+                                                                    <li key={cd} onClick={() => {hospList(cd)}}><Link
                                                                         to={`/hospital_reservation/1/?data=${cd}`}>{cd}</Link>
                                                                     </li>
                                                                 ))}
@@ -332,7 +332,7 @@ export default function Two() {
                                                         {selectedRegion === '울산광역시' && (
                                                             <ul>
                                                                 {ulsanDistricts.map((cd) => (
-                                                                    <li key={cd} onClick={() => {setSido(cd)}}><Link
+                                                                    <li key={cd} onClick={() => {hospList(cd)}}><Link
                                                                         to={`/hospital_reservation/1/?data=${cd}`}>{cd}</Link>
                                                                     </li>
                                                                 ))}
@@ -341,7 +341,7 @@ export default function Two() {
                                                         {selectedRegion === '강원도' && (
                                                             <ul>
                                                                 {gangwonCities.map((cd) => (
-                                                                    <li key={cd} onClick={() => {setSido(cd)}}><Link
+                                                                    <li key={cd} onClick={() => {hospList(cd)}}><Link
                                                                         to={`/hospital_reservation/1/?data=${cd}`}>{cd}</Link>
                                                                     </li>
                                                                 ))}
@@ -350,7 +350,7 @@ export default function Two() {
                                                         {selectedRegion === '제주특별자치도' && (
                                                             <ul>
                                                                 {jejuCities.map((cd) => (
-                                                                    <li key={cd} onClick={() => {setSido(cd)}}><Link
+                                                                    <li key={cd} onClick={() => {hospList(cd)}}><Link
                                                                         to={`/hospital_reservation/1/?data=${cd}`}>{cd}</Link>
                                                                     </li>
                                                                 ))}
@@ -367,7 +367,7 @@ export default function Two() {
                                     </div>
                                 </td>
                             </tr>
-                            <tr><td><button onClick={hospList}>불러오기</button></td></tr>
+                            {/*<tr><td><button onClick={hospList}>불러오기</button></td></tr>*/}
 
                         </table>
                     </td>
