@@ -911,5 +911,6 @@ aside span{
 }
 
 .renderList td{
+  width: 385px;
   height:70px;
 }

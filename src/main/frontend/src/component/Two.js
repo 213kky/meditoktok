@@ -12,7 +12,7 @@ const gyeonggiCities = ['가평군', '고양시', '과천시', '광명시', '광
 const incheonDistricts = ['강화군', '계양구', '남동구', '동구', '부평구', '서구', '연수구', '옹진군', '중구'];
 
 // 충청북도에 속한 도시 리스트
-const chungcheongNorthCities = ['괴산군', '단양군', '보은군', '영동군', '옥천군', '음성군', '제천시', '증평군', '진천군', '청원군', '청주시', '충주시'];
+const chungcheongNorthCities = ['괴산군', '단양군', '보은군', '영동군', '옥천군', '음성군', '제천시', '증평군', '진천군', '청주시', '충주시'];
 
 // 충청남도에 속한 도시 리스트
 const chungcheongSouthCities = ['공주시', '금산군', '논산시', '당진시', '보령시', '부여군', '서산시', '서천군', '아산시', '예산군', '천안시', '청양군', '태안군', '홍성군'];
@@ -82,7 +82,13 @@ export default function Two() {
     }, [loading]);
 
     const renderList = () => {
-        if (data === null) return null;
+        if (data === null) {
+            return (
+                <tr>
+                    지역을 선택해주세요.
+                </tr>
+            );
+        }
         const items = data.response.body.items.item;
         return items.map((item, index) => {
             return (
