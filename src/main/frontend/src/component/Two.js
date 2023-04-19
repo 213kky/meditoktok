@@ -49,6 +49,8 @@ const gangwonCities = ['강릉시', '고성군', '동해시', '삼척시', '속�
 
 // 제주도에 속한 도시 리스트
 const jejuCities = ['서귀포시', '제주시'];
+
+//세종시 없음. 도시 전체 점검 필요할듯 chat gpt ㅄ임
 export default function Two() {
     const [selectedRegion, setSelectedRegion] = useState(null);
 
@@ -93,7 +95,9 @@ export default function Two() {
         return items.map((item, index) => {
             return (
                 <tr key={index}>
-                    <td className="edge"><Link to={`/hospital_information/?yadmNm=${item.yadmNm}&addr=${item.addr}`}>{item.yadmNm}<br/>{item.addr}</Link></td>
+                    <td className="edge"><Link
+                        to={`/hospital_information/?yadmNm=${item.yadmNm}&addr=${item.addr}`}>{item.yadmNm}<br/>{item.addr}
+                    </Link></td>
                 </tr>
             );
         });
@@ -102,6 +106,14 @@ export default function Two() {
     const handleRegionSelect = (region) => {
         setSelectedRegion(region);
     }
+
+    const isRegionSelected = (region) => {
+        return region === selectedRegion;
+    };
+    const isSidoSelected = (cd) => {
+        return cd === sido;
+    };
+
     return (
         <section class="contents">
 
@@ -123,251 +135,347 @@ export default function Two() {
                             <tr>
                                 <td>
                                     <div class="twobox2">
-                                        <table class="edge sss tt" width="25%" height="90%">
+                                        <table class="edge sss tt" width="25%">
                                             <div className="selectCity1">
-                                            <tr>
-                                                <td>
-                                                    <div onClick={() => handleRegionSelect('서울특별시')}>서울</div>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <div onClick={() => handleRegionSelect('경기도')}>경기</div>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <div onClick={() => handleRegionSelect('인천광역시')}>인천</div>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <div onClick={() => handleRegionSelect('충청북도')}>충북</div>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <div onClick={() => handleRegionSelect('충청남도')}>충남</div>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <div onClick={() => handleRegionSelect('대전광역시')}>대전</div>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <div onClick={() => handleRegionSelect('전라북도')}>전북</div>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <div onClick={() => handleRegionSelect('전라남도')}>전남</div>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <div onClick={() => handleRegionSelect('광주광역시')}>광주</div>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <div onClick={() => handleRegionSelect('경상북도')}>경북</div>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <div onClick={() => handleRegionSelect('대구광역시')}>대구</div>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <div onClick={() => handleRegionSelect('경상남도')}>경남</div>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <div onClick={() => handleRegionSelect('부산광역시')}>부산</div>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <div onClick={() => handleRegionSelect('울산광역시')}>울산</div>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <div onClick={() => handleRegionSelect('강원도')}>강원</div>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <div onClick={() => handleRegionSelect('제주특별자치도')}>제주</div>
-                                                </td>
-                                            </tr>
+                                                <tr>
+                                                    <td>
+                                                        <div
+                                                            className={`${isRegionSelected('서울특별시') ? 'selectedRegion' : ''}`}
+                                                            onClick={() => handleRegionSelect('서울특별시')}>서울
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <div
+                                                            className={`${isRegionSelected('경기도') ? 'selectedRegion' : ''}`}
+                                                            onClick={() => handleRegionSelect('경기도')}>경기
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <div
+                                                            className={`${isRegionSelected('인천광역시') ? 'selectedRegion' : ''}`}
+                                                            onClick={() => handleRegionSelect('인천광역시')}>인천
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <div
+                                                            className={`${isRegionSelected('충청북도') ? 'selectedRegion' : ''}`}
+                                                            onClick={() => handleRegionSelect('충청북도')}>충북
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <div
+                                                            className={`${isRegionSelected('충청남도') ? 'selectedRegion' : ''}`}
+                                                            onClick={() => handleRegionSelect('충청남도')}>충남
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <div
+                                                            className={`${isRegionSelected('대전광역시') ? 'selectedRegion' : ''}`}
+                                                            onClick={() => handleRegionSelect('대전광역시')}>대전
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <div
+                                                            className={`${isRegionSelected('전라북도') ? 'selectedRegion' : ''}`}
+                                                            onClick={() => handleRegionSelect('전라북도')}>전북
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <div
+                                                            className={`${isRegionSelected('전라남도') ? 'selectedRegion' : ''}`}
+                                                            onClick={() => handleRegionSelect('전라남도')}>전남
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <div
+                                                            className={`${isRegionSelected('광주광역시') ? 'selectedRegion' : ''}`}
+                                                            onClick={() => handleRegionSelect('광주광역시')}>광주
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <div
+                                                            className={`${isRegionSelected('경상북도') ? 'selectedRegion' : ''}`}
+                                                            onClick={() => handleRegionSelect('경상북도')}>경북
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <div
+                                                            className={`${isRegionSelected('대구광역시') ? 'selectedRegion' : ''}`}
+                                                            onClick={() => handleRegionSelect('대구광역시')}>대구
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <div
+                                                            className={`${isRegionSelected('경상남도') ? 'selectedRegion' : ''}`}
+                                                            onClick={() => handleRegionSelect('경상남도')}>경남
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <div
+                                                            className={`${isRegionSelected('부산광역시') ? 'selectedRegion' : ''}`}
+                                                            onClick={() => handleRegionSelect('부산광역시')}>부산
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <div
+                                                            className={`${isRegionSelected('울산광역시') ? 'selectedRegion' : ''}`}
+                                                            onClick={() => handleRegionSelect('울산광역시')}>울산
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <div
+                                                            className={`${isRegionSelected('강원도') ? 'selectedRegion' : ''}`}
+                                                            onClick={() => handleRegionSelect('강원도')}>강원
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <div
+                                                            className={`${isRegionSelected('제주특별자치도') ? 'selectedRegion' : ''}`}
+                                                            onClick={() => handleRegionSelect('제주특별자치도')}>제주
+                                                        </div>
+                                                    </td>
+                                                </tr>
                                             </div>
                                         </table>
 
-                                        <table class="edge sss tt" width="65%" height="90%">
+                                        <table class="edge sss tt" width="65%">
+                                            <div className="selectCity12">
 
+                                                <tr>
+                                                    <td>
+                                                        <div className="selectCity2">
 
-                                            <tr>
-                                                <td>
-                                                    <div className="selectCity2">
+                                                            {selectedRegion === '서울특별시' && (
+                                                                <ul>
+                                                                    {seoulDistricts.map((cd) => (
+                                                                        <li className={`${isSidoSelected(cd) ? 'selectedRegion' : ''}`}
+                                                                            key={cd} onClick={() => {
+                                                                            hospList(cd)
+                                                                        }}>
+                                                                            <Link
+                                                                                to={`/hospital_reservation/1/?data=${cd}`}>{cd}</Link>
+                                                                        </li>
+                                                                    ))}
+                                                                </ul>
+                                                            )}
 
-                                                        {selectedRegion === '서울특별시' && (
-                                                            <ul>
-                                                                {seoulDistricts.map((cd) => (
-                                                                    <li key={cd} onClick={() => {hospList(cd)}}>
-                                                                        <Link
+                                                            {selectedRegion === '경기도' && (
+                                                                <ul>
+                                                                    {gyeonggiCities.map((cd) => (
+                                                                        <li className={`${isSidoSelected(cd) ? 'selectedRegion' : ''}`}
+                                                                            key={cd} onClick={() => {
+                                                                            hospList(cd)
+                                                                        }}><Link
                                                                             to={`/hospital_reservation/1/?data=${cd}`}>{cd}</Link>
-                                                                    </li>
-                                                                ))}
-                                                            </ul>
-                                                        )}
+                                                                        </li>
+                                                                    ))}
+                                                                </ul>
+                                                            )}
 
-                                                        {selectedRegion === '경기도' && (
-                                                            <ul>
-                                                                {gyeonggiCities.map((cd) => (
-                                                                    <li key={cd} onClick={() => {hospList(cd)}}><Link
-                                                                        to={`/hospital_reservation/1/?data=${cd}`}>{cd}</Link>
-                                                                    </li>
-                                                                ))}
-                                                            </ul>
-                                                        )}
+                                                            {selectedRegion === '인천광역시' && (
+                                                                <ul>
+                                                                    {incheonDistricts.map((cd) => (
+                                                                        <li className={`${isSidoSelected(cd) ? 'selectedRegion' : ''}`}
+                                                                            key={cd} onClick={() => {
+                                                                            hospList(cd)
+                                                                        }}><Link
+                                                                            to={`/hospital_reservation/1/?data=${cd}`}>{cd}</Link>
+                                                                        </li>
+                                                                    ))}
+                                                                </ul>
+                                                            )}
+                                                            {selectedRegion === '충청북도' && (
+                                                                <ul>
+                                                                    {chungcheongNorthCities.map((cd) => (
+                                                                        <li className={`${isSidoSelected(cd) ? 'selectedRegion' : ''}`}
+                                                                            key={cd} onClick={() => {
+                                                                            hospList(cd)
+                                                                        }}><Link
+                                                                            to={`/hospital_reservation/1/?data=${cd}`}>{cd}</Link>
+                                                                        </li>
+                                                                    ))}
+                                                                </ul>
+                                                            )}
+                                                            {selectedRegion === '충청남도' && (
+                                                                <ul>
+                                                                    {chungcheongSouthCities.map((cd) => (
+                                                                        <li className={`${isSidoSelected(cd) ? 'selectedRegion' : ''}`}
+                                                                            key={cd} onClick={() => {
+                                                                            hospList(cd)
+                                                                        }}><Link
+                                                                            to={`/hospital_reservation/1/?data=${cd}`}>{cd}</Link>
+                                                                        </li>
+                                                                    ))}
+                                                                </ul>
+                                                            )}
+                                                            {selectedRegion === '대전광역시' && (
+                                                                <ul>
+                                                                    {daejeonDistricts.map((cd) => (
+                                                                        <li className={`${isSidoSelected(cd) ? 'selectedRegion' : ''}`}
+                                                                            key={cd} onClick={() => {
+                                                                            hospList(cd)
+                                                                        }}><Link
+                                                                            to={`/hospital_reservation/1/?data=${cd}`}>{cd}</Link>
+                                                                        </li>
+                                                                    ))}
+                                                                </ul>
+                                                            )}
+                                                            {selectedRegion === '전라북도' && (
+                                                                <ul>
+                                                                    {jeollaNorthCities.map((cd) => (
+                                                                        <li className={`${isSidoSelected(cd) ? 'selectedRegion' : ''}`}
+                                                                            key={cd} onClick={() => {
+                                                                            hospList(cd)
+                                                                        }}><Link
+                                                                            to={`/hospital_reservation/1/?data=${cd}`}>{cd}</Link>
+                                                                        </li>
+                                                                    ))}
+                                                                </ul>
+                                                            )}
+                                                            {selectedRegion === '전라남도' && (
+                                                                <ul>
+                                                                    {jeollaSouthCities.map((cd) => (
+                                                                        <li className={`${isSidoSelected(cd) ? 'selectedRegion' : ''}`}
+                                                                            key={cd} onClick={() => {
+                                                                            hospList(cd)
+                                                                        }}><Link
+                                                                            to={`/hospital_reservation/1/?data=${cd}`}>{cd}</Link>
+                                                                        </li>
+                                                                    ))}
+                                                                </ul>
+                                                            )}
+                                                            {selectedRegion === '광주광역시' && (
+                                                                <ul>
+                                                                    {gwangjuDistricts.map((cd) => (
+                                                                        <li className={`${isSidoSelected(cd) ? 'selectedRegion' : ''}`}
+                                                                            key={cd} onClick={() => {
+                                                                            hospList(cd)
+                                                                        }}><Link
+                                                                            to={`/hospital_reservation/1/?data=${cd}`}>{cd}</Link>
+                                                                        </li>
+                                                                    ))}
+                                                                </ul>
+                                                            )}
+                                                            {selectedRegion === '경상북도' && (
+                                                                <ul>
+                                                                    {gyeongsangbukdoCities.map((cd) => (
+                                                                        <li className={`${isSidoSelected(cd) ? 'selectedRegion' : ''}`}
+                                                                            key={cd} onClick={() => {
+                                                                            hospList(cd)
+                                                                        }}><Link
+                                                                            to={`/hospital_reservation/1/?data=${cd}`}>{cd}</Link>
+                                                                        </li>
+                                                                    ))}
+                                                                </ul>
+                                                            )}
+                                                            {selectedRegion === '대구광역시' && (
+                                                                <ul>
+                                                                    {daeguDistricts.map((cd) => (
+                                                                        <li className={`${isSidoSelected(cd) ? 'selectedRegion' : ''}`}
+                                                                            key={cd} onClick={() => {
+                                                                            hospList(cd)
+                                                                        }}><Link
+                                                                            to={`/hospital_reservation/1/?data=${cd}`}>{cd}</Link>
+                                                                        </li>
+                                                                    ))}
+                                                                </ul>
+                                                            )}
+                                                            {selectedRegion === '경상남도' && (
+                                                                <ul>
+                                                                    {gyeongsangnamdoCities.map((cd) => (
+                                                                        <li className={`${isSidoSelected(cd) ? 'selectedRegion' : ''}`}
+                                                                            key={cd} onClick={() => {
+                                                                            hospList(cd)
+                                                                        }}><Link
+                                                                            to={`/hospital_reservation/1/?data=${cd}`}>{cd}</Link>
+                                                                        </li>
+                                                                    ))}
+                                                                </ul>
+                                                            )}
+                                                            {selectedRegion === '부산광역시' && (
+                                                                <ul>
+                                                                    {busanDistricts.map((cd) => (
+                                                                        <li className={`${isSidoSelected(cd) ? 'selectedRegion' : ''}`}
+                                                                            key={cd} onClick={() => {
+                                                                            hospList(cd)
+                                                                        }}><Link
+                                                                            to={`/hospital_reservation/1/?data=${cd}`}>{cd}</Link>
+                                                                        </li>
+                                                                    ))}
+                                                                </ul>
+                                                            )}
+                                                            {selectedRegion === '울산광역시' && (
+                                                                <ul>
+                                                                    {ulsanDistricts.map((cd) => (
+                                                                        <li className={`${isSidoSelected(cd) ? 'selectedRegion' : ''}`}
+                                                                            key={cd} onClick={() => {
+                                                                            hospList(cd)
+                                                                        }}><Link
+                                                                            to={`/hospital_reservation/1/?data=${cd}`}>{cd}</Link>
+                                                                        </li>
+                                                                    ))}
+                                                                </ul>
+                                                            )}
+                                                            {selectedRegion === '강원도' && (
+                                                                <ul>
+                                                                    {gangwonCities.map((cd) => (
+                                                                        <li className={`${isSidoSelected(cd) ? 'selectedRegion' : ''}`}
+                                                                            key={cd} onClick={() => {
+                                                                            hospList(cd)
+                                                                        }}><Link
+                                                                            to={`/hospital_reservation/1/?data=${cd}`}>{cd}</Link>
+                                                                        </li>
+                                                                    ))}
+                                                                </ul>
+                                                            )}
+                                                            {selectedRegion === '제주특별자치도' && (
+                                                                <ul>
+                                                                    {jejuCities.map((cd) => (
+                                                                        <li className={`${isSidoSelected(cd) ? 'selectedRegion' : ''}`}
+                                                                            key={cd} onClick={() => {
+                                                                            hospList(cd)
+                                                                        }}><Link
+                                                                            to={`/hospital_reservation/1/?data=${cd}`}>{cd}</Link>
+                                                                        </li>
+                                                                    ))}
+                                                                </ul>
+                                                            )}
 
-                                                        {selectedRegion === '인천광역시' && (
-                                                            <ul>
-                                                                {incheonDistricts.map((cd) => (
-                                                                    <li key={cd} onClick={() => {hospList(cd)}}><Link
-                                                                        to={`/hospital_reservation/1/?data=${cd}`}>{cd}</Link>
-                                                                    </li>
-                                                                ))}
-                                                            </ul>
-                                                        )}
-                                                        {selectedRegion === '충청북도' && (
-                                                            <ul>
-                                                                {chungcheongNorthCities.map((cd) => (
-                                                                    <li key={cd} onClick={() => {hospList(cd)}}><Link
-                                                                        to={`/hospital_reservation/1/?data=${cd}`}>{cd}</Link>
-                                                                    </li>
-                                                                ))}
-                                                            </ul>
-                                                        )}
-                                                        {selectedRegion === '충청남도' && (
-                                                            <ul>
-                                                                {chungcheongSouthCities.map((cd) => (
-                                                                    <li key={cd} onClick={() => {hospList(cd)}}><Link
-                                                                        to={`/hospital_reservation/1/?data=${cd}`}>{cd}</Link>
-                                                                    </li>
-                                                                ))}
-                                                            </ul>
-                                                        )}
-                                                        {selectedRegion === '대전광역시' && (
-                                                            <ul>
-                                                                {daejeonDistricts.map((cd) => (
-                                                                    <li key={cd} onClick={() => {hospList(cd)}}><Link
-                                                                        to={`/hospital_reservation/1/?data=${cd}`}>{cd}</Link>
-                                                                    </li>
-                                                                ))}
-                                                            </ul>
-                                                        )}
-                                                        {selectedRegion === '전라북도' && (
-                                                            <ul>
-                                                                {jeollaNorthCities.map((cd) => (
-                                                                    <li key={cd} onClick={() => {hospList(cd)}}><Link
-                                                                        to={`/hospital_reservation/1/?data=${cd}`}>{cd}</Link>
-                                                                    </li>
-                                                                ))}
-                                                            </ul>
-                                                        )}
-                                                        {selectedRegion === '전라남도' && (
-                                                            <ul>
-                                                                {jeollaSouthCities.map((cd) => (
-                                                                    <li key={cd} onClick={() => {hospList(cd)}}><Link
-                                                                        to={`/hospital_reservation/1/?data=${cd}`}>{cd}</Link>
-                                                                    </li>
-                                                                ))}
-                                                            </ul>
-                                                        )}
-                                                        {selectedRegion === '광주광역시' && (
-                                                            <ul>
-                                                                {gwangjuDistricts.map((cd) => (
-                                                                    <li key={cd} onClick={() => {hospList(cd)}}><Link
-                                                                        to={`/hospital_reservation/1/?data=${cd}`}>{cd}</Link>
-                                                                    </li>
-                                                                ))}
-                                                            </ul>
-                                                        )}
-                                                        {selectedRegion === '경상북도' && (
-                                                            <ul>
-                                                                {gyeongsangbukdoCities.map((cd) => (
-                                                                    <li key={cd} onClick={() => {hospList(cd)}}><Link
-                                                                        to={`/hospital_reservation/1/?data=${cd}`}>{cd}</Link>
-                                                                    </li>
-                                                                ))}
-                                                            </ul>
-                                                        )}
-                                                        {selectedRegion === '대구광역시' && (
-                                                            <ul>
-                                                                {daeguDistricts.map((cd) => (
-                                                                    <li key={cd} onClick={() => {hospList(cd)}}><Link
-                                                                        to={`/hospital_reservation/1/?data=${cd}`}>{cd}</Link>
-                                                                    </li>
-                                                                ))}
-                                                            </ul>
-                                                        )}
-                                                        {selectedRegion === '경상남도' && (
-                                                            <ul>
-                                                                {gyeongsangnamdoCities.map((cd) => (
-                                                                    <li key={cd} onClick={() => {hospList(cd)}}><Link
-                                                                        to={`/hospital_reservation/1/?data=${cd}`}>{cd}</Link>
-                                                                    </li>
-                                                                ))}
-                                                            </ul>
-                                                        )}
-                                                        {selectedRegion === '부산광역시' && (
-                                                            <ul>
-                                                                {busanDistricts.map((cd) => (
-                                                                    <li key={cd} onClick={() => {hospList(cd)}}><Link
-                                                                        to={`/hospital_reservation/1/?data=${cd}`}>{cd}</Link>
-                                                                    </li>
-                                                                ))}
-                                                            </ul>
-                                                        )}
-                                                        {selectedRegion === '울산광역시' && (
-                                                            <ul>
-                                                                {ulsanDistricts.map((cd) => (
-                                                                    <li key={cd} onClick={() => {hospList(cd)}}><Link
-                                                                        to={`/hospital_reservation/1/?data=${cd}`}>{cd}</Link>
-                                                                    </li>
-                                                                ))}
-                                                            </ul>
-                                                        )}
-                                                        {selectedRegion === '강원도' && (
-                                                            <ul>
-                                                                {gangwonCities.map((cd) => (
-                                                                    <li key={cd} onClick={() => {hospList(cd)}}><Link
-                                                                        to={`/hospital_reservation/1/?data=${cd}`}>{cd}</Link>
-                                                                    </li>
-                                                                ))}
-                                                            </ul>
-                                                        )}
-                                                        {selectedRegion === '제주특별자치도' && (
-                                                            <ul>
-                                                                {jejuCities.map((cd) => (
-                                                                    <li key={cd} onClick={() => {hospList(cd)}}><Link
-                                                                        to={`/hospital_reservation/1/?data=${cd}`}>{cd}</Link>
-                                                                    </li>
-                                                                ))}
-                                                            </ul>
-                                                        )}
+                                                        </div>
+                                                    </td>
 
-                                                    </div>
-                                                </td>
-
-                                            </tr>
-
+                                                </tr>
+                                            </div>
                                         </table>
 
                                     </div>

@@ -102,7 +102,8 @@ export default function HospitalInformation() {
             <div class="hospitalInfo">병원 정보</div>
             <div class="hospitalInfoBox">
                 <span>공지사항</span>
-                <div>{items.ykiho}</div>
+                {/*<div>{items.ykiho}</div>*/}
+                <div>공지사항이 없습니다.</div>
                 <span>병원 URL</span>
                 <div>{items.hospUrl != null ? items.hospUrl : "URL이 존재하지 않습니다."}</div>
                 <span>진료과목</span>

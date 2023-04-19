@@ -1,7 +1,10 @@
 import { Link } from "react-router-dom";
 import DTable from "./DTable";
+import {useState} from "react";
 
 export default function DiseaseTable() {
+    const [test, setTest] = useState(0);
+
 
     return (
         <div className="DTable">
@@ -17,9 +20,9 @@ export default function DiseaseTable() {
                     <col width="8%" />
                 </colgroup>
                 <tr>
-                    <th style={{backgroundColor:"rgba(0, 255, 56, 0.28)"}}><Link to='/001' className='link'>머리</Link></th>
-                    <th><Link to='/002' className='link'>목</Link></th>
-                    <th><Link to='/003' className='link'>가슴</Link></th>
+                    <th onClick={()=>setTest(0)} style={{backgroundColor:"rgba(0, 255, 56, 0.28)"}}>머리</th>
+                    <th onClick={()=>setTest(1)}>목</th>
+                    <th onClick={()=>setTest(2)}>가슴</th>
                     <th><Link to='/004' className='link'>배</Link></th>
                     <th><Link to='/005' className='link'>등</Link></th>
                     <th><Link to='/006' className='link'>엉덩이</Link></th>
@@ -29,7 +32,7 @@ export default function DiseaseTable() {
                 <tr style={{height:"200px",}} valign={"top"}>
                     <td colSpan='8' >
                         <div style={{width: '790px',height: "200px", overflowY:"scroll",}}>
-                            <DTable />
+                            <DTable test={test} />
                         </div>
                     </td>
                 </tr>

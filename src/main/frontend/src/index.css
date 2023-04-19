@@ -577,7 +577,7 @@ aside span{
   /*//border: 2px solid;*/
   float:left;
   width: 100%;
-  height:100%;
+  height:95%;
   text-align: center;
 }
 .tt {
@@ -881,13 +881,17 @@ aside span{
 }
 
 .selectCity1 {
-  height: 390px;
-  overflow-y: scroll;
+  height: 410px;
 }
-
+.selectCity1 div{
+  width: 100px;
+}
+.selectCity12{
+  height: 410px;
+}
 .selectCity2 {
   width: 270px;
-  height: 390px;
+  height: 400px;
   overflow-y: scroll;
 }
 
@@ -914,4 +918,8 @@ aside span{
 .renderList td{
   width: 385px;
   height:70px;
+}
+
+.selectedRegion{
+  background-color: rgba(0, 255, 56, 0.28);
 }
