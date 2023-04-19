@@ -17,7 +17,7 @@ export default function DiseaseTable() {
                     <col width="8%" />
                 </colgroup>
                 <tr>
-                    <th><Link to='/001' className='link'>머리</Link></th>
+                    <th style={{backgroundColor:"rgba(0, 255, 56, 0.28)"}}><Link to='/001' className='link'>머리</Link></th>
                     <th><Link to='/002' className='link'>목</Link></th>
                     <th><Link to='/003' className='link'>가슴</Link></th>
                     <th><Link to='/004' className='link'>배</Link></th>

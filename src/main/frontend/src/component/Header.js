@@ -1,10 +1,11 @@
 import {Link} from "react-router-dom";
+import App from "../App";
 
-export default function Header() {
-
+export default function Header(props) {
     return (
         <header>
             <div className="sign">
+                <span onClick={props.onToggleAdmin} style={{color:"white"}}>관리자 페이지로</span>
                 <span><Link to="/login">로그인</Link></span>
                 <span>|</span>
                 <span><Link to="/signup">회원가입</Link></span>
