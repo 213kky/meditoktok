@@ -923,3 +923,7 @@ aside span{
 .selectedRegion{
   background-color: rgba(0, 255, 56, 0.28);
 }
+
+.test{
+  background-color:rgba(0, 255, 56, 0.28);
+}

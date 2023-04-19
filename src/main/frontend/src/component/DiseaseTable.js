@@ -5,7 +5,10 @@ import {useState} from "react";
 export default function DiseaseTable() {
     const [test, setTest] = useState(0);
 
+    const isTest = (t) => {
 
+        return t===test;
+    }
     return (
         <div className="DTable">
             <table>
@@ -20,8 +23,8 @@ export default function DiseaseTable() {
                     <col width="8%" />
                 </colgroup>
                 <tr>
-                    <th onClick={()=>setTest(0)} style={{backgroundColor:"rgba(0, 255, 56, 0.28)"}}>머리</th>
-                    <th onClick={()=>setTest(1)}>목</th>
+                    <th onClick={()=>setTest(0)} className={`${isTest(0) ?  'test': ''}`}>머리</th>
+                    <th onClick={()=>setTest(1)} className={`${isTest(1) ?  'test': ''}`}>목</th>
                     <th onClick={()=>setTest(2)}>가슴</th>
                     <th><Link to='/004' className='link'>배</Link></th>
                     <th><Link to='/005' className='link'>등</Link></th>
