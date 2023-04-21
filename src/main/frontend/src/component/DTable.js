@@ -10,7 +10,7 @@ export default function DTable(props) {
 
                 <table>
                     <tr>
-                        <td><input type='checkbox' onClick={()=>setA(true)} checked={a}/>두통</td>
+                        <td><input type='checkbox' onClick={()=>setA(!a)} checked={a}/>두통</td>
                         <td><input type='checkbox'/>강박증</td>
                         <td><input type='checkbox'/>건망증</td>
                         <td><input type='checkbox'/>고산병</td>
@@ -34,7 +34,7 @@ export default function DTable(props) {
                     </tr>
                 </table> : <table>
                     <tr>
-                        <td><input type='checkbox'  onClick={()=>setB(true)} checked={b}/>목의 통증</td>
+                        <td><input type='checkbox'  onClick={()=>setB(!b)} checked={b}/>목의 통증</td>
                         <td><input type='checkbox'/>목소리 변화</td>
                         <td><input type='checkbox'/>경부 강직</td>
                         <td><input type='checkbox'/>목 주변 부종</td>
