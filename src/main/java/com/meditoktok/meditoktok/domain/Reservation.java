@@ -17,7 +17,7 @@ public class Reservation {
 //    특이사항 프론트엔드 notes
 //    병원이름   프론트엔드에서 받아서 ㄷㅂ저장
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Long id;
     private int userId;
     private String reservationDate;
     private String patientName;
@@ -114,11 +114,11 @@ public class Reservation {
     }
 
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

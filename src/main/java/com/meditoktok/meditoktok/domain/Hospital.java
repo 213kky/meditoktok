@@ -7,7 +7,7 @@ import jakarta.persistence.Id;
 @Entity
 public class Hospital {
     @Id
-    private int id;
+    private Long id;
 
 //    id, 요양기관명, 종별코드명, 시도코드명, 시군구코드명, 읍면동, 우편번호, 주소, 전화번호, 병원홈페이지, 개설일자, 좌표(X), 좌표(Y)
     String hospName;
@@ -17,11 +17,11 @@ public class Hospital {
     double x;
     double y;
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
