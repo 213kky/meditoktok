@@ -9,7 +9,7 @@ public class ResDto {
     private String medicalStaffName;
     private String notes;
     private String hospName;
-    private int userId;
+    private Long userId;
 
 
 
@@ -23,11 +23,11 @@ public class ResDto {
     }
 
     @JsonProperty("userId")
-    public int getUserId() {
+    public Long getUserId() {
         return userId;
     }
     @JsonProperty("userId")
-    public void setUserId(int userId) {
+    public void setUserId(Long userId) {
         this.userId = userId;
     }
 

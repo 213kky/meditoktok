@@ -49,8 +49,8 @@ public class UserService {
     }
 
 
-    public User getUserById(int userId) throws Exception {
-        Optional<User> optionalUser = Optional.ofNullable(userRepository.findById(userId));
+    public User getUserById(Long userId) throws Exception {
+        Optional<User> optionalUser = userRepository.findById(userId);
         if (optionalUser.isPresent()) {
             return optionalUser.get();
         } else {
