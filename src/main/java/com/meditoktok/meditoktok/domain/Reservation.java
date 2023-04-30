@@ -1,10 +1,13 @@
 package com.meditoktok.meditoktok.domain;
 
-import java.time.ZonedDateTime;
+import jakarta.persistence.*;
 
+import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
+@Entity(name = "reservations")
 public class Reservation {
     //    예약 날짜와 시간 프론트엔드 reservation_date
-//    환자이름 디비 patient_name
+//    환자이름 디비 patient_name   로그인 상태를 알면 누군지 알수있나?     복잡하게 하지말고 User pk 값하나 받자 받아서 pk값조회해서 빈칸채우기
 //    진료과 프론트엔드 department
 //    의료진이름 프론트엔드 medical_staff_name
 //    연락처 디비 phone_number
@@ -12,16 +15,29 @@ public class Reservation {
 //    생년월일 디비 birth
 //    성별 디비 gender
 //    특이사항 프론트엔드 notes
-//    병원이름
-    private ZonedDateTime reservationDate;
+//    병원이름   프론트엔드에서 받아서 ㄷㅂ저장
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
+    private int userId;
+    private String reservationDate;
     private String patientName;
     private String department;
     private String medicalStaffName;
     private String phoneNumber;
     private String address;
     private String birth;
+    @Enumerated(EnumType.STRING)
     private Gender gender;
-    private String note;
+    private String notes;
+    private String hospiName;
+
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
 
     public String getHospiName() {
         return hospiName;
@@ -31,13 +47,13 @@ public class Reservation {
         this.hospiName = hospiName;
     }
 
-    private String hospiName;
 
-    public ZonedDateTime getReservationDate() {
+
+    public String getReservationDate() {
         return reservationDate;
     }
 
-    public void setReservationDate(ZonedDateTime reservationDate) {
+    public void setReservationDate(String reservationDate) {
         this.reservationDate = reservationDate;
     }
 
@@ -97,12 +113,21 @@ public class Reservation {
         this.gender = gender;
     }
 
-    public String getNote() {
-        return note;
+
+    public int getId() {
+        return id;
     }
 
-    public void setNote(String note) {
-        this.note = note;
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getNotes() {
+        return notes;
+    }
+
+    public void setNotes(String notes) {
+        this.notes = notes;
     }
 }
 

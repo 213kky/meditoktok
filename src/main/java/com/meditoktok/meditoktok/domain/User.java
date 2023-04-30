@@ -36,6 +36,6 @@ public class User extends Member {
 }
 
 enum Gender {
-    MALE,
-    FEMALE
+    Male,
+    Female
 }
