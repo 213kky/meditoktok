@@ -15,29 +15,14 @@ public class ReservationController {
 
     @Autowired
     ReservationService reservationService;
-    @Autowired
-    UserService userService;
+
 
     // 예약
     @PostMapping("/test/res")
     public String reservation(@RequestBody ResDto resDto) throws Exception {
-        User user = userService.getUserById(resDto.getUserId());
 
-//             Reservation 객체 생성 및 값 할당
-        Reservation reservation = new Reservation();
-        reservation.setUserId(resDto.getUserId());
-        reservation.setBirth(user.getBirth());
-//            reservation.setAddress(user.getAddress());
-        reservation.setReservationDate(resDto.getReservationDate());
-        reservation.setNotes(resDto.getNotes());
-        reservation.setDepartment(resDto.getDepartment());
-        reservation.setPhoneNumber(user.getPhoneNumber());
-        reservation.setPatientName(user.getName());
-        reservation.setMedicalStaffName(resDto.getMedicalStaffName());
-        reservation.setHospiName(resDto.getHospName());
-        reservation.setGender(user.getGender());
 //             Reservation 객체 저장
-        reservationService.createReservation(reservation);
+        Reservation reservation = reservationService.createReservation(resDto);
         return reservation.getPatientName() + "님 예약이 완료되었습니다.";
     }
 
