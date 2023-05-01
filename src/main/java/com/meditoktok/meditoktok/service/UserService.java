@@ -4,6 +4,8 @@ import com.meditoktok.meditoktok.domain.User;
 import com.meditoktok.meditoktok.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.servlet.NoHandlerFoundException;
+
 import java.util.Optional;
 
 @Service
@@ -47,4 +49,13 @@ public class UserService {
     }
 
 
+    public User getUserById(Long userId) throws Exception {
+        Optional<User> optionalUser = userRepository.findById(userId);
+        if (optionalUser.isPresent()) {
+            return optionalUser.get();
+        } else {
+            // User를 찾을 수 없을 때 처리
+            throw new Exception("User not found");
+        }
+    }
 }

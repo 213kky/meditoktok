@@ -85,8 +85,8 @@ export default function UserSignUp() {
                     <div>성별</div>
                     <select  onChange={(event) => setGender(event.target.value === "none" ? null : event.target.value)}>
                         <option value="none">선택하세요</option>
-                        <option value="MALE">남성</option>
-                        <option value="FEMALE">여성</option>
+                        <option value="Male">남성</option>
+                        <option value="Female">여성</option>
                     </select>
                 </div>
                 <div>
