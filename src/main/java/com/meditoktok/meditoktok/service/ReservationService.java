@@ -1,6 +1,8 @@
 package com.meditoktok.meditoktok.service;
 
+import com.meditoktok.meditoktok.controller.ResDto;
 import com.meditoktok.meditoktok.domain.Reservation;
+import com.meditoktok.meditoktok.domain.User;
 import com.meditoktok.meditoktok.repository.ReservationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,9 +14,27 @@ import java.util.NoSuchElementException;
 public class ReservationService {
     @Autowired
     private ReservationRepository reservationRepository;
-
+    @Autowired
+    UserService userService;
     // 1. 새로운 예약 생성(저장)
-    public Reservation createReservation(Reservation reservation) {
+    public Reservation createReservation(ResDto resDto) throws Exception {
+
+        User user = userService.getUserById(resDto.getUserId());
+
+//             Reservation 객체 생성 및 값 할당
+        Reservation reservation = new Reservation();
+        reservation.setUserId(resDto.getUserId());
+        reservation.setBirth(user.getBirth());
+//            reservation.setAddress(user.getAddress());
+        reservation.setReservationDate(resDto.getReservationDate());
+        reservation.setNotes(resDto.getNotes());
+        reservation.setDepartment(resDto.getDepartment());
+        reservation.setPhoneNumber(user.getPhoneNumber());
+        reservation.setPatientName(user.getName());
+        reservation.setMedicalStaffName(resDto.getMedicalStaffName());
+        reservation.setHospiName(resDto.getHospName());
+        reservation.setGender(user.getGender());
+
         // 본격적인 예약 생성 전, validation 과정 필요
         if (reservation.getReservationDate() == null || reservation.getPatientName() == null || reservation.getDepartment() == null || reservation.getMedicalStaffName() == null ||
                 reservation.getBirth() == null || reservation.getGender() == null) {
@@ -31,7 +51,7 @@ public class ReservationService {
 
     // user pk값으로 예약 조회
     public List<Reservation> getReservationsByUserId(Long userId) {
-        List<Reservation> reservations = (List<Reservation>) reservationRepository.findByUserId(userId);
+        List<Reservation> reservations = reservationRepository.findByUserId(userId);
         if (reservations == null || reservations.isEmpty()) {
             throw new RuntimeException("입력한 user id의 결과값이 없습니다: " + userId);
         }
