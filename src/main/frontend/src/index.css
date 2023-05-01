@@ -815,9 +815,6 @@ aside span{
   text-align: center;
 }
 
-.foundDisease {
-   margin-left: 350px;
- }
 .diseaseList {
   display: flex;
   flex-wrap: wrap;
@@ -846,7 +843,8 @@ aside span{
   vertical-align: middle;
 }
 .FDTable:first-child {
-  width: 500px;
+  width: 250px;
+  text-align: center;
 }
 
 .userSignUp {

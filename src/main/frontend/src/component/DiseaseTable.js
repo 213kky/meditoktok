@@ -25,8 +25,8 @@ export default function DiseaseTable() {
                 <tr>
                     <th onClick={()=>setTest(0)} className={`${isTest(0) ?  'test': ''}`}>머리</th>
                     <th onClick={()=>setTest(1)} className={`${isTest(1) ?  'test': ''}`}>목</th>
-                    <th onClick={()=>setTest(2)}>가슴</th>
-                    <th><Link to='/004' className='link'>배</Link></th>
+                    <th onClick={()=>setTest(2)} className={`${isTest(2) ?  'test': ''}`}>가슴</th>
+                    <th onClick={()=>setTest(3)} className={`${isTest(3) ?  'test': ''}`}>배</th>
                     <th><Link to='/005' className='link'>등</Link></th>
                     <th><Link to='/006' className='link'>엉덩이</Link></th>
                     <th><Link to='/007' className='link'>다리</Link></th>

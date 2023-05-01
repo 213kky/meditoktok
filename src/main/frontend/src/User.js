@@ -19,13 +19,14 @@ import ManagerSignUp from "./component/ManagerSignUp";
 import FindAccount from "./component/FindAccount";
 import Test from "./component/Test";
 import React from "react";
-import LoginKakao from "./component/LoginKakao";
+import LoginKakao from './component/LoginKakao';
 
-function User(props) {
+function User() {
 
     return (
         <BrowserRouter>
-            <Header onToggleAdmin={props.onToggleAdmin}/>
+
+            <Header/>
             <Routes>
                 <Route path="/" element={<MainPage/>}/>
                 <Route path="/symptom_search" element={<SymptomSearch/>}/>
@@ -42,10 +43,10 @@ function User(props) {
                 <Route path="/signup/manager" element={<ManagerSignUp/>}/>
                 <Route path="/findAccount" element={<FindAccount/>}/>
                 <Route path="/test11" element={<Test/>}/>
+                <Route path="/callback" element={<LoginKakao/>}/>
 
-                <Route path="*" element={<EmptyPage/>}/>
+                {/*<Route path="*" element={<EmptyPage/>}/>*/}
             </Routes>
-
             <QuickMenu/>
 
 
