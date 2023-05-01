@@ -9,7 +9,6 @@ import QuickMenu from "./component/QuickMenu"
 import DiseaseInformation from "./component/DiseaseInformation";
 import HospitalInformation from "./component/HospitalInformation";
 import Two from "./component/Two";
-import Two1 from "./component/two1";
 import Change from "./component/change";
 import EmptyPage from "./component/EmptyPage";
 import Login from "./component/login";
@@ -31,12 +30,11 @@ function User(props) {
                 <Route path="/" element={<MainPage/>}/>
                 <Route path="/symptom_search" element={<SymptomSearch/>}/>
                 <Route path="/disease_search" element={<DiseaseSearch/>}/>
-                <Route path="/hospital_reservation" element={<HospitalReservation/>}/>
+                <Route path="/hospital_reservation/0" element={<HospitalReservation/>}/>
                 <Route path="/my_page" element={<MyPage/>}/>
                 <Route path="/disease_information" element={<DiseaseInformation/>}/>
                 <Route path="/hospital_information" element={<HospitalInformation/>}/>
                 <Route path="/hospital_reservation/1" element={<Two/>}/>
-                <Route path="/hospital_reservation/2" element={<Two1/>}/>
                 <Route path="/my_page/change" element={<Change/>}/>
                 <Route path="/login" element={<Login/>}/>
                 <Route path="/signup" element={<Signup/>}/>

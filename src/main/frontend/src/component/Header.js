@@ -15,7 +15,7 @@ export default function Header(props) {
                 <ul>
                     <li><Link to="/symptom_search">증상 검색</Link></li>
                     <li><Link to="/disease_search">질병 정보</Link></li>
-                    <li><Link to="/hospital_reservation">병원 예약</Link></li>
+                    <li><Link to="/hospital_reservation/0">병원 예약</Link></li>
                     <li><Link to="/my_page">마이페이지</Link></li>
                 </ul>
             </div>
