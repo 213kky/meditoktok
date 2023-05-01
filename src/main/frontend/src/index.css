@@ -986,6 +986,7 @@ aside span{
   border: 2px solid black;
   margin: 0 auto;
   overflow-y: scroll;
+  overflow-x: hidden;
 }
 .hospitalListB table{
   width: 379px;

@@ -12,7 +12,7 @@ export default function HospitalReservation() {
     const [loading, setLoading] = useState(false);
     const [inputValue, setInputValue] = useState('');
     const [mapData, setMapData] = useState(null);
-
+    const [mapLoad, setMapLoad] = useState(false);
     const scrollRef = useRef(null);
     const handleToggleMap = () => {
         setIsMap(true);
@@ -124,6 +124,10 @@ export default function HospitalReservation() {
     function handleInputChange(event) {
         setInputValue(event.target.value);
     }
+    window.onload = function() {
+        console.log('페이지 로딩이 완료되었습니다.');
+        setMapLoad(true);
+    };
 
     return (
         <section className="contents">
@@ -136,7 +140,7 @@ export default function HospitalReservation() {
                 </div>
                 <div className={`${isMap ? 'mapBox' : 'regionBox'}`}>
                     {/*setMapX={setMapX} setMapY={setMapY} setMapLoading={setMapLoading}*/}
-                    {isMap ? <MyMap setMapData={setMapData}/> :
+                    {isMap ? (mapLoad ? <MyMap setMapData={setMapData}/> : "로딩 중") :
                         <MyRegion mode={0} selectedRegion={selectedRegion} setSelectedRegion={setSelectedRegion}
                                   sido={sido} setSido={setSido} setLoading={setLoading}/>}
                 </div>
