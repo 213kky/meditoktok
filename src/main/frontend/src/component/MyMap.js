@@ -11,7 +11,6 @@ import {
 } from 'react-naver-maps';
 import pin from './pin.png';
 import axios from "axios";
-import {Link} from "react-router-dom";
 
 export default function MyMap(props) {
     const navermaps = useNavermaps()
@@ -25,6 +24,7 @@ export default function MyMap(props) {
     const [circleRadius, setCircleRadius] = useState(1000)
     const [circleZoom, setCircleZoom] = useState(15)
     const myRef = useRef([])
+
 
     useEffect(() => {//나중에 모드에 따른 진료 과목 추가해야 함
         if (initLoading) { //numOfRows=10 --> 표시되는 행의 수 (테스트를 위해 10으로 설정)
@@ -167,7 +167,7 @@ export default function MyMap(props) {
             // naver.maps.Event.addDOMListener 사용할 필요 없이, native addEventListener를 사용합니다.
             // https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener
             const domElement = customControl1.getElement()
-            const domListener =  () => {
+            const domListener = () => {
                 map.setCenter(new navermaps.LatLng(myCoordinates))
             }
 
@@ -198,7 +198,7 @@ export default function MyMap(props) {
                             '<div style="padding:10px;">' +
                             item.yadmNm +
                             '</div>' +
-                            `<a style="padding: 10px; text-decoration: underline; font-size: 13px; color: blue;" href=/hospital_information/?yadmNm=${item.yadmNm}&addr=${item.addr} >`+'병원 정보 페이지'+'</a>'}/>
+                            `<a style="padding: 10px; text-decoration: underline; font-size: 13px; color: blue;" href=/hospital_information/?yadmNm=${item.yadmNm}&addr=${item.sgguCdNm} >` + '병원 정보 페이지' + '</a>'}/>
                         <Marker position={new navermaps.LatLng(item.YPos, item.XPos)} onClick={() => {
                             if (myRef.current[index].getMap()) {
                                 myRef.current[index].close()
@@ -214,8 +214,8 @@ export default function MyMap(props) {
 
     }
 
-    useEffect(()=>{
-        if(!map){
+    useEffect(() => {
+        if (!map) {
             return
         }
         setTimeout(() => { //수정해야함
@@ -224,62 +224,58 @@ export default function MyMap(props) {
         }, 500);
 
 
-    },[init&&map.getCenter()])
+    }, [init && map.getCenter()])
 
     const renderCircle = () => {
         if (!map) {
             return
-        } else if (circleCenter!=null) {
-            return(
-                <Circle center={circleCenter} fillColor={"rgba(255,0,0,0.3)"} fillOpacity={0.3} radius={circleRadius} strokeColor={"red"} strokeWeight={1}
+        } else if (circleCenter != null) {
+            return (
+                <Circle center={circleCenter} fillColor={"rgba(255,0,0,0.3)"} fillOpacity={0.3} radius={circleRadius}
+                        strokeColor={"red"} strokeWeight={1}
                         clickable={false}/>
             )
         }
     }
 
     function minusRadius() {
-        if(circleRadius===500) return
-        else if(circleRadius===1000){
+        if (circleRadius === 500) return
+        else if (circleRadius === 1000) {
             setCircleRadius(500)
             setCircleZoom(15)
-        }
-        else if(circleRadius===1500){
+        } else if (circleRadius === 1500) {
             setCircleRadius(1000)
             setCircleZoom(15)
-        }
-        else if(circleRadius===2000){
+        } else if (circleRadius === 2000) {
             setCircleRadius(1500)
             setCircleZoom(14)
-        }
-        else if(circleRadius===2500){
+        } else if (circleRadius === 2500) {
             setCircleRadius(2000)
             setCircleZoom(14)
         }
     }
 
     function plusRadius() {
-        if(circleRadius===2500) return
-        else if(circleRadius===2000){
+        if (circleRadius === 2500) return
+        else if (circleRadius === 2000) {
             setCircleRadius(2500)
             setCircleZoom(13)
-        }
-        else if(circleRadius===1500){
+        } else if (circleRadius === 1500) {
             setCircleRadius(2000)
             setCircleZoom(14)
-        }
-        else if(circleRadius===1000){
+        } else if (circleRadius === 1000) {
             setCircleRadius(1500)
             setCircleZoom(14)
-        }
-        else if(circleRadius===500){
+        } else if (circleRadius === 500) {
             setCircleRadius(1000)
             setCircleZoom(15)
         }
     }
-    useEffect(()=>{
-        if(!map) return
+
+    useEffect(() => {
+        if (!map) return
         map.setZoom(circleZoom)
-    },[circleZoom])
+    }, [circleZoom])
     return (
         <>
             <MapDiv
@@ -310,7 +306,7 @@ export default function MyMap(props) {
                     top: '41%',
                     width: '50px',
                     height: '50px',
-                    pointerEvents:'none',
+                    pointerEvents: 'none',
                 }}></img>
             </MapDiv>
             <div>

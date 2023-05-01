@@ -16,7 +16,7 @@ export default function HospitalInformation() {
 
     useEffect(() => {
         if (loading) {
-            axios.get(`https://apis.data.go.kr/B551182/hospInfoServicev2/getHospBasisList?serviceKey=G3OZp5dYqrTm0I9gNRRu%2BXouEslD9Gs7F%2BYz9LUKT8%2F%2BJjRHdzSmmSwbLnJ7vR6znJD4hftgOK5ZZ%2FCE9iG3XA%3D%3D&pageNo=1&numOfRows=1&emdongNm=${addr}&yadmNm=${yadmNm}`)
+            axios.get(`https://apis.data.go.kr/B551182/hospInfoServicev2/getHospBasisList?serviceKey=G3OZp5dYqrTm0I9gNRRu%2BXouEslD9Gs7F%2BYz9LUKT8%2F%2BJjRHdzSmmSwbLnJ7vR6znJD4hftgOK5ZZ%2FCE9iG3XA%3D%3D&pageNo=1&numOfRows=1&addr=${addr}&yadmNm=${yadmNm}`)
                 .then(response => {
                     setData(response.data);
                 })
@@ -27,6 +27,7 @@ export default function HospitalInformation() {
                     setLoading(false);
                     setLoading2(true);
                     setLoading3(true);
+
                 });
         }
     }, [loading]);
@@ -42,6 +43,7 @@ export default function HospitalInformation() {
                 })
                 .finally(() => {
                     setLoading2(false);
+
                 });
         }
     }, [loading2]);
@@ -78,7 +80,7 @@ export default function HospitalInformation() {
     if (data3 === null) {
         return null
     } else {
-        if (data3.response.body.totalCount !== 0) {
+        if (data3.response.body.totalCount > 1) {
             items3 = data3.response.body.items.item;
             renderList = () => {
                 return items3.map((item3, index) => {
@@ -89,7 +91,17 @@ export default function HospitalInformation() {
                     );
                 });
             };
-        }else{
+        }else if(data3.response.body.totalCount == 1){
+            items3 = data3.response.body.items.item;
+            renderList = () => {
+                return (
+                    <>
+                        {items3.dgsbjtCdNm} : {items3.dgsbjtPrSdrCnt}명 <br/>
+                    </>
+                );
+            }
+        }
+        else{
             items3 = null;
         }
     }
@@ -107,7 +119,7 @@ export default function HospitalInformation() {
                 <span>병원 URL</span>
                 <div>{items.hospUrl != null ? items.hospUrl : "URL이 존재하지 않습니다."}</div>
                 <span>진료과목</span>
-                <div>{items3 != null ?  (items3.map((item3, index)=> item3.dgsbjtCdNm+(index !== items3.length-1?", ":""))): "진료과목 정보가 존재하지 않습니다."}</div>
+                <div>{data3.response.body.totalCount > 1 ? (items3.map((item3, index)=> item3.dgsbjtCdNm+(index !== items3.length-1?", ":""))): (items3 !=null ? items3.dgsbjtCdNm:"진료과목 정보가 존재하지 않습니다.")}</div>
                 <span>의료진</span>
                 {/*<div>{items3 != null ? (items3.map((item3, index)=> item3.dgsbjtCdNm+" : "+item3.dgsbjtPrSdrCnt+"명 ")) : "의료진 정보가 존재하지 않습니다."}</div>*/}
                 <div>{items3 != null ? renderList() : "의료진 정보가 존재하지 않습니다."}</div>

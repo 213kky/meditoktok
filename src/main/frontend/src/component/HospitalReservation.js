@@ -12,9 +12,6 @@ export default function HospitalReservation() {
     const [loading, setLoading] = useState(false);
     const [inputValue, setInputValue] = useState('');
     const [mapData, setMapData] = useState(null);
-    const [mapX, setMapX] = useState(0);
-    const [mapY, setMapY] = useState(0);
-    const [mapLoading, setMapLoading] = useState(false);
 
     const scrollRef = useRef(null);
     const handleToggleMap = () => {
