@@ -7,38 +7,61 @@ const REDIRECT_URI = 'http://localhost:3000/callback'; // 콜백 URL
 const SCOPE = 'profile_nickname, account_email, gender'; // 요청할 동의항목
 
 function LoginKakao() {
-  const [accessToken, setAccessToken] = useState('');
+  const [accessToken, setAccessToken] = useState(null);
   const [userInfo, setUserInfo] = useState(null);
 
   // 카카오 로그인 함수
   const handleKakaoLogin = () => {
-    const url = `https://kauth.kakao.com/oauth/authorize?client_id=${KAKAO_REST_API_KEY}&redirect_uri=${REDIRECT_URI}&response_type=code&scope=${SCOPE}`;
-    window.location.href = url;
+    const url = `https://kauth.kakao.com/oauth/authorize?client_id=${KAKAO_REST_API_KEY}&redirect_uri=${REDIRECT_URI}&response_type=code`;
+    const popup = window.open(url, '_blank', 'width=500, height=600');
+    popup.onbeforeunload = () => {
+      window.close(); // 팝업창 닫기
+    };
   };
 
   // 액세스 토큰을 발급받고 사용자 정보를 가져오는 함수
-  const getUserInfo = async (code) => {
-    const tokenUrl = `https://kauth.kakao.com/oauth/token?grant_type=authorization_code&client_id=${KAKAO_REST_API_KEY}&redirect_uri=${REDIRECT_URI}&code=${code}`;
-    const tokenResponse = await axios.post(tokenUrl);
-    setAccessToken(tokenResponse.data.access_token);
+const getUserInfo = async (code) => {
+  const tokenUrl = `https://kauth.kakao.com/oauth/token?grant_type=authorization_code&client_id=${KAKAO_REST_API_KEY}&redirect_uri=${REDIRECT_URI}&code=${code}`;
+  const tokenResponse = await axios.post(tokenUrl);
+  setAccessToken(tokenResponse.data.access_token);
 
-    const userInfoUrl = 'https://kapi.kakao.com/v2/user/me';
-    const headers = {
-      Authorization: `Bearer ${tokenResponse.data.access_token}`,
-    };
-    const userInfoResponse = await axios.get(userInfoUrl, { headers });
-    setUserInfo(userInfoResponse.data);
+  const userInfoUrl = 'https://kapi.kakao.com/v2/user/me';
+  const headers = {
+    Authorization: `Bearer ${tokenResponse.data.access_token}`,
   };
+  const userInfoResponse = await axios.get(userInfoUrl, { headers });
+  setUserInfo(userInfoResponse.data);
+
+  // 팝업창 닫기
+  window.opener.location.reload(); // 이전 페이지 새로고침
+  window.close(); // 팝업창 닫기
+};
+
 
   useEffect(() => {
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);
     const authorizationCode = urlParams.get('code');
+    const state = urlParams.get('state');
 
     if (authorizationCode) {
       getUserInfo(authorizationCode);
+      window.history.replaceState(null, null, state); // 원래 페이지로 이동
+    } else {
+      const storedToken = localStorage.getItem('accessToken');
+      if (storedToken) {
+        setAccessToken(storedToken);
+      }
     }
   }, []);
+
+  useEffect(() => {
+    if (accessToken) {
+      localStorage.setItem('accessToken', accessToken);
+    } else {
+      localStorage.removeItem('accessToken');
+    }
+  }, [accessToken]);
 
   // 로그아웃 함수
   const handleLogout = async () => {
@@ -51,25 +74,16 @@ function LoginKakao() {
     setUserInfo(null);
   };
 
-  const renderUserInfo = () => {
-    if (userInfo) {
-      alert(`${userInfo.properties.nickname}님 환영합니다!`);
-    }
-    return null;
-  };
-
   return (
     <div>
       {accessToken ? (
-        <div>
-          {renderUserInfo()}
+        <div className='kakaoLogin'>
           <button onClick={handleLogout}>로그아웃</button>
         </div>
       ) : (
         <div className='kakaoLogin'>
           <button onClick={handleKakaoLogin}>
-            <img src={KakaoLoginButton} alt="카카오 로그인"
-            style={{}} />
+            <img src={KakaoLoginButton} alt="카카오 로그인" />
           </button>
         </div>
       )}

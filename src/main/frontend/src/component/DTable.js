@@ -4,6 +4,8 @@ export default function DTable(props) {
 
     const [a,setA] = useState(false);
     const [b,setB] = useState(false);
+    const [c,setC] = useState(false);
+    const [d,setD] = useState(false);
     return (
         <div className="DTable1">
             {props.test == 0 ?
