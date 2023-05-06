@@ -12,7 +12,7 @@ import java.sql.SQLException;
 public class TestController {
 
     /**
-     * DB연결 테스트 d임시
+     * DB연결 테스트
      */
     @Autowired
     private DataSource dataSource;
