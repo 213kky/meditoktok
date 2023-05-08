@@ -1,65 +1,56 @@
-import './Create.css';
+import { useState } from "react";
+import "./Create.css";
 import Calendar from "../component/Calendar";
 
 export default function Create() {
+  const [startTime, setStartTime] = useState("09:00");
+  const [endTime, setEndTime] = useState("18:00");
 
-    return (
-        <div className="R">
-            <div className="Create">
-                <div className='CD'><Calendar/></div>
-                <div className="SE">
-                    <div className="start">
-                        <div className="S">시작</div>
-                        <br/>
-                        <div className="startT"> 09:00</div>
-                    </div>
-                    <div className="end">
-                        <div className="E">끝</div>
-                        <br/>
-                        <div className="endT"> 18:00</div>
-                    </div>
-                    <div class="made">만들기</div>
-                </div>
+  const handleStartTimeChange = (e) => {
+    setStartTime(e.target.value);
+  };
 
+  const handleEndTimeChange = (e) => {
+    setEndTime(e.target.value);
+  };
 
-            </div>
-            <div className="Save">
-                {/*<div class="box">*/}
-                <div>
-                    <table class="time">
-                        <thead>
-                        <tr>
-                            <th colspan="4">오전</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr>
-                            <td>1/7<br/>09:00</td>
-                            <td>1/7<br/>10:00</td>
-                            <td>1/7<br/>11:00</td>
-                            <td>1/7<br/>12:00</td>
-                        </tr>
-                        </tbody>
-                    </table>
-                    <table class="time">
-                        <thead>
-                        <tr>
-                            <th colspan="4">오후</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr>
-                            <td>1/7<br/>14:00</td>
-                            <td>1/7<br/>15:00</td>
-                            <td>1/7<br/>16:00</td>
-                            <td>1/7<br/>17:00</td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </div>
-                <div class="save">저장</div>
-            </div>
+  const handleCreateClick = () => {
+    console.log("Start Time:", startTime);
+    console.log("End Time:", endTime);
+  };
+
+  return (
+    <div className="R">
+      <div className="Create">
+        <div className="CD">
+          <Calendar />
         </div>
-    );
-
+        <div className="SE">
+          <div className="start">
+            <div className="S">시작</div>
+            <br />
+            <input
+              type="time"
+              value={startTime}
+              onChange={handleStartTimeChange}
+              className="startT"
+            />
+          </div>
+          <div className="end">
+            <div className="E">끝</div>
+            <br />
+            <input
+              type="time"
+              value={endTime}
+              onChange={handleEndTimeChange}
+              className="endT"
+            />
+          </div>
+          <button className="made" onClick={handleCreateClick}>
+            만들기
+          </button>
+        </div>
+      </div>
+    </div>
+  );
 }

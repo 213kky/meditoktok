@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import moment from 'moment';
 import 'moment/locale/ko';
 import './Calendar.css';
-import TableComponent from './TableComponent';
+import TableComponent1 from './TableComponent1';
 
 moment.locale('ko');
 
@@ -96,7 +96,7 @@ function Calendar() {
       <div className='tableC'>
         {isTableVisible && (
           <div className="table-wrapper">
-            <TableComponent selectedDate={selectedDate} />
+            <TableComponent1 selectedDate={selectedDate} />
           </div>
         )}
       </div>
@@ -105,4 +105,3 @@ function Calendar() {
 }
 
 export default Calendar;
-

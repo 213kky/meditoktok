@@ -9,7 +9,7 @@ export default function Header() {
     <span> | </span>
     <span><Link to="/">회원가입</Link></span>
     </div>
-  <div class="mainLogo"><Link to="/">메디톡톡</Link><div>관리자</div></div>
+  <div class="mainLogo"><Link to="/">메디톡톡</Link><div className="manager_ver">관리자</div></div>
   <div class="MhospitalName">OOO 병원</div>
   <nav class="MheaderNav">
     <ul>
