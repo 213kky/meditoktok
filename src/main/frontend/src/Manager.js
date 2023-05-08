@@ -5,10 +5,10 @@ import Page2 from "./component/manager/Page2";
 import React from "react";
 import Page3 from "./component/manager/Page3";
 
-export default function Manager() {
+export default function Manager(props) {
     return (
         <BrowserRouter>
-            <Header />
+            <Header  onToggleAdmin={props.onToggleAdmin}/>
             <Routes>
                 <Route path="/" element={<Page1/>} />
                 <Route path="/manager1" element={<Page1/>} />

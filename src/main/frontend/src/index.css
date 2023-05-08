@@ -285,7 +285,8 @@ aside span{
 
 .hospitalInfoBox div {
   width: 800px;
-  height: 40px;
+  height: max-content;
+  padding: 10px;
   margin-top: 10px;
   margin-bottom: 10px;
   margin-left: 10px;
@@ -576,7 +577,7 @@ aside span{
   /*//border: 2px solid;*/
   float:left;
   width: 100%;
-  height:100%;
+  height:95%;
   text-align: center;
 }
 .tt {
@@ -814,9 +815,6 @@ aside span{
   text-align: center;
 }
 
-.foundDisease {
-   margin-left: 350px;
- }
 .diseaseList {
   display: flex;
   flex-wrap: wrap;
@@ -845,7 +843,8 @@ aside span{
   vertical-align: middle;
 }
 .FDTable:first-child {
-  width: 500px;
+  width: 250px;
+  text-align: center;
 }
 
 .userSignUp {
@@ -880,14 +879,24 @@ aside span{
 }
 
 .selectCity1 {
-  height: 390px;
-  overflow-y: scroll;
+  height: 470px;
+  float: left;
+  border: 2px solid black;
+  margin: 10px;
+}
+.selectCity1 div{
+  width: 100px;
+  padding:4px;
+  cursor: pointer;
 }
 
 .selectCity2 {
-  width: 270px;
-  height: 390px;
+  width: 240px;
+  height: 470px;
   overflow-y: scroll;
+  border: 2px solid black;
+  margin: 10px 10px 10px 0px;
+  display: inline-block;
 }
 
 .selectCity2 ul {
@@ -898,10 +907,10 @@ aside span{
 }
 
 .selectCity2 li {
-  width: 125px;
+  width: 110px;
   display:inline-block;
   float: left;
-  padding:0;
+  padding:4px 0;
   margin:0;
 }
 
@@ -911,5 +920,115 @@ aside span{
 }
 
 .renderList td{
+  width: 385px;
   height:70px;
+}
+
+.test{
+  background-color:rgba(0, 255, 56, 0.28);
+}
+
+.mapOrRegionBox{
+  width: 450px;
+  height: 600px;
+  float: left;
+  text-align: center;
+}
+.mapOrRegionSelect{
+  width: 400px;
+  height: 80px;
+  margin: 0 auto;
+
+}
+.mapOrRegionSelect div{
+  width: 180px;
+  height: 50px;
+  border: 2px solid black;
+  float: left;
+  line-height: 50px;
+}
+.mapBox{
+  width: 396px;
+  height: 496px;
+  margin: 0 auto;
+}
+.regionBox{
+  width: 396px;
+  height: 496px;
+  border: 2px solid black;
+  margin: 0 auto;
+}
+.hospitalListBox{
+  width: 450px;
+  height: 600px;
+  display: inline-block;
+  margin-left: 114px;
+}
+.hospitalListA{
+  font-size: 24px;
+  width: 400px;
+  height: 60px;
+  margin: 0px auto 20px;
+  line-height: 60px;
+}
+
+.hospitalListA span{
+  margin-left: 150px;
+  font-size: 16px;
+  border: 2px solid black;
+  padding: 5px;
+}
+.hospitalListB{
+  width: 396px;
+  height: 446px;
+  border: 2px solid black;
+  margin: 0 auto;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+.hospitalListB table{
+  width: 379px;
+}
+.hospitalListB td{
+  width: 379px;
+  height: 70px;
+  border: 1.5px solid black;
+}
+.hospitalListBox input{
+  width: 374px;
+  height: 30px;
+  margin: 15px auto 0px;
+  border-color: black;
+  display: block;
+  padding-left: 20px;
+}
+.selected{
+  background-color: rgba(0, 255, 56, 0.28);
+}
+
+.mapSearch{
+  width: 140px;
+  height: 30px;
+  line-height: 30px;
+  margin-top: 14px;
+  margin-left: 256px;
+  border: 2px solid black;
+  cursor: pointer;
+}
+.setRadius div{
+  float: left;
+}
+.radius {
+  width: 90px;
+  height: 30px;
+  line-height: 30px;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+.plusMinus{
+  width: 30px;
+  height: 30px;
+  font-size: 30px;
+  border: 2px solid black;
+  line-height: 25px;
 }

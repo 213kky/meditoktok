@@ -13,7 +13,7 @@ public class HospitalService {
     @Autowired
     HospitalRepository hospitalRepository;
 
-    public Hospital test(int id){
+    public Hospital test(Long id){
         Optional<Hospital> byHospName = hospitalRepository.findById(id);
         return byHospName.get();
     }

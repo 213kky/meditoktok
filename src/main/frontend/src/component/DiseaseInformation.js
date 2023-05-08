@@ -7,7 +7,7 @@ export default function DiseaseInformation() {
                 <div style={{float: "left",}}>
                     <div className="disease">간염</div>
                     <div className="department">소화기내과</div>
-                    <div className="hospitalList"><Link to="/hospital_reservation/2">병원목록</Link></div>
+                    <div className="hospitalList"><Link to="/hospital_reservation/1">병원목록</Link></div>
                 </div>
                 <div className="disease_image1">질병 사진</div>
                 <div className="diseaseInfo" style={{marginTop: "10px",}}>
