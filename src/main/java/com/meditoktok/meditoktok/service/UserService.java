@@ -55,7 +55,7 @@ public class UserService {
             return optionalUser.get();
         } else {
             // User를 찾을 수 없을 때 처리
-            throw new Exception("User not found");
+            throw new Exception("유저를 찾을 수 없습니다.");
         }
     }
 
