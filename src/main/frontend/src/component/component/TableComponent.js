@@ -50,7 +50,7 @@ export default function TableComponent({ startTime, endTime }) {
       <tr key={rowIndex}>
         {row.map((slot, index) => (
           <td key={index}>
-            <input
+            <input className="slotInput"
               type="number"
               min="0"
               max="5"
