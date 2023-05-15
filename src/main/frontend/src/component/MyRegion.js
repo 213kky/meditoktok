@@ -1,5 +1,6 @@
 import {Link} from "react-router-dom";
-import React from "react";
+import React, {useState} from "react";
+import axios from "axios";
 
 // 서울에 속한 구 리스트
 const seoulDistricts = ['강남구', '강동구', '강북구', '강서구', '관악구', '광진구', '구로구', '금천구', '노원구', '도봉구', '동대문구', '동작구', '마포구', '서대문구', '서초구', '성동구', '성북구', '송파구', '양천구', '영등포구', '용산구', '은평구', '종로구', '중구', '중랑구'];
@@ -51,19 +52,35 @@ const jejuCities = ['서귀포시', '제주시'];
 
 //세종시 없음. 도시 전체 점검 필요할듯 chat gpt ㅄ임
 export default function MyRegion(props) {
+    const [selectedRegion, setSelectedRegion] = useState(null);
+    const [sido, setSido] = useState(null);
+
     const hospList = (cd) => {
-        props.setSido(cd);
-        props.setLoading(true);
+        setSido(cd);
+        console.log("지역선택");
+        if(props.mode===0){
+            props.setInputValue('');
+        }
+        axios.get(`https://apis.data.go.kr/B551182/hospInfoServicev2/getHospBasisList?serviceKey=G3OZp5dYqrTm0I9gNRRu%2BXouEslD9Gs7F%2BYz9LUKT8%2F%2BJjRHdzSmmSwbLnJ7vR6znJD4hftgOK5ZZ%2FCE9iG3XA%3D%3D&pageNo=1&numOfRows=10&emdongNm=${selectedRegion} ${cd}`)
+            .then(response => {
+                props.setData(response.data);
+            })
+            .catch(error => {
+                console.error(error);
+            })
+            .finally(() => {
+            });
+
     }
     const handleRegionSelect = (region) => {
-        props.setSelectedRegion(region);
+        setSelectedRegion(region);
     }
 
     const isRegionSelected = (region) => {
-        return region === props.selectedRegion;
+        return region === selectedRegion;
     };
     const isSidoSelected = (cd) => {
-        return cd === props.sido;
+        return cd === sido;
     };
 
     return (
@@ -151,197 +168,181 @@ export default function MyRegion(props) {
             </div>
             <div className="selectCity2">
 
-                {props.selectedRegion === '서울특별시' && (
+                {selectedRegion === '서울특별시' && (
                     <ul>
                         {seoulDistricts.map((cd) => (
                             <li className={`${isSidoSelected(cd) ? 'selected' : ''}`}
                                 key={cd} onClick={() => {
                                 hospList(cd)
                             }}>
-                                <Link
-                                    to={`/hospital_reservation/${props.mode}/?data=${cd}`}>{cd}</Link>
+                                {cd}
                             </li>
                         ))}
                     </ul>
                 )}
 
-                {props.selectedRegion === '경기도' && (
+                {selectedRegion === '경기도' && (
                     <ul>
                         {gyeonggiCities.map((cd) => (
                             <li className={`${isSidoSelected(cd) ? 'selected' : ''}`}
                                 key={cd} onClick={() => {
                                 hospList(cd)
-                            }}><Link
-                                to={`/hospital_reservation/${props.mode}/?data=${cd}`}>{cd}</Link>
+                            }}>{cd}
                             </li>
                         ))}
                     </ul>
                 )}
 
-                {props.selectedRegion === '인천광역시' && (
+                {selectedRegion === '인천광역시' && (
                     <ul>
                         {incheonDistricts.map((cd) => (
                             <li className={`${isSidoSelected(cd) ? 'selected' : ''}`}
                                 key={cd} onClick={() => {
                                 hospList(cd)
-                            }}><Link
-                                to={`/hospital_reservation/${props.mode}/?data=${cd}`}>{cd}</Link>
+                            }}>{cd}
                             </li>
                         ))}
                     </ul>
                 )}
-                {props.selectedRegion === '충청북도' && (
+                {selectedRegion === '충청북도' && (
                     <ul>
                         {chungcheongNorthCities.map((cd) => (
                             <li className={`${isSidoSelected(cd) ? 'selected' : ''}`}
                                 key={cd} onClick={() => {
                                 hospList(cd)
-                            }}><Link
-                                to={`/hospital_reservation/${props.mode}/?data=${cd}`}>{cd}</Link>
+                            }}>{cd}
                             </li>
                         ))}
                     </ul>
                 )}
-                {props.selectedRegion === '충청남도' && (
+                {selectedRegion === '충청남도' && (
                     <ul>
                         {chungcheongSouthCities.map((cd) => (
                             <li className={`${isSidoSelected(cd) ? 'selected' : ''}`}
                                 key={cd} onClick={() => {
                                 hospList(cd)
-                            }}><Link
-                                to={`/hospital_reservation/${props.mode}/?data=${cd}`}>{cd}</Link>
+                            }}>{cd}
                             </li>
                         ))}
                     </ul>
                 )}
-                {props.selectedRegion === '대전광역시' && (
+                {selectedRegion === '대전광역시' && (
                     <ul>
                         {daejeonDistricts.map((cd) => (
                             <li className={`${isSidoSelected(cd) ? 'selected' : ''}`}
                                 key={cd} onClick={() => {
                                 hospList(cd)
-                            }}><Link
-                                to={`/hospital_reservation/${props.mode}/?data=${cd}`}>{cd}</Link>
+                            }}>{cd}
                             </li>
                         ))}
                     </ul>
                 )}
-                {props.selectedRegion === '전라북도' && (
+                {selectedRegion === '전라북도' && (
                     <ul>
                         {jeollaNorthCities.map((cd) => (
                             <li className={`${isSidoSelected(cd) ? 'selected' : ''}`}
                                 key={cd} onClick={() => {
                                 hospList(cd)
-                            }}><Link
-                                to={`/hospital_reservation/${props.mode}/?data=${cd}`}>{cd}</Link>
+                            }}>{cd}
                             </li>
                         ))}
                     </ul>
                 )}
-                {props.selectedRegion === '전라남도' && (
+                {selectedRegion === '전라남도' && (
                     <ul>
                         {jeollaSouthCities.map((cd) => (
                             <li className={`${isSidoSelected(cd) ? 'selected' : ''}`}
                                 key={cd} onClick={() => {
                                 hospList(cd)
-                            }}><Link
-                                to={`/hospital_reservation/${props.mode}/?data=${cd}`}>{cd}</Link>
+                            }}>{cd}
                             </li>
                         ))}
                     </ul>
                 )}
-                {props.selectedRegion === '광주광역시' && (
+                {selectedRegion === '광주광역시' && (
                     <ul>
                         {gwangjuDistricts.map((cd) => (
                             <li className={`${isSidoSelected(cd) ? 'selected' : ''}`}
                                 key={cd} onClick={() => {
                                 hospList(cd)
-                            }}><Link
-                                to={`/hospital_reservation/${props.mode}/?data=${cd}`}>{cd}</Link>
+                            }}>{cd}
                             </li>
                         ))}
                     </ul>
                 )}
-                {props.selectedRegion === '경상북도' && (
+                {selectedRegion === '경상북도' && (
                     <ul>
                         {gyeongsangbukdoCities.map((cd) => (
                             <li className={`${isSidoSelected(cd) ? 'selected' : ''}`}
                                 key={cd} onClick={() => {
                                 hospList(cd)
-                            }}><Link
-                                to={`/hospital_reservation/${props.mode}/?data=${cd}`}>{cd}</Link>
+                            }}>{cd}
                             </li>
                         ))}
                     </ul>
                 )}
-                {props.selectedRegion === '대구광역시' && (
+                {selectedRegion === '대구광역시' && (
                     <ul>
                         {daeguDistricts.map((cd) => (
                             <li className={`${isSidoSelected(cd) ? 'selected' : ''}`}
                                 key={cd} onClick={() => {
                                 hospList(cd)
-                            }}><Link
-                                to={`/hospital_reservation/${props.mode}/?data=${cd}`}>{cd}</Link>
+                            }}>{cd}
                             </li>
                         ))}
                     </ul>
                 )}
-                {props.selectedRegion === '경상남도' && (
+                {selectedRegion === '경상남도' && (
                     <ul>
                         {gyeongsangnamdoCities.map((cd) => (
                             <li className={`${isSidoSelected(cd) ? 'selected' : ''}`}
                                 key={cd} onClick={() => {
                                 hospList(cd)
-                            }}><Link
-                                to={`/hospital_reservation/${props.mode}/?data=${cd}`}>{cd}</Link>
+                            }}>{cd}
                             </li>
                         ))}
                     </ul>
                 )}
-                {props.selectedRegion === '부산광역시' && (
+                {selectedRegion === '부산광역시' && (
                     <ul>
                         {busanDistricts.map((cd) => (
                             <li className={`${isSidoSelected(cd) ? 'selected' : ''}`}
                                 key={cd} onClick={() => {
                                 hospList(cd)
-                            }}><Link
-                                to={`/hospital_reservation/${props.mode}/?data=${cd}`}>{cd}</Link>
+                            }}>{cd}
                             </li>
                         ))}
                     </ul>
                 )}
-                {props.selectedRegion === '울산광역시' && (
+                {selectedRegion === '울산광역시' && (
                     <ul>
                         {ulsanDistricts.map((cd) => (
                             <li className={`${isSidoSelected(cd) ? 'selected' : ''}`}
                                 key={cd} onClick={() => {
                                 hospList(cd)
-                            }}><Link
-                                to={`/hospital_reservation/${props.mode}/?data=${cd}`}>{cd}</Link>
+                            }}>{cd}
                             </li>
                         ))}
                     </ul>
                 )}
-                {props.selectedRegion === '강원도' && (
+                {selectedRegion === '강원도' && (
                     <ul>
                         {gangwonCities.map((cd) => (
                             <li className={`${isSidoSelected(cd) ? 'selected' : ''}`}
                                 key={cd} onClick={() => {
                                 hospList(cd)
-                            }}><Link
-                                to={`/hospital_reservation/${props.mode}/?data=${cd}`}>{cd}</Link>
+                            }}>{cd}
                             </li>
                         ))}
                     </ul>
                 )}
-                {props.selectedRegion === '제주특별자치도' && (
+                {selectedRegion === '제주특별자치도' && (
                     <ul>
                         {jejuCities.map((cd) => (
                             <li className={`${isSidoSelected(cd) ? 'selected' : ''}`}
                                 key={cd} onClick={() => {
                                 hospList(cd)
-                            }}><Link
-                                to={`/hospital_reservation/${props.mode}/?data=${cd}`}>{cd}</Link>
+                            }}>{cd}
                             </li>
                         ))}
                     </ul>
