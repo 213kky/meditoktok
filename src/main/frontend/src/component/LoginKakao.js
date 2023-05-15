@@ -20,23 +20,22 @@ function LoginKakao() {
   };
 
   // 액세스 토큰을 발급받고 사용자 정보를 가져오는 함수
-const getUserInfo = async (code) => {
-  const tokenUrl = `https://kauth.kakao.com/oauth/token?grant_type=authorization_code&client_id=${KAKAO_REST_API_KEY}&redirect_uri=${REDIRECT_URI}&code=${code}`;
-  const tokenResponse = await axios.post(tokenUrl);
-  setAccessToken(tokenResponse.data.access_token);
+  const getUserInfo = async (code) => {
+    const tokenUrl = `https://kauth.kakao.com/oauth/token?grant_type=authorization_code&client_id=${KAKAO_REST_API_KEY}&redirect_uri=${REDIRECT_URI}&code=${code}`;
+    const tokenResponse = await axios.post(tokenUrl);
+    setAccessToken(tokenResponse.data.access_token);
 
-  const userInfoUrl = 'https://kapi.kakao.com/v2/user/me';
-  const headers = {
-    Authorization: `Bearer ${tokenResponse.data.access_token}`,
+    const userInfoUrl = 'https://kapi.kakao.com/v2/user/me';
+    const headers = {
+      Authorization: `Bearer ${tokenResponse.data.access_token}`,
+    };
+    const userInfoResponse = await axios.get(userInfoUrl, { headers });
+    setUserInfo(userInfoResponse.data);
+
+    // 팝업창 닫고 메인 페이지로 이동
+    window.opener.location.href = 'http://localhost:3000';
+    window.close();
   };
-  const userInfoResponse = await axios.get(userInfoUrl, { headers });
-  setUserInfo(userInfoResponse.data);
-
-  // 팝업창 닫기
-  window.opener.location.reload(); // 이전 페이지 새로고침
-  window.close(); // 팝업창 닫기
-};
-
 
   useEffect(() => {
     const queryString = window.location.search;
