@@ -2,12 +2,13 @@ import React, { useState } from 'react';
 import moment from 'moment';
 import 'moment/locale/ko';
 import './Calendar.css';
+import TableComponent1 from './TableComponent1';
 
 moment.locale('ko');
 
 function Calendar() {
   const [selectedDate, setSelectedDate] = useState(moment());
-  const [clickedDate, setClickedDate] = useState(null);
+  const [isTableVisible, setIsTableVisible] = useState(false);
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -22,13 +23,13 @@ function Calendar() {
     setSelectedDate((prevDate) => prevDate.clone().add(1, 'month').startOf('month'));
   };
 
-  
-  const handleDateClick = (clickedDate) => {
-    setClickedDate(clickedDate);
-  };
-
   const weekdaysShort = moment.weekdaysShort(true);
   const months = moment.months();
+
+  const handleDateClick = (day) => {
+    setSelectedDate(day);
+    setIsTableVisible(true);
+  };
 
   return (
     <div className="calendar">
@@ -78,26 +79,26 @@ function Calendar() {
             ).map((week, i) => (
               <tr key={i}>
                 {week.map((day) => (
-      <td
-      key={day.format('YYYY-MM-DD')}
-      className={
-        day.isSame(selectedDate, 'day')
-          ? day.isSame(clickedDate, 'day')
-            ? 'selected clicked'
-            : 'selected'
-          : day.isSame(clickedDate, 'day')
-          ? 'clicked'
-          : ''
-      }
-      onClick={() => handleDateClick(day)}
-    >
-      {day.format('D')}
+                  <td
+                    key={day.format('YYYY-MM-DD')}
+                    onClick={() => handleDateClick(day)}
+                  >
+                    {day.format('D')}
                   </td>
                 ))}
               </tr>
             ))}
           </tbody>
         </table>
+      </div>
+
+
+      <div className='tableC'>
+        {isTableVisible && (
+          <div className="table-wrapper">
+            <TableComponent1 selectedDate={selectedDate} />
+          </div>
+        )}
       </div>
     </div>
   );

@@ -3,14 +3,13 @@ package com.meditoktok.meditoktok.domain;
 import jakarta.persistence.*;
 
 @Entity
+@Table(name = "symptomtable")
 public class Symptom {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
-
-    @Column(name = "count")
-    private int count;
+    private String description;
 
     public Long getId() {
         return id;
@@ -28,12 +27,11 @@ public class Symptom {
         this.name = name;
     }
 
-    public int getCount() {
-        return count;
+    public String getDescription() {
+        return description;
     }
 
-    public void setCount(int count) {
-        this.count = count;
+    public void setDescription(String description) {
+        this.description = description;
     }
-
 }

@@ -11,22 +11,14 @@ function Dropdown() {
 
   return (
     <div>
-      <select className='Dropdown' value={selectedOption} onChange={handleChange}>
-        <option value="">--Select--</option>
+      <select className='Dropdown' value={selectedOption} onChange={handleChange} style={{ textAlign: 'center' }}>
+        <option value="">--Select doctor--</option>
         {dummydata.map((name) => (
           <option key={name.id} value={name.id}>
             {name.name}
           </option>
         ))}
       </select>
-      {/* {selectedOption && (
-        <div>
-          <h3>User Details</h3>
-          <p>Name: {dummyData[selectedOption - 1].name}</p>
-          <p>Age: {dummyData[selectedOption - 1].age}</p>
-          <p>Gender: {dummyData[selectedOption - 1].gender}</p>
-        </div>
-      )} */}
     </div>
   );
 }

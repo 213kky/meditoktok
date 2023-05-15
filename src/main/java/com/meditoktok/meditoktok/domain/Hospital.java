@@ -1,21 +1,20 @@
 package com.meditoktok.meditoktok.domain;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 @Entity
 public class Hospital {
-    @Id
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    private String hospName;
+    private String department;
+    private String medicalStaffName;
+    private String operatingHours;
+    private String address;
+    private String tell;
+    private String url;
+    private String notes;
 
-//    id, 요양기관명, 종별코드명, 시도코드명, 시군구코드명, 읍면동, 우편번호, 주소, 전화번호, 병원홈페이지, 개설일자, 좌표(X), 좌표(Y)
-    String hospName;
-    String address;
-    String tell;
-
-    double x;
-    double y;
 
     public Long getId() {
         return id;
@@ -25,12 +24,28 @@ public class Hospital {
         this.id = id;
     }
 
-    public String getHospName() {
-        return hospName;
+    public String getDepartment() {
+        return department;
     }
 
-    public void setHospName(String hospName) {
-        this.hospName = hospName;
+    public void setDepartment(String department) {
+        this.department = department;
+    }
+
+    public String getMedicalStaffName() {
+        return medicalStaffName;
+    }
+
+    public void setMedicalStaffName(String medicalStaffName) {
+        this.medicalStaffName = medicalStaffName;
+    }
+
+    public String getOperatingHours() {
+        return operatingHours;
+    }
+
+    public void setOperatingHours(String operatingHours) {
+        this.operatingHours = operatingHours;
     }
 
     public String getAddress() {
@@ -49,21 +64,34 @@ public class Hospital {
         this.tell = tell;
     }
 
-    public double getX() {
-        return x;
+    public String getUrl() {
+        return url;
     }
 
-    public void setX(double x) {
-        this.x = x;
+    public void setUrl(String url) {
+        this.url = url;
     }
 
-    public double getY() {
-        return y;
+    public String getNotes() {
+        return notes;
     }
 
-    public void setY(double y) {
-        this.y = y;
+    public void setNotes(String notes) {
+        this.notes = notes;
     }
 
+    public String getHospName() {
+        return hospName;
+    }
 
+    public void setHospName(String hospName) {
+        this.hospName = hospName;
+    }
 }
+//진료과목
+//의료진
+//운영시간
+//주소
+//전화번호
+//병원URL
+//공지사항
