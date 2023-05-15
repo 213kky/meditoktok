@@ -79,9 +79,8 @@
   cursor: pointer;
 }
 
-.calendar td.selected {
-  background-color: #007bff;
-  color: #fff;
+.calendar td.clicked {
+  background-color: yellow;
 }
 
 .tableC{
@@ -101,6 +100,5 @@
     max-width: 400px;
   }
 } */
-
 
 

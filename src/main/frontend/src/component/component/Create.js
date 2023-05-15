@@ -1,10 +1,12 @@
 import { useState } from "react";
 import "./Create.css";
 import Calendar from "../component/Calendar";
+import TableComponent from "../component/TableComponent";
 
 export default function Create() {
   const [startTime, setStartTime] = useState("09:00");
   const [endTime, setEndTime] = useState("18:00");
+  const [isTableVisible, setIsTableVisible] = useState(false);
 
   const handleStartTimeChange = (e) => {
     setStartTime(e.target.value);
@@ -15,15 +17,14 @@ export default function Create() {
   };
 
   const handleCreateClick = () => {
-    console.log("Start Time:", startTime);
-    console.log("End Time:", endTime);
+    setIsTableVisible(true);
   };
 
   return (
     <div className="R">
       <div className="Create">
         <div className="CD">
-          <Calendar />
+          <Calendar handleDateSelect={handleCreateClick} />
         </div>
         <div className="SE">
           <div className="start">
@@ -50,6 +51,9 @@ export default function Create() {
             만들기
           </button>
         </div>
+      </div>
+      <div className="TC">
+      {isTableVisible && <TableComponent startTime={startTime} endTime={endTime} />}
       </div>
     </div>
   );
