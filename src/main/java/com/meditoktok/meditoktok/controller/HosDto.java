@@ -1,39 +1,34 @@
-package com.meditoktok.meditoktok.domain;
+package com.meditoktok.meditoktok.controller;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+public class HosDto {
+//    private Long id;
+//
+//    public Long getId() {
+//        return id;
+//    }
+//
+//    public void setId(Long id) {
+//        this.id = id;
+//    }
 
-@Entity
-public class Hospital {
-    @Id
-    private Long id;
-    private Long adminId; // 관리자 pk값
-//    id, 요양기관명, 종별코드명, 시도코드명, 시군구코드명, 읍면동, 우편번호, 주소, 전화번호, 병원홈페이지, 개설일자, 좌표(X), 좌표(Y)
+
+//    private Long userId;
     private String hospName;
-    private String address;
-    private String tell;
     private String department;
     private String medicalStaffName;
     private String operatingHours;
+    private String address;
+    private String tell;
     private String url;
     private String notice;
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Long getAdminId() {
-        return adminId;
-    }
-
-    public void setAdminId(Long adminId) {
-        this.adminId = adminId;
-    }
+//    public Long getUserId() {
+//        return userId;
+//    }
+//
+//    public void setUserId(Long userId) {
+//        this.userId = userId;
+//    }
 
     public String getHospName() {
         return hospName;
@@ -41,22 +36,6 @@ public class Hospital {
 
     public void setHospName(String hospName) {
         this.hospName = hospName;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-    public String getTell() {
-        return tell;
-    }
-
-    public void setTell(String tell) {
-        this.tell = tell;
     }
 
     public String getDepartment() {
@@ -83,6 +62,22 @@ public class Hospital {
         this.operatingHours = operatingHours;
     }
 
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getTell() {
+        return tell;
+    }
+
+    public void setTell(String tell) {
+        this.tell = tell;
+    }
+
     public String getUrl() {
         return url;
     }
@@ -98,4 +93,9 @@ public class Hospital {
     public void setNotice(String notice) {
         this.notice = notice;
     }
+
+
+//    병원이름, 진료과목, 의료짐, 운영시간, 주소, 전하번호, 병원url, 공지사항
+
+
 }

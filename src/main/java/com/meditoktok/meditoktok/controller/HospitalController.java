@@ -1,18 +1,18 @@
-//package com.meditoktok.meditoktok.controller;
-//
-//import com.meditoktok.meditoktok.domain.Hospital;
-//import com.meditoktok.meditoktok.repository.HospitalRepository;
-//import com.meditoktok.meditoktok.service.HospitalService;
-//import org.springframework.beans.factory.annotation.Autowired;
-//import org.springframework.web.bind.annotation.GetMapping;
-//import org.springframework.web.bind.annotation.PostMapping;
-//import org.springframework.web.bind.annotation.RequestBody;
-//import org.springframework.web.bind.annotation.RestController;
-//
-//import java.util.Optional;
-//
-//@RestController
-//public class HospitalController {
+package com.meditoktok.meditoktok.controller;
+
+import com.meditoktok.meditoktok.domain.Hospital;
+import com.meditoktok.meditoktok.repository.HospitalRepository;
+import com.meditoktok.meditoktok.service.HospitalService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
+
+import java.util.Optional;
+
+@RestController
+public class HospitalController {
 //    @Autowired
 //    HospitalService hospitalService;
 //
@@ -30,4 +30,12 @@
 ////        return test.getHospName();
 ////        return hospitalTest.toString();
 //    }
-//}
+
+    @Autowired
+    HospitalService hospitalService;
+
+
+
+
+
+}

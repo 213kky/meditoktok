@@ -17,7 +17,7 @@ import MainPage from "./component/MainPage";
 import UserSignUp from "./component/UserSignUp";
 import ManagerSignUp from "./component/ManagerSignUp";
 import FindAccount from "./component/FindAccount";
-import Test from "./component/Test";
+import Test3 from "./component/Test3";
 import React from "react";
 import LoginKakao from './component/LoginKakao';
 
@@ -42,7 +42,7 @@ function User() {
                 <Route path="/signup/user" element={<UserSignUp/>}/>
                 <Route path="/signup/manager" element={<ManagerSignUp/>}/>
                 <Route path="/findAccount" element={<FindAccount/>}/>
-                <Route path="/test11" element={<Test/>}/>
+                <Route path="/test3" element={<Test3/>}/>
                 <Route path="/callback" element={<LoginKakao/>}/>
 
                 {/*<Route path="*" element={<EmptyPage/>}/>*/}
