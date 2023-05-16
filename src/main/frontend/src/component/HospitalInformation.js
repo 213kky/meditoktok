@@ -25,6 +25,7 @@ export default function HospitalInformation() {
                     console.error(error);
                 })
                 .finally(() => {
+                    // setLoading(false);
                     setLoading2(true);
                     setLoading3(true);
                 });

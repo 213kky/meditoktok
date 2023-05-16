@@ -25,12 +25,12 @@ import SymptomReset from "./component/SymptomReset";
 import DiseaseResultMain from "./component/DiseaseResultMain";
 import FoundDisease from "./component/FoundDisease";
 
-function User() {
+function User(props) {
 
     return (
         <BrowserRouter>
 
-            <Header/>
+            <Header onToggleAdmin={props.onToggleAdmin}/>
             <Suspense fallback={<section className="contents">
                 <h2>Loading...</h2>
             </section>}>
