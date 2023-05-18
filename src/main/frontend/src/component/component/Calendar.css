@@ -1,26 +1,104 @@
+.calendar {
+  width: 350px;
+  height: 300px;
+  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+  /* overflow: hidden; */
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+  line-height: 1.4;
+}
 
-/* 달력에 오늘 날짜 표시 */
-  .react-calendar__tile--now {
-    background: whitesmoke;
-    color: black;
-  }
-  .react-calendar__tile--now:enabled:hover,
-  .react-calendar__tile--now:enabled:focus {
-    color: black;
-  }
+.calendar .dropdowns {
+  display: center;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+  width: 350px;
+}
 
-/* 달력 년 월 표시 */
-  .react-calendar__navigation__label > span {
-    font-size:  20px;
-    font-weight: bolder;
-    color: black;
+.calendar .dropdowns select {
+  margin-right: 10px;
+  padding: 5px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+.calendar .calendar-body {
+  display: center;
+  flex-direction: column;
+  justify-content: space-between;
+  height: calc(100% - 40px);
+}
+
+.calendar .calendar-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+  background-color: #f0f0f0;
+  width: 330px;
+}
+
+.calendar .calendar-header button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 20px;
+  font-weight: bold;
+  line-height: 1;
+  padding: 5px;
+}
+
+.calendar .calendar-header h2 {
+  font-size: 18px;
+  font-weight: normal;
+  margin: 0;
+}
+
+.calendar table {
+  width: 350px;
+  border-collapse: collapse;
+}
+
+.calendar th,
+.calendar td {
+  text-align: center;
+  padding: 5px;
+}
+
+.calendar th {
+  color: #999;
+  font-size: 12px;
+  text-transform: uppercase;
+}
+
+.calendar td {
+  cursor: pointer;
+}
+
+.calendar td.clicked {
+  background-color: yellow;
+}
+
+.tableC{
+  margin-top: -352px;
+}
+
+/* @media (max-width: 400px) {
+  .calendar {
+    max-width: 100%;
+    max-height: 500px;
   }
-/* 요일 섹션 커스텀 */
-  .react-calendar__month-view__weekdays {
-    font-size:  15px;
-    font-weight: bolder;
-    letter-spacing: 20px;
-    color: black;
-    }
+}
+
+@media (max-height: 500px) {
+  .calendar {
+    max-height: 100%;
+    max-width: 400px;
+  }
+} */
 
 

@@ -1,13 +1,11 @@
 package com.meditoktok.meditoktok.service;
 
-import com.meditoktok.meditoktok.controller.HosDto;
+import com.meditoktok.meditoktok.controller.HospiDto;
 import com.meditoktok.meditoktok.domain.Hospital;
-import com.meditoktok.meditoktok.domain.Reservation;
 import com.meditoktok.meditoktok.repository.HospitalRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.NoSuchElementException;
 import java.util.Optional;
 
 @Service
@@ -21,65 +19,71 @@ public class HospitalService {
 //        return byHospName.get();
 //    }
 
-    /**
-     * 임시로 병원이름 주소 전화번호로
-     * 병원 테이블생성  관리는 FE에서  true false 정보를 기반으로 false일때 테이블생성 true 일때 업데이트
-     */
-    public String createHospital(HosDto dto) {
-//        hospitalRepository.findByTell()
-//        // 본격적인 데이터저장 전, validation 과정 필요   입력하지 않은 데이터 체크
-//        if (hospital.getHospName() == null || hospital.getAddress() == null || hospital.getTell() == null) {
-//            throw new IllegalArgumentException("예약 정보가 올바르지 않습니다.");
+    public Hospital firstSave(HospiDto dto) throws IllegalArgumentException {
+        // 병원 정보 저장
+
+        Hospital hospital = new Hospital();
+        hospital.setHospName(dto.getHospName());
+        hospital.setDepartment(dto.getDepartment());
+        hospital.setMedicalStaffName(dto.getMedicalStaffName());
+        hospital.setOperatingHours(dto.getOperatingHours());
+        hospital.setAddress(dto.getAddress());
+        hospital.setTell(dto.getTell());
+        hospital.setUrl(dto.getUrl());
+        return hospitalRepository.save(hospital);
+    }
+
+    public Hospital getHospitalById(Long id) throws Exception {
+        // ID로 병원 정보 조회
+        Optional<Hospital> optionalHospital = hospitalRepository.findById(id);
+        if (optionalHospital.isPresent()) {
+            return optionalHospital.get();
+        } else {
+            throw new Exception("병원을 찾을 수 없습니다");
+        }
+    }
+
+    public Hospital updateHospital(HospiDto dto) throws Exception {
+        // 병원 정보 수정
+//        if (hospital.getId() == null) {
+//            throw new IllegalArgumentException("Hospital ID cannot be null");
 //        }
-//        return hospitalRepository.save(hospital);
-        Hospital hos = new Hospital();
-        hos.setHospName(dto.getHospName());
-        hos.setDepartment(dto.getDepartment());
-        hos.setTell(dto.getTell());
-        hos.setAddress(dto.getAddress());
-        hos.setMedicalStaffName(dto.getMedicalStaffName());
-        hos.setNotice(dto.getNotice());
-        hos.setOperatingHours(dto.getOperatingHours());
-        hos.setUrl(dto.getUrl());
-        return "병원정보 생성";
+//        Optional<Hospital> optionalHospital = hospitalRepository.findById(hospital.getId());
+//        if (optionalHospital.isPresent()) {
+//            return hospitalRepository.save(hospital);
+//        } else {
+//            throw new Exception("병원을 찾을 수 없습니다");
+//        }
 
+        if (dto.getId() == null) {
+            throw new IllegalArgumentException("병원 고유값을 입력하지 않아 병원을 찾을 수 없습니다");
+        }
+        Optional<Hospital> optionalHospital = hospitalRepository.findById(dto.getId());
+        if (optionalHospital.isPresent()) {
+            Hospital hospital = optionalHospital.get();
+            hospital.setHospName(dto.getHospName());
+            hospital.setDepartment(dto.getDepartment());
+            hospital.setMedicalStaffName(dto.getMedicalStaffName());
+            hospital.setOperatingHours(dto.getOperatingHours());
+            hospital.setAddress(dto.getAddress());
+            hospital.setTell(dto.getTell());
+            hospital.setUrl(dto.getUrl());
+            hospital.setNotes(dto.getNotes());
+            return hospitalRepository.save(hospital);
+        } else {
+            throw new Exception("병원을 찾을 수 없습니다");
+        }
     }
 
-//    public Hospital
-
-
-    // DB에서 전화번호로 찾아서 객체 반환
-    public Optional<Hospital> findHospital(String tell) {
-        Optional<Hospital> hos = hospitalRepository.findByTell(tell);
-        if (hos.isPresent()) {
-            return hos;
+    public void deleteHospitalById(Long id) throws Exception {
+        // ID로 병원 정보 삭제
+        Optional<Hospital> optionalHospital = hospitalRepository.findById(id);
+        if (optionalHospital.isPresent()) {
+            hospitalRepository.deleteById(id);
+        } else {
+            throw new Exception("병원을 찾을 수 없습니다");
         }
-        throw new IllegalArgumentException("해당 전화번호로 등록된 병원이 없습니다.");
-    }
-
-
-    /**
-     * 임시로 병원이름 주소 전화번호로
-     * 병원 테이블생성후    관리는 FE에서  true false 정보를 기반으로
-     */
-    public Hospital updateHospital(Long id, Hospital hospital) {
-        Hospital updatedHospital = hospitalRepository.findById(id)
-                .orElseThrow(() -> new NoSuchElementException("저장된 병원 정보가 존재하지 않습니다."));
-        // 변경된 내용들
-        if (hospital.getHospName() != updatedHospital.getHospName()) {
-            updatedHospital.setHospName(hospital.getHospName());
-        }
-        if (hospital.getAddress() != updatedHospital.getAddress()) {
-            updatedHospital.setAddress(hospital.getAddress());
-        }
-        if (hospital.getTell() != updatedHospital.getTell()) {
-            updatedHospital.setTell(hospital.getTell());
-        }
-
-
-        return hospitalRepository.save(updatedHospital);
     }
 
 
 }
-

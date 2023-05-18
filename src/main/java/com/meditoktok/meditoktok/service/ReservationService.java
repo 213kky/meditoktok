@@ -4,44 +4,85 @@ import com.meditoktok.meditoktok.controller.ResDto;
 import com.meditoktok.meditoktok.domain.Reservation;
 import com.meditoktok.meditoktok.domain.User;
 import com.meditoktok.meditoktok.repository.ReservationRepository;
+import com.meditoktok.meditoktok.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.Optional;
 
 @Service
 public class ReservationService {
     @Autowired
     private ReservationRepository reservationRepository;
+//    @Autowired
+//    UserService userService;
     @Autowired
-    UserService userService;
+    UserRepository userRepository;
     // 1. 새로운 예약 생성(저장)
+//    public Reservation createReservation(ResDto resDto) throws Exception {
+//
+//        User user = userService.getUserById(resDto.getUserId());
+//
+////             Reservation 객체 생성 및 값 할당
+//        Reservation reservation = new Reservation();
+//        reservation.setUserId(resDto.getUserId());
+//        reservation.setBirth(user.getBirth());
+////            reservation.setAddress(user.getAddress());
+//        reservation.setReservationDate(resDto.getReservationDate());
+//        reservation.setNotes(resDto.getNotes());
+//        reservation.setDepartment(resDto.getDepartment());
+//        reservation.setPhoneNumber(user.getPhoneNumber());
+//        reservation.setPatientName(user.getName());
+//        reservation.setMedicalStaffName(resDto.getMedicalStaffName());
+//        reservation.setHospiName(resDto.getHospName());
+//        reservation.setGender(user.getGender());
+//
+//        // 본격적인 예약 생성 전, validation 과정 필요
+//        if (reservation.getReservationDate() == null || reservation.getPatientName() == null || reservation.getDepartment() == null || reservation.getMedicalStaffName() == null ||
+//                reservation.getBirth() == null || reservation.getGender() == null) {
+//            throw new IllegalArgumentException("예약 정보가 올바르지 않습니다.");
+//        }
+//        return reservationRepository.save(reservation);
+//    }
+
     public Reservation createReservation(ResDto resDto) throws Exception {
+        Optional<User> optionalUser = userRepository.findById(resDto.getUserId());
+        if (optionalUser.isPresent()) {
+//            return optionalUser.get();
+            User user = optionalUser.get();
 
-        User user = userService.getUserById(resDto.getUserId());
-
-//             Reservation 객체 생성 및 값 할당
-        Reservation reservation = new Reservation();
-        reservation.setUserId(resDto.getUserId());
-        reservation.setBirth(user.getBirth());
+            //             Reservation 객체 생성 및 값 할당
+            Reservation reservation = new Reservation();
+            reservation.setUserId(resDto.getUserId());
+            reservation.setBirth(user.getBirth());
 //            reservation.setAddress(user.getAddress());
-        reservation.setReservationDate(resDto.getReservationDate());
-        reservation.setNotes(resDto.getNotes());
-        reservation.setDepartment(resDto.getDepartment());
-        reservation.setPhoneNumber(user.getPhoneNumber());
-        reservation.setPatientName(user.getName());
-        reservation.setMedicalStaffName(resDto.getMedicalStaffName());
-        reservation.setHospiName(resDto.getHospName());
-        reservation.setGender(user.getGender());
+            reservation.setReservationDate(resDto.getReservationDate());
+            reservation.setNotes(resDto.getNotes());
+            reservation.setDepartment(resDto.getDepartment());
+            reservation.setPhoneNumber(user.getPhoneNumber());
+            reservation.setPatientName(user.getName());
+            reservation.setMedicalStaffName(resDto.getMedicalStaffName());
+            reservation.setHospiName(resDto.getHospName());
+            reservation.setGender(user.getGender());
 
-        // 본격적인 예약 생성 전, validation 과정 필요
-        if (reservation.getReservationDate() == null || reservation.getPatientName() == null || reservation.getDepartment() == null || reservation.getMedicalStaffName() == null ||
-                reservation.getBirth() == null || reservation.getGender() == null) {
-            throw new IllegalArgumentException("예약 정보가 올바르지 않습니다.");
+            // 본격적인 예약 생성 전, validation 과정 필요
+            if (reservation.getReservationDate() == null || reservation.getPatientName() == null || reservation.getDepartment() == null || reservation.getMedicalStaffName() == null ||
+                    reservation.getBirth() == null || reservation.getGender() == null) {
+                throw new IllegalArgumentException("예약 정보가 올바르지 않습니다.");
+            }
+            return reservationRepository.save(reservation);
+        } else {
+            // User를 찾을 수 없을 때 처리
+            throw new Exception("회원정보를 찾을 수 없습니다.");
         }
-        return reservationRepository.save(reservation);
+
+
     }
+
+
+
 
     // 2. 예약 조회
     public Reservation getReservationById(Long id) {

@@ -17,36 +17,44 @@ import MainPage from "./component/MainPage";
 import UserSignUp from "./component/UserSignUp";
 import ManagerSignUp from "./component/ManagerSignUp";
 import FindAccount from "./component/FindAccount";
-import Test3 from "./component/Test3";
-import React from "react";
+import Test from "./component/Test";
+import React, {Suspense} from "react";
 import LoginKakao from './component/LoginKakao';
+import DiseaseTable from "./component/DiseaseTable";
+import SymptomReset from "./component/SymptomReset";
+import DiseaseResultMain from "./component/DiseaseResultMain";
+import FoundDisease from "./component/FoundDisease";
 
-function User() {
+function User(props) {
 
     return (
         <BrowserRouter>
 
-            <Header/>
-            <Routes>
-                <Route path="/" element={<MainPage/>}/>
-                <Route path="/symptom_search" element={<SymptomSearch/>}/>
-                <Route path="/disease_search" element={<DiseaseSearch/>}/>
-                <Route path="/hospital_reservation/0" element={<HospitalReservation/>}/>
-                <Route path="/my_page" element={<MyPage/>}/>
-                <Route path="/disease_information" element={<DiseaseInformation/>}/>
-                <Route path="/hospital_information" element={<HospitalInformation/>}/>
-                <Route path="/hospital_reservation/1" element={<Two/>}/>
-                <Route path="/my_page/change" element={<Change/>}/>
-                <Route path="/login" element={<Login/>}/>
-                <Route path="/signup" element={<Signup/>}/>
-                <Route path="/signup/user" element={<UserSignUp/>}/>
-                <Route path="/signup/manager" element={<ManagerSignUp/>}/>
-                <Route path="/findAccount" element={<FindAccount/>}/>
-                <Route path="/test3" element={<Test3/>}/>
-                <Route path="/callback" element={<LoginKakao/>}/>
+            <Header onToggleAdmin={props.onToggleAdmin}/>
+            <Suspense fallback={<section className="contents">
+                <h2>Loading...</h2>
+            </section>}>
+                <Routes>
+                    <Route path="/" element={<MainPage/>}/>
+                    <Route path="/symptom_search" element={<SymptomSearch/>}/>
+                    <Route path="/disease_search" element={<DiseaseSearch/>}/>
+                    <Route path="/hospital_reservation/0" element={<HospitalReservation/>}/>
+                    <Route path="/my_page" element={<MyPage/>}/>
+                    <Route path="/disease_information" element={<DiseaseInformation/>}/>
+                    <Route path="/hospital_information" element={<HospitalInformation/>}/>
+                    <Route path="/hospital_reservation/1" element={<Two/>}/>
+                    <Route path="/my_page/change" element={<Change/>}/>
+                    <Route path="/login" element={<Login/>}/>
+                    <Route path="/signup" element={<Signup/>}/>
+                    <Route path="/signup/user" element={<UserSignUp/>}/>
+                    <Route path="/signup/manager" element={<ManagerSignUp/>}/>
+                    <Route path="/findAccount" element={<FindAccount/>}/>
+                    <Route path="/test11" element={<Test/>}/>
+                    <Route path="/callback" element={<LoginKakao/>}/>
 
-                {/*<Route path="*" element={<EmptyPage/>}/>*/}
-            </Routes>
+                    {/*<Route path="*" element={<EmptyPage/>}/>*/}
+                </Routes>
+            </Suspense>
             <QuickMenu/>
 
 
