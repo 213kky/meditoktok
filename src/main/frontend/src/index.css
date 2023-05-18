@@ -1032,3 +1032,14 @@ aside span{
   border: 2px solid black;
   line-height: 25px;
 }
+.sortSelect{
+  height: 30px;
+  margin-left: 161px;
+  display: inline-block;
+  border: 2px solid black;
+  font-weight: 600;
+  font-size: 16px;
+}
+.sortSelect option{
+  font-weight: 600;
+}

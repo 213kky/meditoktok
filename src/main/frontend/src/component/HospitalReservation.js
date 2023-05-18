@@ -1,16 +1,16 @@
-import React, {useEffect, useRef, useState} from "react";
+import React, {useRef, useState} from "react";
 import MyMap from "./MyMap";
 import MyRegion from "./MyRegion";
-import axios from "axios";
 import {Link} from "react-router-dom";
 
 export default function HospitalReservation() {
     const [isMap, setIsMap] = useState(true);
     const [data, setData] = useState(null);
     const [inputValue, setInputValue] = useState('');
-    const [mapData, setMapData] = useState(null);
-    const [mapLoad, setMapLoad] = useState(true);
     const scrollRef = useRef(null);
+    const [sortSelect, setSortSelect] = useState('abc');
+    const [hospitals, setHospitals] = useState([]);
+    const [totalCount, setTotalCount] = useState(null);
     const handleToggleMap = () => {
         setIsMap(true);
     };
@@ -48,7 +48,7 @@ export default function HospitalReservation() {
     //     }
     // }, [mapLoading]);
     const mapRenderList = () => {
-        if (mapData === null) {
+        if (totalCount === null) {
             return (
                 <tr>
                     <h3>로딩 중 입니다...</h3>
@@ -56,14 +56,14 @@ export default function HospitalReservation() {
             );
 
         }
-        if (mapData.response.body.totalCount === 0) {
+        if (totalCount === 0) {
             return (
                 <tr>
                     조건에 맞는 병원이 없습니다.
                 </tr>
             );
-        } else if (mapData.response.body.totalCount == 1) {
-            const item = mapData.response.body.items.item;
+        } else if (totalCount == 1) {
+            const item = hospitals;
             return (
                 <tr key={0}>
                     <Link
@@ -76,7 +76,8 @@ export default function HospitalReservation() {
         }
 
 
-        const items = mapData.response.body.items.item;
+        // const items = mapData.response.body.items.item;
+        const items = hospitals;
 
         if (scrollRef.current) { //스크롤 초기화
             scrollRef.current.scrollTop = 0;
@@ -88,6 +89,13 @@ export default function HospitalReservation() {
 
             return hospitalName.includes(searchText);
         });
+        if (sortSelect === 'abc') {
+            filteredItems.sort((a, b) => a.yadmNm.localeCompare(b.yadmNm)); // 가나다 오름차순
+        } else if (sortSelect === 'cba') {
+            filteredItems.sort((a, b) => b.yadmNm.localeCompare(a.yadmNm)); // 가나다 내림차순
+        } else if (sortSelect === 'distance') {
+            filteredItems.sort((a, b) => a.distance - b.distance);
+        }
         if (filteredItems.length === 0) {
             return (
                 <tr>
@@ -135,6 +143,13 @@ export default function HospitalReservation() {
 
             return hospitalName.includes(searchText);
         });
+
+        if (sortSelect === 'abc') {
+            filteredItems.sort((a, b) => a.yadmNm.localeCompare(b.yadmNm)); // 가나다 오름차순
+        } else if (sortSelect === 'cba') {
+            filteredItems.sort((a, b) => b.yadmNm.localeCompare(a.yadmNm)); // 가나다 내림차순
+        }
+
         if (filteredItems.length === 0) {
             return (
                 <tr>
@@ -158,12 +173,6 @@ export default function HospitalReservation() {
         setInputValue(event.target.value);
     }
 
-    // window.onload = function () {
-    //     console.log('페이지 로딩이 완료되었습니다.');
-    //     setMapLoad(true)
-    // };
-
-
     return (
         <section className="contents">
             <div className="mapOrRegionBox">
@@ -175,12 +184,18 @@ export default function HospitalReservation() {
                 </div>
                 <div className={`${isMap ? 'mapBox' : 'regionBox'}`}>
                     {/*setMapX={setMapX} setMapY={setMapY} setMapLoading={setMapLoading}*/}
-                    {isMap ? <MyMap mode={0} setMapData={setMapData} setInputValue={setInputValue}/> :
+                    {isMap ? <MyMap mode={0} setTotalCount={setTotalCount} setInputValue={setInputValue} setHospitals={setHospitals}/> :
                         <MyRegion mode={0} setData={setData} setInputValue={setInputValue}/>}
                 </div>
             </div>
             <div className="hospitalListBox">
-                <div className="hospitalListA">병원목록 <span>가나다순 | 거리순</span></div>
+                <div className="hospitalListA">병원목록
+                    <select className="sortSelect" name="sort" onChange={(e) => setSortSelect(e.target.value)}>
+                        <option value="abc">가나다 오름차순</option>
+                        <option value="cba">가나다 내림차순</option>
+                        {isMap ? <option value="distance">거리 가까운순</option> : null}
+                    </select>
+                </div>
                 <div ref={scrollRef} className="hospitalListB">
                     <table>{isMap ? mapRenderList() : regionRenderList()}</table>
                 </div>
