@@ -99,6 +99,7 @@ export default function MyMap(props) {
     // }, [loading])
     function reSearch() {//나중에 모드에 따른 진료 과목 추가해야 함
         console.log("재검색");
+        props.setTotalCount(null)
         if (props.mode === 0) {
             props.setInputValue('');
         }
