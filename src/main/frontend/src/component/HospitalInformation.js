@@ -16,6 +16,7 @@ export default function HospitalInformation() {
 
     useEffect(() => {
         if (loading) {
+            console.log("요양기호 가져오기");
             axios.get(`https://apis.data.go.kr/B551182/hospInfoServicev2/getHospBasisList?serviceKey=G3OZp5dYqrTm0I9gNRRu%2BXouEslD9Gs7F%2BYz9LUKT8%2F%2BJjRHdzSmmSwbLnJ7vR6znJD4hftgOK5ZZ%2FCE9iG3XA%3D%3D&pageNo=1&numOfRows=1&addr=${addr}&yadmNm=${yadmNm}`)
                 .then(response => {
                     setData(response.data);
@@ -24,16 +25,16 @@ export default function HospitalInformation() {
                     console.error(error);
                 })
                 .finally(() => {
-                    setLoading(false);
+                    // setLoading(false);
                     setLoading2(true);
                     setLoading3(true);
-
                 });
         }
     }, [loading]);
 
     useEffect(() => {
         if (loading2) {
+            console.log("병원정보 1 가져오기");
             axios.get(`https://apis.data.go.kr/B551182/MadmDtlInfoService2/getDtlInfo2?serviceKey=%2Fzt1jmOZn0y5Q8ql8mxBIKRoXvyqetyRjCvZUNCV6OCXxnnYWFFZUnNcW5E2yCax4iZMPg%2FAbMM%2FpAw7%2BeYhtQ%3D%3D&ykiho=${items.ykiho}`)
                 .then(response => {
                     setData2(response.data);
@@ -42,14 +43,13 @@ export default function HospitalInformation() {
                     console.error(error);
                 })
                 .finally(() => {
-                    setLoading2(false);
-
                 });
         }
     }, [loading2]);
 
     useEffect(() => {
         if (loading3) {
+            console.log("병원정보 2 가져오기");
             axios.get(`https://apis.data.go.kr/B551182/MadmDtlInfoService2/getDgsbjtInfo2?serviceKey=%2Fzt1jmOZn0y5Q8ql8mxBIKRoXvyqetyRjCvZUNCV6OCXxnnYWFFZUnNcW5E2yCax4iZMPg%2FAbMM%2FpAw7%2BeYhtQ%3D%3D&ykiho=${items.ykiho}`)
                 .then(response => {
                     setData3(response.data);
@@ -58,7 +58,6 @@ export default function HospitalInformation() {
                     console.error(error);
                 })
                 .finally(() => {
-                    setLoading3(false);
                 });
         }
     }, [loading3]);
@@ -67,6 +66,7 @@ export default function HospitalInformation() {
         return null
     } else {
         items = data.response.body.items.item;
+
     }
     if (data2 === null) {
         return null

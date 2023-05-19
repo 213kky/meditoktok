@@ -18,53 +18,124 @@ export default function MyMap(props) {
     const [map, setMap] = useState(null)
     const [myCoordinates, setMyCoordinates] = useState(null)
     const [data, setData] = useState(null);
-    const [loading, setLoading] = useState(false)
     const [initLoading, setInitLoading] = useState(false)
     const [circleCenter, setCircleCenter] = useState(null)
     const [circleRadius, setCircleRadius] = useState(1000)
     const [circleZoom, setCircleZoom] = useState(15)
     const myRef = useRef([])
 
+    function calculateDistance(lat1, lon1, lat2, lon2) {
+        const earthRadius = 6371; // 지구 반지름 (단위: km)
+
+        // 위도 및 경도를 라디안 단위로 변환
+        const lat1Rad = toRadians(lat1);
+        const lon1Rad = toRadians(lon1);
+        const lat2Rad = toRadians(lat2);
+        const lon2Rad = toRadians(lon2);
+
+        // Haversine 공식을 사용하여 거리 계산
+        const dLat = lat2Rad - lat1Rad;
+        const dLon = lon2Rad - lon1Rad;
+        const a =
+            Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+            Math.cos(lat1Rad) * Math.cos(lat2Rad) * Math.sin(dLon / 2) * Math.sin(dLon / 2);
+        const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+        const distance = earthRadius * c;
+
+        return distance;
+    }
+
+// 각도를 라디안으로 변환하는 함수
+    function toRadians(angle) {
+        return angle * (Math.PI / 180);
+    }
 
     useEffect(() => {//나중에 모드에 따른 진료 과목 추가해야 함
         if (initLoading) { //numOfRows=10 --> 표시되는 행의 수 (테스트를 위해 10으로 설정)
-            axios.get(`https://apis.data.go.kr/B551182/hospInfoServicev2/getHospBasisList?ServiceKey=%2Fzt1jmOZn0y5Q8ql8mxBIKRoXvyqetyRjCvZUNCV6OCXxnnYWFFZUnNcW5E2yCax4iZMPg%2FAbMM%2FpAw7%2BeYhtQ%3D%3D&pageNo=1&numOfRows=100&xPos=${myCoordinates.lng()}&yPos=${myCoordinates.lat()}&radius=1000`)
+            console.log("첫 번째 지도 병원 로딩")
+            if (props.mode === 0) {
+                props.setInputValue('');
+            }
+            axios.get(`https://apis.data.go.kr/B551182/hospInfoServicev2/getHospBasisList?ServiceKey=%2Fzt1jmOZn0y5Q8ql8mxBIKRoXvyqetyRjCvZUNCV6OCXxnnYWFFZUnNcW5E2yCax4iZMPg%2FAbMM%2FpAw7%2BeYhtQ%3D%3D&pageNo=1&numOfRows=100&xPos=${map.getCenter().lng()}&yPos=${map.getCenter().lat()}&radius=1000`)
                 .then(response => {
-                    props.setMapData(response.data)
+                    props.setTotalCount(response.data.response.body.totalCount)
+                    if(response.data.response.body.totalCount===1){
+                        props.setHospitals(response.data.response.body.items.item)
+                    }
+                    if (response.data.response.body.totalCount > 1) {
+                        const items = response.data.response.body.items.item;
+                        const hospitals = items.map((item) => {
+                            const distance = calculateDistance(map.getCenter().lat(), map.getCenter().lng(), item.YPos, item.XPos);
+                            return {...item, distance};
+                        });
+                        props.setHospitals(hospitals)
+                    }
                     setData(response.data)
                 })
                 .catch(error => {
                     console.error(error)
                 })
                 .finally(() => {
-                    setInitLoading(false)
+                    // setInitLoading(false)
                 })
         }
     }, [initLoading])
-    useEffect(() => {//나중에 모드에 따른 진료 과목 추가해야 함
-        if (loading) { //numOfRows=10 --> 표시되는 행의 수 (테스트를 위해 10으로 설정)
-            axios.get(`https://apis.data.go.kr/B551182/hospInfoServicev2/getHospBasisList?ServiceKey=%2Fzt1jmOZn0y5Q8ql8mxBIKRoXvyqetyRjCvZUNCV6OCXxnnYWFFZUnNcW5E2yCax4iZMPg%2FAbMM%2FpAw7%2BeYhtQ%3D%3D&pageNo=1&numOfRows=100&xPos=${map.getCenter().lng()}&yPos=${map.getCenter().lat()}&radius=${circleRadius}`)
-                .then(response => {
-                    props.setMapData(response.data)
-                    setData(response.data)
-                })
-                .catch(error => {
-                    console.error(error)
-                })
-                .finally(() => {
-                    setLoading(false)
-                })
-        }
-    }, [loading])
 
-    function mapSearch() {
-        // center = map.getCenter()
-        setLoading(true)
-        // setCircleCenter(map.getCenter())
-        // props.setMapX(center.lng())//경도
-        // props.setMapY(center.lat())//위도
-        // props.setMapLoading(true)
+    // useEffect(() => {//나중에 모드에 따른 진료 과목 추가해야 함
+    //     console.log("HospMAP");
+    //     if (loading) { //numOfRows=10 --> 표시되는 행의 수 (테스트를 위해 10으로 설정)
+    //         axios.get(`https://apis.data.go.kr/B551182/hospInfoServicev2/getHospBasisList?ServiceKey=%2Fzt1jmOZn0y5Q8ql8mxBIKRoXvyqetyRjCvZUNCV6OCXxnnYWFFZUnNcW5E2yCax4iZMPg%2FAbMM%2FpAw7%2BeYhtQ%3D%3D&pageNo=1&numOfRows=100&xPos=${map.getCenter().lng()}&yPos=${map.getCenter().lat()}&radius=${circleRadius}`)
+    //             .then(response => {
+    //                 props.setMapData(response.data)
+    //                 setData(response.data)
+    //             })
+    //             .catch(error => {
+    //                 console.error(error)
+    //             })
+    //             .finally(() => {
+    //                 setLoading(false)
+    //             })
+    //     }
+    // }, [loading])
+    function reSearch() {//나중에 모드에 따른 진료 과목 추가해야 함
+        console.log("재검색");
+        props.setTotalCount(null)
+        if (props.mode === 0) {
+            props.setInputValue('');
+        }
+        //numOfRows=10 --> 표시되는 행의 수 (테스트를 위해 10으로 설정)
+        axios.get(`https://apis.data.go.kr/B551182/hospInfoServicev2/getHospBasisList?ServiceKey=%2Fzt1jmOZn0y5Q8ql8mxBIKRoXvyqetyRjCvZUNCV6OCXxnnYWFFZUnNcW5E2yCax4iZMPg%2FAbMM%2FpAw7%2BeYhtQ%3D%3D&pageNo=1&numOfRows=100&xPos=${map.getCenter().lng()}&yPos=${map.getCenter().lat()}&radius=${circleRadius}`)
+            .then(response => {
+                props.setTotalCount(response.data.response.body.totalCount)
+                if(response.data.response.body.totalCount===1){
+                    props.setHospitals(response.data.response.body.items.item)
+                }
+                if (response.data.response.body.totalCount > 1) {
+                    const items = response.data.response.body.items.item;
+                    const hospitals = items.map((item) => {
+                        const distance = calculateDistance(map.getCenter().lat(), map.getCenter().lng(), item.YPos, item.XPos);
+                        return {...item, distance};
+                    });
+                    props.setHospitals(hospitals)
+                }
+                setData(response.data)
+            })
+            .catch(error => {
+                console.error(error)
+            })
+            .finally(() => {
+            })
     }
+
+
+    // function mapSearch() {
+    //     // center = map.getCenter()
+    //     // setLoading(true)
+    //     // setCircleCenter(map.getCenter())
+    //     // props.setMapX(center.lng())//경도
+    //     // props.setMapY(center.lat())//위도
+    //     // props.setMapLoading(true)
+    // }
 
     function onSuccessGeolocation(position) {
 
@@ -81,7 +152,7 @@ export default function MyMap(props) {
 
     function onErrorGeolocation() {
         alert('위치 액세스를 허용해주세요.')
-        const center = map.getCenter()
+        // const center = map.getCenter()
         // props.setMapX(center.lng())//경도
         // props.setMapY(center.lat())//위도
         // props.setMapLoading(true)
@@ -113,7 +184,7 @@ export default function MyMap(props) {
         }
     }, [map])
 
-    //###
+//###
     function MyCustomControl() {
         const locationBtnHtml = `
     <a href="#" 
@@ -187,10 +258,27 @@ export default function MyMap(props) {
         }
         if (data.response.body.totalCount === 0) {
             return
+        } else if (data.response.body.totalCount == 1) {
+            const item = data.response.body.items.item;
+            return (
+                <>
+                    <InfoWindow ref={el => myRef.current[0] = el} content={
+                        '<div style="padding:10px;">' +
+                        item.yadmNm +
+                        '</div>' +
+                        `<a style="padding: 10px; text-decoration: underline; font-size: 13px; color: blue;" href=/hospital_information/?yadmNm=${item.yadmNm}&addr=${item.sgguCdNm} >` + '병원 정보 페이지' + '</a>'}/>
+                    <Marker position={new navermaps.LatLng(item.YPos, item.XPos)} onClick={() => {
+                        if (myRef.current[0].getMap()) {
+                            myRef.current[0].close()
+                        } else {
+                            myRef.current[0].open(map, new navermaps.LatLng(item.YPos, item.XPos))
+                        }
+                    }}/>
+
+                </>
+            )
         }
-
         const items = data.response.body.items.item;
-
         return items.map((item, index) => {
                 return (
                     <>
@@ -300,6 +388,7 @@ export default function MyMap(props) {
                     {renderMarker()}
                     {renderCircle()}
                 </NaverMap>
+
                 <img src={pin} style={{
                     position: 'absolute',
                     right: '43.4%',
@@ -315,7 +404,7 @@ export default function MyMap(props) {
                     <div className="radius">{circleRadius}m 반경</div>
                     <div className="plusMinus" onClick={plusRadius}>+</div>
                 </div>
-                <div className="mapSearch" onClick={mapSearch}>현 지도에서 검색</div>
+                <div className="mapSearch" onClick={reSearch}>현 지도에서 검색</div>
             </div>
         </>
     )
