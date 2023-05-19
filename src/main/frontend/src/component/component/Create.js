@@ -4,8 +4,8 @@ import Calendar from "../component/Calendar";
 import TableComponent from "../component/TableComponent";
 
 export default function Create() {
-  const [startTime, setStartTime] = useState("09:00");
-  const [endTime, setEndTime] = useState("18:00");
+  const [startTime, setStartTime] = useState("");
+  const [endTime, setEndTime] = useState("");
   const [isTableVisible, setIsTableVisible] = useState(false);
 
   const handleStartTimeChange = (e) => {
@@ -47,13 +47,16 @@ export default function Create() {
               className="endT"
             />
           </div>
+          
           <button className="made" onClick={handleCreateClick}>
             만들기
           </button>
         </div>
       </div>
       <div className="TC">
-      {isTableVisible && <TableComponent startTime={startTime} endTime={endTime} />}
+        {isTableVisible && (
+          <TableComponent startTime={startTime} endTime={endTime} />
+        )}
       </div>
     </div>
   );
