@@ -10,8 +10,16 @@ public class ResDto {
     private String notes;
     private String hospName;
     private Long userId;
+    @JsonProperty("doctorId")
+    private Long doctorId;
 
+    public Long getDoctorId() {
+        return doctorId;
+    }
 
+    public void setDoctorId(Long doctorId) {
+        this.doctorId = doctorId;
+    }
 
     @JsonProperty("reservationDate")
     public String getReservationDate() {

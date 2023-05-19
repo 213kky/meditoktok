@@ -14,7 +14,15 @@ public class Hospital {
     private String tell;
     private String url;
     private String notes;
-
+//    private Long adminId;     관리자 삭제시 병원도 삭제를 위해?? DB에만 fk로
+//
+//    public Long getAdminId() {
+//        return adminId;
+//    }
+//
+//    public void setAdminId(Long adminId) {
+//        this.adminId = adminId;
+//    }
 
     public Long getId() {
         return id;

@@ -66,6 +66,7 @@ public class ReservationService {
             reservation.setMedicalStaffName(resDto.getMedicalStaffName());
             reservation.setHospiName(resDto.getHospName());
             reservation.setGender(user.getGender());
+            reservation.setDoctorId(resDto.getDoctorId());
 
             // 본격적인 예약 생성 전, validation 과정 필요
             if (reservation.getReservationDate() == null || reservation.getPatientName() == null || reservation.getDepartment() == null || reservation.getMedicalStaffName() == null ||
@@ -136,6 +137,12 @@ public class ReservationService {
 //        }
         if (reservation.getNotes() != updatedReservation.getNotes()) {
             updatedReservation.setNotes(reservation.getNotes());
+        }
+        if (reservation.getDoctorId() != updatedReservation.getDoctorId()) {
+            updatedReservation.setDoctorId(reservation.getDoctorId());
+        }
+        if (reservation.getDepartment() != updatedReservation.getDepartment()) {
+            updatedReservation.setDepartment(reservation.getDepartment());
         }
 
         return reservationRepository.save(updatedReservation);
