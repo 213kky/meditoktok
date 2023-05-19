@@ -143,7 +143,9 @@ export default function HospitalReservation() {
 
             return hospitalName.includes(searchText);
         });
-
+        if (sortSelect === 'distance') {
+            setSortSelect('abc')
+        }
         if (sortSelect === 'abc') {
             filteredItems.sort((a, b) => a.yadmNm.localeCompare(b.yadmNm)); // 가나다 오름차순
         } else if (sortSelect === 'cba') {

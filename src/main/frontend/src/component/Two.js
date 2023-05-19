@@ -90,6 +90,9 @@ export default function Two() {
         if (scrollRef.current) { //스크롤 초기화
             scrollRef.current.scrollTop = 0;
         }
+        if (sortSelect === 'distance') {
+            setSortSelect('abc')
+        }
         if (sortSelect === 'abc') {
             items.sort((a, b) => a.yadmNm.localeCompare(b.yadmNm)); // 가나다 오름차순
         } else if (sortSelect === 'cba') {
