@@ -35,7 +35,7 @@ public class UserController {
     public String login(@RequestBody UserLoginRequest loginRequest) {
         try {
             User user = userService.login(loginRequest.getAccount(), loginRequest.getPw());
-            return user.getName() + "님 환영합니다.";
+            return user.getName();
         } catch (Exception e) {
             return e.getMessage();
         }

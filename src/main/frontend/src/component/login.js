@@ -2,11 +2,13 @@ import React, {useState} from "react";
 import axios from "axios";
 import {Link, useNavigate} from "react-router-dom";
 import LoginKakao from "./LoginKakao";
+import { useCookies } from 'react-cookie';
 
-export default function Login() {
+export default function Login(props) {
     const [account, setAccount] = useState("");
     const [password, setPassword] = useState("");
     const navigate = useNavigate();
+    const [cookies, setCookie] = useCookies(['memberInfo']);
     const handleSubmit = (event) => {
         event.preventDefault();
         const formData = {
@@ -16,7 +18,9 @@ export default function Login() {
         axios.post('/login', formData)
             .then(response => {
                 // console.log(response);
-                alert(response.data);
+                props.setIsLogin(true);
+                setCookie('memberInfo', response.data, { path: '/' });
+                alert(response.data+"님 환영합니다.");
                 navigate("/");
             })
             .catch(error => {

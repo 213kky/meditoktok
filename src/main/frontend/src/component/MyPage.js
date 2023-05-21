@@ -1,14 +1,17 @@
 import NowTr from "./NowTr";
 import HistoryTr from "./HistoryTr";
 import {Link} from "react-router-dom";
+import {useCookies} from "react-cookie";
 
 export default function MyPage() {
+    const [cookies] = useCookies(['memberInfo']);
+    const cookieValue = cookies['memberInfo'];
     return (
         <section className="contents">
-            <div className="userName">OOO님</div>
+            <div className="userName">{cookieValue}님</div>
             <div className="userInfoModify">
                 <Link to="/my_page/change">회원정보수정</Link>
-               </div>
+            </div>
             <div className="tableSubject">현재 예약된 병원</div>
             <nav className="nowNav">
                 <ul>
@@ -40,5 +43,7 @@ export default function MyPage() {
                 </table>
             </div>
         </section>
+
+
     );
 }

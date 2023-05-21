@@ -116,9 +116,7 @@ aside ul li {
 aside ul li a {
   display: block;
 }
-aside span{
-  display: none;
-}
+
 /*n2-1*/
 .disease_image1 {
   width: 350px;

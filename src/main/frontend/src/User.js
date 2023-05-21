@@ -1,6 +1,6 @@
 import './App.css';
 import Header from "./component/Header";
-import {BrowserRouter, Route, Routes} from "react-router-dom";
+import {BrowserRouter, Route, Routes, useNavigate} from "react-router-dom";
 import SymptomSearch from "./component/SymptomSearch";
 import DiseaseSearch from "./component/DiseaseSearch";
 import HospitalReservation from "./component/HospitalReservation";
@@ -18,7 +18,7 @@ import UserSignUp from "./component/UserSignUp";
 import ManagerSignUp from "./component/ManagerSignUp";
 import FindAccount from "./component/FindAccount";
 import Test from "./component/Test";
-import React, {Suspense} from "react";
+import React, {Suspense, useEffect} from "react";
 import LoginKakao from './component/LoginKakao';
 import DiseaseTable from "./component/DiseaseTable";
 import SymptomReset from "./component/SymptomReset";
@@ -26,11 +26,30 @@ import DiseaseResultMain from "./component/DiseaseResultMain";
 import FoundDisease from "./component/FoundDisease";
 
 function User(props) {
+    function PrivateRoute() {
+        const navigate = useNavigate();
 
+        // if (!props.isLogin) {
+        //     navigate('/login');
+        //     return null;
+        // }
+        useEffect(() => {
+            if (!props.isLogin) {
+                alert("로그인이 필요한 서비스입니다.");
+                navigate('/login');
+            }
+        }, [props.isLogin, navigate]);
+
+        if (!props.isLogin) {
+            return null;
+        }
+
+        return <MyPage/>;
+    }
     return (
         <BrowserRouter>
 
-            <Header onToggleAdmin={props.onToggleAdmin}/>
+            <Header isLogin={props.isLogin} setIsLogin={props.setIsLogin} onToggleAdmin={props.onToggleAdmin}/>
             <Suspense fallback={<section className="contents">
                 <h2>Loading...</h2>
             </section>}>
@@ -39,12 +58,12 @@ function User(props) {
                     <Route path="/symptom_search" element={<SymptomSearch/>}/>
                     <Route path="/disease_search" element={<DiseaseSearch/>}/>
                     <Route path="/hospital_reservation/0" element={<HospitalReservation/>}/>
-                    <Route path="/my_page" element={<MyPage/>}/>
+                    <Route path="/my_page" element={<PrivateRoute/>}/>
                     <Route path="/disease_information" element={<DiseaseInformation/>}/>
                     <Route path="/hospital_information" element={<HospitalInformation/>}/>
                     <Route path="/hospital_reservation/1" element={<Two/>}/>
                     <Route path="/my_page/change" element={<Change/>}/>
-                    <Route path="/login" element={<Login/>}/>
+                    <Route path="/login" element={<Login setIsLogin={props.setIsLogin} />}/>
                     <Route path="/signup" element={<Signup/>}/>
                     <Route path="/signup/user" element={<UserSignUp/>}/>
                     <Route path="/signup/manager" element={<ManagerSignUp/>}/>
@@ -55,7 +74,7 @@ function User(props) {
                     {/*<Route path="*" element={<EmptyPage/>}/>*/}
                 </Routes>
             </Suspense>
-            <QuickMenu/>
+            <QuickMenu isLogin={props.isLogin}/>
 
 
         </BrowserRouter>
