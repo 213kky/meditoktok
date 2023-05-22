@@ -19,11 +19,15 @@ export default function Login(props) {
             .then(response => {
                 // console.log(response);
                 props.setIsLogin(true);
+                if(response.data.isAdmin){
+                    props.onToggleAdmin(true);
+                }
                 setCookie('memberInfo', response.data, { path: '/' });
-                alert(response.data+"님 환영합니다.");
+                alert(response.data.name+"님 환영합니다.");
                 navigate("/");
             })
             .catch(error => {
+                alert(error);
                 console.error(error);
             });
     }

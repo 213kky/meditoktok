@@ -9,7 +9,7 @@ export default function Header(props) {
         <header>
             <div className="sign">
                 <span onClick={props.onToggleAdmin} style={{color:"white"}}>관리자 페이지로</span>
-                {props.isLogin ? <><span>{cookieValue}님</span><span>|</span><span onClick={()=>{removeCookie('memberInfo'); props.setIsLogin(false);}}><Link to="/">로그아웃</Link></span></>:  <><span><Link to="/login">로그인</Link></span><span>|</span><span><Link to="/signup">회원가입</Link></span></> }
+                {props.isLogin ? <><span>{cookieValue.name}님</span><span>|</span><span onClick={()=>{removeCookie('memberInfo'); props.setIsLogin(false);}}><Link to="/">로그아웃</Link></span></>:  <><span><Link to="/login">로그인</Link></span><span>|</span><span><Link to="/signup">회원가입</Link></span></> }
 
             </div>
             <div className="mainLogo"><Link to="/">메디톡톡</Link></div>

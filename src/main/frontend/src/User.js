@@ -63,14 +63,14 @@ function User(props) {
                     <Route path="/hospital_information" element={<HospitalInformation/>}/>
                     <Route path="/hospital_reservation/1" element={<Two/>}/>
                     <Route path="/my_page/change" element={<Change/>}/>
-                    <Route path="/login" element={<Login setIsLogin={props.setIsLogin} />}/>
+                    <Route path="/login" element={<Login setIsLogin={props.setIsLogin} onToggleAdmin={props.onToggleAdmin}/>}/>
                     <Route path="/signup" element={<Signup/>}/>
                     <Route path="/signup/user" element={<UserSignUp/>}/>
                     <Route path="/signup/manager" element={<ManagerSignUp/>}/>
                     <Route path="/findAccount" element={<FindAccount/>}/>
                     <Route path="/test11" element={<Test/>}/>
                     <Route path="/callback" element={<LoginKakao/>}/>
-
+                    {/*<Route path="/test/fe" element={<Test/>}></Route>*/}
                     {/*<Route path="*" element={<EmptyPage/>}/>*/}
                 </Routes>
             </Suspense>

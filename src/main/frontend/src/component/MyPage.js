@@ -8,7 +8,7 @@ export default function MyPage() {
     const cookieValue = cookies['memberInfo'];
     return (
         <section className="contents">
-            <div className="userName">{cookieValue}님</div>
+            <div className="userName">{cookieValue.name}님</div>
             <div className="userInfoModify">
                 <Link to="/my_page/change">회원정보수정</Link>
             </div>
