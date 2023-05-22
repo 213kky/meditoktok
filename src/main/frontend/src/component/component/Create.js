@@ -39,7 +39,7 @@ export default function Create() {
           </div>
           <div className="end">
             <div className="E">끝</div>
-            <br />
+            <br/>
             <input
               type="time"
               value={endTime}
