@@ -16,20 +16,28 @@ export default function Login(props) {
             pw: password,
         };
         axios.post('/login', formData)
-            .then(response => {
-                // console.log(response);
-                props.setIsLogin(true);
-                if(response.data.isAdmin){
-                    props.onToggleAdmin(true);
-                }
-                setCookie('memberInfo', response.data, { path: '/' });
-                alert(response.data.name+"님 환영합니다.");
-                navigate("/");
-            })
-            .catch(error => {
-                alert(error);
-                console.error(error);
-            });
+          .then(response => {
+            // 로그인 성공
+            props.setIsLogin(true);
+            if (response.data.isAdmin) {
+              props.onToggleAdmin(true);
+            }
+            setCookie('memberInfo', response.data, { path: '/' });
+            alert(`${response.data.name}님 환영합니다.`);
+            navigate("/");
+          })
+          .catch(error => {
+            // 로그인 실패 또는 오류 발생
+            if (error.response && error.response.data) {
+              // 오류 응답 처리
+              const errorMessage = error.response.data.errorMessage;
+              alert(errorMessage);
+            } else {
+              // 일반 오류 처리
+              alert('로그인에 실패했습니다.');
+              console.error(error);
+            }
+          });
     }
 
     return (
