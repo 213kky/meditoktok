@@ -1,11 +1,18 @@
-package com.meditoktok.meditoktok.domain;
+package com.meditoktok.meditoktok.controller;
 
-import jakarta.persistence.*;
+public class HosDto {
+//    private Long id;
+//
+//    public Long getId() {
+//        return id;
+//    }
+//
+//    public void setId(Long id) {
+//        this.id = id;
+//    }
 
-@Entity
-public class Hospital {
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+
+//    private Long userId;
     private String hospName;
     private String department;
     private String medicalStaffName;
@@ -13,23 +20,22 @@ public class Hospital {
     private String address;
     private String tell;
     private String url;
-    private String notes;
-//    private Long adminId;     관리자 삭제시 병원도 삭제를 위해?? DB에만 fk로
-//
-//    public Long getAdminId() {
-//        return adminId;
+    private String notice;
+
+//    public Long getUserId() {
+//        return userId;
 //    }
 //
-//    public void setAdminId(Long adminId) {
-//        this.adminId = adminId;
+//    public void setUserId(Long userId) {
+//        this.userId = userId;
 //    }
 
-    public Long getId() {
-        return id;
+    public String getHospName() {
+        return hospName;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setHospName(String hospName) {
+        this.hospName = hospName;
     }
 
     public String getDepartment() {
@@ -80,26 +86,16 @@ public class Hospital {
         this.url = url;
     }
 
-    public String getNotes() {
-        return notes;
+    public String getNotice() {
+        return notice;
     }
 
-    public void setNotes(String notes) {
-        this.notes = notes;
+    public void setNotice(String notice) {
+        this.notice = notice;
     }
 
-    public String getHospName() {
-        return hospName;
-    }
 
-    public void setHospName(String hospName) {
-        this.hospName = hospName;
-    }
+//    병원이름, 진료과목, 의료짐, 운영시간, 주소, 전하번호, 병원url, 공지사항
+
+
 }
-//진료과목
-//의료진
-//운영시간
-//주소
-//전화번호
-//병원URL
-//공지사항

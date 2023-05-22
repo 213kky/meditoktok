@@ -36,11 +36,13 @@ public class ReservationController {
     //수정 예약고유번호로
     @PostMapping("/test/res/2")
     public String change(@RequestBody ResChangeDto dto) {
-        Reservation res = reservationService.getReservationById((long)dto.getId());
+        Reservation res = reservationService.getReservationById(dto.getId());
         res.setNotes(dto.getNotes());
         res.setMedicalStaffName(dto.getName());
         res.setReservationDate(dto.getDate());
-        reservationService.updateReservation((long) dto.getId(), res);
+        res.setDepartment(dto.getDepartment());
+        res.setDoctorId(dto.getDoctorId());
+        reservationService.updateReservation( dto.getId(), res);
         return res.getId() + " : 수정되었습니다.";
     }
 
@@ -53,17 +55,4 @@ public class ReservationController {
     }
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
 

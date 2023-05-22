@@ -85,5 +85,13 @@ public class HospitalService {
         }
     }
 
+//    public Optional<Hospital> getHospitalByHospNameAndAddressAndTellAndUrl(String a, String b,String c,String d)throws Exception{
+//        Optional<Hospital> optionalHospital = Optional.ofNullable(hospitalRepository.findByHospNameAndAddressAndTellAndUrl(a, b, c, d));
+//        if (optionalHospital.isPresent()) {
+//            return optionalHospital;
+//        } else {
+//            throw new Exception("병원을 찾을 수 없습니다");
+//        }
+//    }
 
 }

@@ -5,16 +5,34 @@ import org.w3c.dom.NameList;
 import javax.management.loading.PrivateClassLoader;
 
 public class ResChangeDto {
-    private int id;
+    private Long id;
     private String name;
     private String date;
     private String notes;
+    private String department;
+    private Long doctorId;
 
-    public int getId() {
+    public Long getDoctorId() {
+        return doctorId;
+    }
+
+    public void setDoctorId(Long doctorId) {
+        this.doctorId = doctorId;
+    }
+
+    public String getDepartment() {
+        return department;
+    }
+
+    public void setDepartment(String department) {
+        this.department = department;
+    }
+
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

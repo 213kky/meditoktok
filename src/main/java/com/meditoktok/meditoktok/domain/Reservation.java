@@ -19,6 +19,7 @@ public class Reservation {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private Long userId;
+    private Long doctorId;
     private String reservationDate;
     private String patientName;
     private String department;
@@ -47,7 +48,13 @@ public class Reservation {
         this.hospiName = hospiName;
     }
 
+    public Long getDoctorId() {
+        return doctorId;
+    }
 
+    public void setDoctorId(Long doctorId) {
+        this.doctorId = doctorId;
+    }
 
     public String getReservationDate() {
         return reservationDate;
