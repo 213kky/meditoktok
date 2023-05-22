@@ -8,7 +8,7 @@ import Page3 from "./component/manager/Page3";
 export default function Manager(props) {
     return (
         <BrowserRouter>
-            <Header  onToggleAdmin={props.onToggleAdmin}/>
+            <Header  isLogin={props.isLogin} setIsLogin={props.setIsLogin} onToggleAdmin={props.onToggleAdmin}/>
             <Routes>
                 <Route path="/" element={<Page1/>} />
                 <Route path="/manager1" element={<Page1/>} />
