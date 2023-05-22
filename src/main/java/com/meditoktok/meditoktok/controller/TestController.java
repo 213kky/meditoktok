@@ -23,4 +23,15 @@ public class TestController {
             return "Database connected successfully!";
         }
     }
+
+    @GetMapping("/test/fe")
+    public String testFe() {
+        return "localhost:3000으로 보낸 요청";
+    }
+
+
+
+
+
+
 }

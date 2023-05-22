@@ -1,7 +1,11 @@
 package com.meditoktok.meditoktok.controller;
 
+import com.meditoktok.meditoktok.domain.Admin;
+import com.meditoktok.meditoktok.domain.Member;
 import com.meditoktok.meditoktok.domain.User;
 import com.meditoktok.meditoktok.repository.UserRepository;
+import com.meditoktok.meditoktok.service.AdminService;
+import com.meditoktok.meditoktok.service.MemberService;
 import com.meditoktok.meditoktok.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -24,20 +28,33 @@ public class UserController {
 //    }
 
 
-
     /**
      * 로그인
      */
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private MemberService memberService;
+    @Autowired
+    private AdminService adminService;
+
     @PostMapping("/login")
-    public String login(@RequestBody UserLoginRequest loginRequest) {
-        try {
-            User user = userService.login(loginRequest.getAccount(), loginRequest.getPw());
-            return user.getName();
-        } catch (Exception e) {
-            return e.getMessage();
+    public Member login(@RequestBody UserLoginRequest loginRequest) {
+        if (!memberService.isAdmin(loginRequest)) {
+            try {
+                User user = userService.login(loginRequest.getAccount(), loginRequest.getPw());
+                return user;
+            } catch (Exception e) {
+                throw new RuntimeException(e.getMessage());
+            }
+        } else {
+            try {
+                Admin admin = adminService.login(loginRequest.getAccount(), loginRequest.getPw());
+                return admin;
+            } catch (Exception e) {
+                throw new RuntimeException(e.getMessage());
+            }
         }
     }
 
@@ -52,11 +69,11 @@ public class UserController {
     }
 
     @PostMapping("/findAccount")
-    public String findAccount(@RequestBody UserFindAccount userFindAccount){
-        try{
+    public String findAccount(@RequestBody UserFindAccount userFindAccount) {
+        try {
             User user = userService.findAccount(userFindAccount.getName(), userFindAccount.getBirth(), userFindAccount.getEmail());
             return user.getAccount() + "입니다.";
-        } catch (Exception e){
+        } catch (Exception e) {
             return e.getMessage();
         }
     }
