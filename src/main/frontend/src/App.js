@@ -6,7 +6,7 @@ import { NavermapsProvider } from 'react-naver-maps';
 
 function App() {
 //     const isAdmin = true;
-    const [isAdmin, setIsAdmin] = useState(false);
+    const [isAdmin, setIsAdmin] = useState(true);
     const [isLogin, setIsLogin] = useState(false);
     const handleToggleAdmin = () => {
         setIsAdmin(!isAdmin);
