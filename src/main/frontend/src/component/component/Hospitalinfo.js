@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, { useState, useEffect } from 'react';
 import './Hospitalinfo.css';
 import axios from "axios";
 import {useCookies} from "react-cookie";
@@ -15,6 +15,7 @@ export default function Hospitalinfo() {
   const [cookies, setCookie, removeCookie] = useCookies(['memberInfo']);
   const cookieValue = cookies['memberInfo'];
   const [originData, setOriginData] = useState(null);
+console.log(cookieValue.hospiId);
   const handleEditSave = () => {
     if (editMode) {
       setEditMode(false);
@@ -31,6 +32,14 @@ export default function Hospitalinfo() {
           },
         });
         setOriginData(response.data);
+        setDepartment(response.data.department);
+         setDoctors(response.data.medicalStaffName);
+                setOpeningHours(response.data.operatingHours);
+                setAddress(response.data.address);
+                setPhoneNumber(response.data.tell);
+                setHospitalURL(response.data.url);
+                setNotice(response.data.notes);
+        console.log(originData);
       } catch (error) {
         console.error('Error:', error);
       }
@@ -39,14 +48,37 @@ export default function Hospitalinfo() {
     fetchData();
   }, []);
 
+  const save = () => {
+          setEditMode(false);
+          const editData = {
+              hospName:originData.hospName,
+              id: cookieValue.hospiId,
+              department: department,
+              medicalStaffName: doctors,
+              operatingHours: openingHours,
+              address: address,
+              tell: phoneNumber,
+              url: hospitalURL,
+              notes: Notice,
+          };
+          axios.post('/manager12', editData)
+              .then(response => {
+                  alert('병원 정보가 수정되었습니다.');
+              })
+              .catch(error => {
+                  console.error(error);
+              });
+
+      }
+
 
   return (
     <section className="Mcontents">
-      <div className="Mhospital">병원 이름</div>
+      <div className="Mhospital">{originData? originData.hospName:null}</div>
       <div className='Mc'>
       <span className="ButtonContainer">
         {editMode ? (
-          <button className="SaveButton" style={{ width: '100px', height: '40px' }} onClick={handleEditSave}>
+          <button className="SaveButton" style={{ width: '100px', height: '40px' }} onClick={save}>
             저장
           </button>
         ) : (
