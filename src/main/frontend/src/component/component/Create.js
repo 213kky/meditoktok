@@ -2,11 +2,17 @@ import { useState } from "react";
 import "./Create.css";
 import Calendar from "../component/Calendar";
 import TableComponent from "../component/TableComponent";
+import Dropdown from "../component/Dropdown";
 
 export default function Create() {
+  const [selectedDoctor, setSelectedDoctor] = useState("");
   const [startTime, setStartTime] = useState("");
   const [endTime, setEndTime] = useState("");
   const [isTableVisible, setIsTableVisible] = useState(false);
+
+  const handleDoctorSelect = (doctorName) => {
+    setSelectedDoctor(doctorName);
+  };
 
   const handleStartTimeChange = (e) => {
     setStartTime(e.target.value);
@@ -21,6 +27,8 @@ export default function Create() {
   };
 
   return (
+    <div>
+    <Dropdown onSelect={handleDoctorSelect} />
     <div className="R">
       <div className="Create">
         <div className="CD">
@@ -55,9 +63,10 @@ export default function Create() {
       </div>
       <div className="TC">
         {isTableVisible && (
-          <TableComponent startTime={startTime} endTime={endTime} />
+          <TableComponent doctor={selectedDoctor} startTime={startTime} endTime={endTime} />
         )}
       </div>
+    </div>
     </div>
   );
 }
