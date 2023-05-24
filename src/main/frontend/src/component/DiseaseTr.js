@@ -1,10 +1,10 @@
 import {Link} from "react-router-dom";
 
-export default function DiseaseTr() {
+export default function DiseaseTr(props) {
     return (
         <tr>
             <td valign={"top"}>
-                <Link to="/disease_information">
+                <Link to={`/disease_information?cntntsSn=${props.test}`}>
                     <table className="sub_table">
                         <colgroup>
                             <col width="20%"/>
@@ -16,7 +16,7 @@ export default function DiseaseTr() {
                             <td rowSpan="4">
                                 <div className="disease_image">질병 사진</div>
                             </td>
-                            <td colSpan="2">간염</td>
+                            <td colSpan="2">{props.test2}</td>
                             <td></td>
                         </tr>
                         <tr>
