@@ -3,7 +3,7 @@ import './Hospitalinfo.css';
 import axios from "axios";
 import {useCookies} from "react-cookie";
 
-export default function Hospitalinfo() {
+export default function Hospitalinfo(props) {
   const [editMode, setEditMode] = useState(false);
   const [department, setDepartment] = useState('');
   const [doctors, setDoctors] = useState('');
@@ -32,6 +32,7 @@ console.log(cookieValue.hospiId);
           },
         });
         setOriginData(response.data);
+        props.setHospName(originData.hospName);
         setDepartment(response.data.department);
          setDoctors(response.data.medicalStaffName);
                 setOpeningHours(response.data.operatingHours);

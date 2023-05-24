@@ -1,9 +1,9 @@
 import Hospitalinfo from "../component/Hospitalinfo";
 
-function Page1() {
+function Page1(props) {
   return (
     <section className="contents">
-      <Hospitalinfo />
+      <Hospitalinfo setHospName={props.setHospName}/>
     </section>
 
   );

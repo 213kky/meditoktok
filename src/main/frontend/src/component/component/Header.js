@@ -18,7 +18,7 @@ export default function Header(props) {
             <div class="mainLogo"><Link to="/">메디톡톡</Link>
                 <div className="manager_ver">관리자</div>
             </div>
-            <div class="MhospitalName">OOO 병원</div>
+            <div class="MhospitalName">{props.hospName}</div>
             <nav class="MheaderNav">
                 <ul>
                     <li><Link to="/manager1">병원 정보 수정 / 공지사항</Link></li>
