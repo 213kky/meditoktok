@@ -195,7 +195,7 @@ export default function HospitalReservation() {
                     <select className="sortSelect" name="sort" onChange={(e) => setSortSelect(e.target.value)}>
                         <option value="abc">가나다 오름차순</option>
                         <option value="cba">가나다 내림차순</option>
-                        {isMap ? <option value="distance">거리 가까운순</option> : null}
+                        {isMap ? <option value="distance">거리 가까운 순</option> : null}
                     </select>
                 </div>
                 <div ref={scrollRef} className="hospitalListB">

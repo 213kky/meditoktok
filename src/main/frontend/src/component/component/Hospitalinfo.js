@@ -1,5 +1,7 @@
-import React, { useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import './Hospitalinfo.css';
+import axios from "axios";
+import {useCookies} from "react-cookie";
 
 export default function Hospitalinfo() {
   const [editMode, setEditMode] = useState(false);
@@ -10,7 +12,9 @@ export default function Hospitalinfo() {
   const [phoneNumber, setPhoneNumber] = useState('');
   const [hospitalURL, setHospitalURL] = useState('');
   const [Notice, setNotice] = useState('');
-
+  const [cookies, setCookie, removeCookie] = useCookies(['memberInfo']);
+  const cookieValue = cookies['memberInfo'];
+  const [originData, setOriginData] = useState(null);
   const handleEditSave = () => {
     if (editMode) {
       setEditMode(false);
@@ -18,6 +22,23 @@ export default function Hospitalinfo() {
       setEditMode(true);
     }
   };
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get('/manager1', {
+          params: {
+            hospiId: cookieValue.hospiId,
+          },
+        });
+        setOriginData(response.data);
+      } catch (error) {
+        console.error('Error:', error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
 
   return (
     <section className="Mcontents">
