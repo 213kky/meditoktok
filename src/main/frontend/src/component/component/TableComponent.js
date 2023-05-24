@@ -1,8 +1,8 @@
-import React , { useState } from "react";
 import "./TableComponent.css";
 
 export default function TableComponent({ startTime, endTime }) {
-  const [reservationCounts, setReservationCounts] = useState([]);
+  const reservationCounts = [];
+
 
   const generateTimeSlots = () => {
     const start = new Date(`01/01/2000 ${startTime}`);
@@ -22,16 +22,12 @@ export default function TableComponent({ startTime, endTime }) {
       start.setMinutes(start.getMinutes() + 30);
     }
 
-    reservationCounts.push(...timeSlots);
-
     return timeSlots;
   };
 
   const handleChange = (index, e) => {
     if (reservationCounts[index]) {
-      const updatedCounts = [...reservationCounts]; 
-      updatedCounts[index].count = e.target.value;
-      setReservationCounts(updatedCounts);
+      reservationCounts[index].count = e.target.value;
     }
   };
 
@@ -50,13 +46,11 @@ export default function TableComponent({ startTime, endTime }) {
       const row = slots.slice(i, i + 4);
       rows.push(row);
     }
-
-    
     return rows.map((row, rowIndex) => (
       <tr key={rowIndex}>
         {row.map((slot, index) => (
           <td key={index}>
-            <input className="slotInput"
+            <input
               type="number"
               min="0"
               max="5"
@@ -71,15 +65,7 @@ export default function TableComponent({ startTime, endTime }) {
   };
 
   return (
-    <div
-      className="Save"
-      style={{
-        width: "410px",
-        height: "550px",
-        overflow: "auto",
-        overflowX: "hidden"
-      }}
-    >
+    <div className="Save" style={{ width: "410px", height: "550px", overflow: "auto", overflowX: "hidden" }}>
       <div className="TT">
         <table className="time">
           <thead>
