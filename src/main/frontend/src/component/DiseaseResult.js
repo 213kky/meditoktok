@@ -1,18 +1,15 @@
-import React, { useState } from "react";
-
-function DiseaseResult() {
-
-  return (
-    <div>
-      <div className="selectDisease">선택한 증상
-      </div>
-    </div>
-  );
-}
-
-export default DiseaseResult;
-
-
+//import React, { useState } from "react";
+//import DTable from "./DTable";
+//
+//function DiseaseResult(props) {
+//  return (
+//    <div className="selectDisease">
+//      선택한 증상
+//    </div>
+//  );
+//}
+//
+//export default DiseaseResult;
 
 
 

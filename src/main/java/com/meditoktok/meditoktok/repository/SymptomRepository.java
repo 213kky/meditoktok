@@ -3,6 +3,9 @@ package com.meditoktok.meditoktok.repository;
 import com.meditoktok.meditoktok.domain.Symptom;
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import java.util.List;
+
 public interface SymptomRepository extends JpaRepository<Symptom, Long> {
-    // 기타 메소드 추가 가능
+
+    List<Symptom> findByBodyPart(String bodyPart);
 }

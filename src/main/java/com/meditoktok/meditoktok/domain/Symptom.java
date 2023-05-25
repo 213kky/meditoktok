@@ -8,8 +8,8 @@ public class Symptom {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    private String bodyPart;
     private String name;
-    private String description;
 
     public Long getId() {
         return id;
@@ -19,19 +19,19 @@ public class Symptom {
         this.id = id;
     }
 
+    public String getBodyPart() {
+        return bodyPart;
+    }
+
+    public void setBodyPart(String bodyPart) {
+        this.bodyPart = bodyPart;
+    }
+
     public String getName() {
         return name;
     }
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
     }
 }

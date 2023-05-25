@@ -17,4 +17,6 @@ public class SymptomService {
     public List<Symptom> getAllSymptoms() {
         return symptomRepository.findAll();
     }
+
+    public List<Symptom> getPartSymptoms(String test) {return symptomRepository.findByBodyPart(test);}
 }

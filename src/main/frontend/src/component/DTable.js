@@ -1,18 +1,18 @@
 import React, { useState, useEffect } from "react";
+import axios from "axios";
 
-function DTable({ onSelectedSymptoms }) {
+function DTable({ onSelectedSymptoms, test }) {
   const [symptoms, setSymptoms] = useState([]);
   const [selectedSymptoms, setSelectedSymptoms] = useState([]);
 
   useEffect(() => {
     fetchSymptoms();
-  }, []);
+  }, [test]);
 
   const fetchSymptoms = async () => {
     try {
-      const response = await fetch('/api/symptoms');
-      const data = await response.json();
-      setSymptoms(data);
+      const response = await axios.get(`/api/symptoms`,{params : { bodyPart : test,}});
+      setSymptoms(response.data);
     } catch (error) {
       console.error('Error fetching symptoms:', error);
     }
@@ -31,14 +31,12 @@ function DTable({ onSelectedSymptoms }) {
   };
 
   useEffect(() => {
-    setSelectedSymptoms(symptoms.filter(symptom => symptom.checked));
-  }, [symptoms]);
-
-  useEffect(() => {
+    const selected = symptoms.filter(symptom => symptom.checked);
+    setSelectedSymptoms(selected);
     if (typeof onSelectedSymptoms === 'function') {
-      onSelectedSymptoms(selectedSymptoms);
+      onSelectedSymptoms(selected);
     }
-  }, [selectedSymptoms, onSelectedSymptoms]);
+  }, [symptoms, onSelectedSymptoms]);
 
   const renderTableRows = () => {
     const rows = [];
@@ -78,16 +76,6 @@ function DTable({ onSelectedSymptoms }) {
           {renderTableRows()}
         </tbody>
       </table>
-      <div>
-        <p>
-          {selectedSymptoms.map((symptom, index, arr) => (
-            <span key={symptom.id}>
-              {symptom.name}
-              {index !== arr.length - 1 ? " " : ""}
-            </span>
-          ))}
-        </p>
-      </div>
     </div>
   );
 }
@@ -95,35 +83,4 @@ function DTable({ onSelectedSymptoms }) {
 export default DTable;
 
 
-
-
-
-
-
-
-
-
-
-//                  <tr>
 //                      <td><input type='checkbox'  onClick={()=>setB(!b)} checked={b}/>목의 통증</td>
-//                      <td><input type='checkbox'/>목소리 변화</td>
-//                      <td><input type='checkbox'/>경부 강직</td>
-//                      <td><input type='checkbox'/>목 주변 부종</td>
-//                  </tr>
-//                  <tr>
-//                      <td><input type='checkbox'/>이물감</td>
-//                      <td><input type='checkbox'/>이중음성</td>
-//                      <td><input type='checkbox'/>성대 이상</td>
-//                      <td><input type='checkbox'/>후두염</td>
-//                  </tr>
-//                  <tr>
-//                      <td><input type='checkbox'/>편도선 비대</td>
-//                      <td><input type='checkbox'/>인후염</td>
-//                      <td><input type='checkbox'/>후두부종</td>
-//                      <td><input type='checkbox'/>성대부종</td>
-//                  </tr>
-//                  <tr>
-//                      <td><input type='checkbox'/>잦은 상기도 감염</td>
-//                      <td><input type='checkbox'/>코가 목뒤로 넘어감</td>
-//                      <td><input type='checkbox'/>삼키기 곤란</td>
-//                  </tr>

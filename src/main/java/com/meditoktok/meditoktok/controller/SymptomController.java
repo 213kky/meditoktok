@@ -4,6 +4,7 @@ import com.meditoktok.meditoktok.domain.Symptom;
 import com.meditoktok.meditoktok.service.SymptomService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -18,7 +19,9 @@ public class SymptomController {
     }
 
     @GetMapping
-    public List<Symptom> getAllSymptoms() {
-        return symptomService.getAllSymptoms();
+    public List<Symptom> getAllSymptoms(@RequestParam String bodyPart) {
+        return symptomService.getPartSymptoms(bodyPart);
+//        return symptomService.getAllSymptoms();
+
     }
 }
