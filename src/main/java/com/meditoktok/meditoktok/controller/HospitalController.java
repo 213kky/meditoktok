@@ -34,8 +34,19 @@ public class HospitalController {
         return "첫 병원정보 저장";
     }
 
+    @GetMapping("/manager1")
+    public Hospital getHospitalById(@RequestParam long hospiId) throws Exception {
+        Hospital hospital = hospitalService.getHospitalById(hospiId);
+        return hospital;
+    }
 
-    @PostMapping("/test/hospiinfo/change")
+//    @PostMapping("/manager1")
+//    public Hospital getHospitalById(@RequestBody long hospiId) throws Exception {
+//        Hospital hospital = hospitalService.getHospitalById(hospiId);
+//        return hospital;
+//    }
+
+    @PostMapping("/manager12")
     public String change(@RequestBody HospiDto dto) throws Exception{
         hospitalService.updateHospital(dto);
         return "병원 정보가 수정되었습니다.";

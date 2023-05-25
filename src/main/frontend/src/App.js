@@ -17,7 +17,7 @@ function App() {
         <NavermapsProvider
             ncpClientId='jfncs1dl99'
         >
-            {isAdmin ? <Manager isLogin={isLogin} setIsLogin={setIsLogin} onToggleAdmin={handleToggleAdmin}/> : <User isLogin={isLogin} setIsLogin={setIsLogin} onToggleAdmin={handleToggleAdmin}/>}
+            {isAdmin ? <Manager isLogin={isLogin} setIsLogin={setIsLogin} setIsAdmin={setIsAdmin} onToggleAdmin={handleToggleAdmin}/> : <User isLogin={isLogin} setIsLogin={setIsLogin} onToggleAdmin={handleToggleAdmin}/>}
         </NavermapsProvider>
     );
 

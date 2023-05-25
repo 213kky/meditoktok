@@ -70,7 +70,7 @@ function User(props) {
                     <Route path="/findAccount" element={<FindAccount/>}/>
                     <Route path="/test11" element={<Test/>}/>
                     <Route path="/callback" element={<LoginKakao/>}/>
-                    {/*<Route path="/test/fe" element={<Test/>}></Route>*/}
+                    <Route path="/test/hospitalInfoApi" element={<Test/>}></Route>
                     {/*<Route path="*" element={<EmptyPage/>}/>*/}
                 </Routes>
             </Suspense>
