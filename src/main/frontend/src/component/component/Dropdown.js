@@ -5,45 +5,26 @@ import axios from "axios";
 import {useCookies} from "react-cookie"
 
 
-function Dropdown() {
+function Dropdown({onSelect, originData}) {
   const [cookies, setCookie, removeCookie] = useCookies(['memberInfo']);
   const cookieValue = cookies['memberInfo'];
   const [selectedOption, setSelectedOption] = useState('');
- const [originData, setOriginData] = useState('');
-  function handleChange(event) {
+   function handleChange(event) {
     setSelectedOption(event.target.value);
+    onSelect(event.target.value);
   }
 console.log(cookieValue);
 
-
-   useEffect(() => {
-     const fetchData = async () => {
-       try {
-         const response = await axios.get('/find/doctor', {
-           params: {
-             hosp: cookieValue.hospiId,
-           },
-         });
-         setOriginData(response.data);
-
-         console.log(response);
-       } catch (error) {
-         console.error('Error:', error);
-       }
-     };
-
-     fetchData();
-   }, []);
 
   return (
     <div>
       <select className='Dropdown' value={selectedOption} onChange={handleChange} style={{ textAlign: 'center' }}>
         <option value="">--Select doctor--</option>
-        {dummydata.map((name) => (
-          <option key={name.id} value={name.id}>
-            {name.name}
+        {originData?originData.map((item) => (
+          <option key={item.id} value={item.id}>
+            {item.doctorName}
           </option>
-        ))}
+        )):null}
       </select>
     </div>
   );
