@@ -1,13 +1,39 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import dummydata from './dummydata.json';
 import './Dropdown.css';
+import axios from "axios";
+import {useCookies} from "react-cookie"
+
 
 function Dropdown() {
+  const [cookies, setCookie, removeCookie] = useCookies(['memberInfo']);
+  const cookieValue = cookies['memberInfo'];
   const [selectedOption, setSelectedOption] = useState('');
-
+ const [originData, setOriginData] = useState('');
   function handleChange(event) {
     setSelectedOption(event.target.value);
   }
+console.log(cookieValue);
+
+
+   useEffect(() => {
+     const fetchData = async () => {
+       try {
+         const response = await axios.get('/find/doctor', {
+           params: {
+             hosp: cookieValue.hospiId,
+           },
+         });
+         setOriginData(response.data);
+
+         console.log(response);
+       } catch (error) {
+         console.error('Error:', error);
+       }
+     };
+
+     fetchData();
+   }, []);
 
   return (
     <div>
