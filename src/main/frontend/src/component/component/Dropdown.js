@@ -1,19 +1,16 @@
 import React, { useState, useEffect } from 'react';
-import dummydata from './dummydata.json';
 import './Dropdown.css';
-import axios from "axios";
-import {useCookies} from "react-cookie"
+
 
 
 function Dropdown({onSelect, originData}) {
-  const [cookies, setCookie, removeCookie] = useCookies(['memberInfo']);
-  const cookieValue = cookies['memberInfo'];
   const [selectedOption, setSelectedOption] = useState('');
    function handleChange(event) {
     setSelectedOption(event.target.value);
-    onSelect(event.target.value);
   }
-console.log(cookieValue);
+  useEffect(() => {
+    onSelect(selectedOption);
+  }, [selectedOption, onSelect]);
 
 
   return (

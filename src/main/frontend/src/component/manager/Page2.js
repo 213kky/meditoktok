@@ -1,11 +1,11 @@
 import Create from "../component/Create";
 import {useCookies} from "react-cookie";
-function Page2() {
+function Page2({originData}) {
   const [cookies] = useCookies(['memberInfo']);
   const cookieValue = cookies['memberInfo'];
   return (
     <section className="contents">
-    <Create/>
+    <Create originData={originData}/>
     </section>
   );
 }

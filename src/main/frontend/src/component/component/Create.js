@@ -3,21 +3,16 @@ import "./Create.css";
 import Calendar from "../component/Calendar";
 import TableComponent from "../component/TableComponent";
 import Dropdown from "../component/Dropdown";
-import axios from "axios";
-import {useCookies} from "react-cookie"
 
-export default function Create() {
+
+export default function Create({originData}) {
   const [selectedDoctor, setSelectedDoctor] = useState("");
   const [startTime, setStartTime] = useState("");
   const [endTime, setEndTime] = useState("");
   const [isTableVisible, setIsTableVisible] = useState(false);
-  const [originData, setOriginData] = useState('');
-  const [cookies, setCookie, removeCookie] = useCookies(['memberInfo']);
-  const cookieValue = cookies['memberInfo'];
 
   const handleDoctorSelect = (doctorName) => {
     setSelectedDoctor(doctorName);
-    console.log(selectedDoctor);
   };
 
   const handleStartTimeChange = (e) => {
@@ -32,7 +27,7 @@ export default function Create() {
     setIsTableVisible(true);
   };
 
-  useEffect(() => {
+  /*useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await axios.get('/find/doctor', {
@@ -49,7 +44,11 @@ export default function Create() {
     };
 
     fetchData();
-  }, []);
+  }, [cookieValue.hospiId]);*/
+
+  useEffect(() => {
+    console.log(selectedDoctor);
+  }, [selectedDoctor]);
 
   return (
     <div>
