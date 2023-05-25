@@ -15,7 +15,7 @@ function LoginKakao() {
     const url = `https://kauth.kakao.com/oauth/authorize?client_id=${KAKAO_REST_API_KEY}&redirect_uri=${REDIRECT_URI}&response_type=code`;
     const popup = window.open(url, '_blank', 'width=500, height=600');
     popup.onbeforeunload = () => {
-      window.close(); // 팝업창 닫기
+        window.close(); // 팝업창 닫기
     };
   };
 
@@ -45,7 +45,6 @@ function LoginKakao() {
 
     if (authorizationCode) {
       getUserInfo(authorizationCode);
-      window.history.replaceState(null, null, state); // 원래 페이지로 이동
     } else {
       const storedToken = localStorage.getItem('accessToken');
       if (storedToken) {
@@ -64,14 +63,24 @@ function LoginKakao() {
 
   // 로그아웃 함수
   const handleLogout = async () => {
-    const url = 'https://kapi.kakao.com/v1/user/logout';
-    const headers = {
-      Authorization: `Bearer ${accessToken}`,
-    };
-    await axios.post(url, null, { headers });
-    setAccessToken('');
-    setUserInfo(null);
+    try {
+      const url = 'https://kapi.kakao.com/v1/user/logout';
+      const headers = {
+        Authorization: `Bearer ${accessToken}`,
+      };
+      await axios.post(url, null, { headers });
+      setAccessToken('');
+      setUserInfo(null);
+    } catch (error) {
+      if (error.response && error.response.status === 401) {
+        // 인증이 만료되었으므로 액세스 토큰을 제거하고 사용자 정보를 초기화
+        localStorage.removeItem('accessToken');
+        setAccessToken(null);
+        setUserInfo(null);
+      }
+    }
   };
+
 
   return (
     <div>
