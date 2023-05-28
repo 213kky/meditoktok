@@ -25,6 +25,7 @@ function Calendar() {
   
   const handleDateClick = (clickedDate) => {
     setClickedDate(clickedDate);
+    console.log(clickedDate.format('YYYY-MM-DD')); 
   };
 
   const weekdaysShort = moment.weekdaysShort(true);
@@ -78,20 +79,20 @@ function Calendar() {
             ).map((week, i) => (
               <tr key={i}>
                 {week.map((day) => (
-      <td
-      key={day.format('YYYY-MM-DD')}
-      className={
-        day.isSame(selectedDate, 'day')
-          ? day.isSame(clickedDate, 'day')
-            ? 'selected clicked'
-            : 'selected'
-          : day.isSame(clickedDate, 'day')
-          ? 'clicked'
-          : ''
-      }
-      onClick={() => handleDateClick(day)}
-    >
-      {day.format('D')}
+                  <td
+                    key={day.format('YYYY-MM-DD')}
+                    className={
+                      day.isSame(selectedDate, 'day')
+                        ? day.isSame(clickedDate, 'day')
+                          ? 'selected clicked'
+                          : 'selected'
+                        : day.isSame(clickedDate, 'day')
+                        ? 'clicked'
+                        : ''
+                    }
+                    onClick={() => handleDateClick(day)}
+                  >
+                    {day.format('D')}
                   </td>
                 ))}
               </tr>
@@ -103,4 +104,4 @@ function Calendar() {
   );
 }
 
-export default Calendar;
+export default Calendar

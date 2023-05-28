@@ -92,3 +92,4 @@ export default function TableComponent({ startTime, endTime }) {
     </div>
   );
 }
+
