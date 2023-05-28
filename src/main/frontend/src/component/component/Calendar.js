@@ -5,9 +5,8 @@ import './Calendar.css';
 
 moment.locale('ko');
 
-function Calendar() {
+function Calendar({clickedDate, setClickedDate}) {
   const [selectedDate, setSelectedDate] = useState(moment());
-  const [clickedDate, setClickedDate] = useState(null);
 
   const handleChange = (event) => {
     const { name, value } = event.target;
