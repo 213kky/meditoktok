@@ -44,7 +44,7 @@ export default function DiseaseInformation() {
                     if (item.CNTNTS_CL_CN.__cdata.includes("https://chs.kdca.go.kr")) {
                         return (<img style={{display: "block", margin: "0 auto"}} src={item.CNTNTS_CL_CN.__cdata} alt="이미지"/>);
                     }
-                    return (<div className="boxInfo">{item.CNTNTS_CL_CN.__cdata}</div>);
+                    return (<span className="boxInfo">{item.CNTNTS_CL_CN.__cdata}</span>);
                 }
                 prevData = item.CNTNTS_CL_NM.__cdata;
                 if (item.CNTNTS_CL_CN.__cdata.includes("https://chs.kdca.go.kr")) {
