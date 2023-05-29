@@ -7,6 +7,7 @@ export default function DiseaseInformation() {
     const location = useLocation();
     const queryParams = new URLSearchParams(location.search);
     const cntntsSn = queryParams.get('cntntsSn');
+    const department = queryParams.get('department');
     const [data, setData] = useState(null);
 
     // useEffect(() => {
@@ -63,12 +64,19 @@ export default function DiseaseInformation() {
                 {/*style={{float: "left",}} 아래 div 스타일 (사진 있을 시)*/}
                 <div>
                     <div className="disease">{data ? data.XML.svc.CNTNTSSJ.__cdata : null}</div>
-                    <div className="department">소화기내과</div>
+                    <div className="department">{department}</div>
                     <div className="hospitalList"><Link to="/hospital_reservation/1">병원목록</Link></div>
                 </div>
                 {/*<div className="disease_image1">질병 사진</div>*/}
                 <div className="diseaseInfo" style={{marginTop: "10px",}}>
                     {renderInfo()}
+                </div>
+                <div className="open-box">
+                    <ul>
+                        <li><Link to="https://www.kogl.or.kr/info/licenseType4.do" target="_blank" title="공공누리 바로가기"><img
+                            src="https://health.kdca.go.kr/healthinfo/static/images/sub/open.png" alt="공공누리"/></Link></li>
+                        <li>본 공공저작물은 공공누리<strong> "출처표시+상업적이용금지+변경금지" </strong>조건에 따라 이용할 수 있습니다.</li>
+                    </ul>
                 </div>
             </section>
         </div>

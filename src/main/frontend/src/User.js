@@ -54,7 +54,7 @@ function User(props) {
                 <h2>Loading...</h2>
             </section>}>
                 <Routes>
-                    <Route path="/" element={<MainPage/>}/>
+                    <Route path="/" element={<SymptomSearch/>}/>
                     <Route path="/symptom_search" element={<SymptomSearch/>}/>
                     <Route path="/disease_search" element={<DiseaseSearch/>}/>
                     <Route path="/hospital_reservation/0" element={<HospitalReservation/>}/>

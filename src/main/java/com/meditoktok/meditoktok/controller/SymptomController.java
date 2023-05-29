@@ -19,8 +19,8 @@ public class SymptomController {
     }
 
     @GetMapping
-    public List<Symptom> getAllSymptoms(@RequestParam String bodyPart) {
-        return symptomService.getPartSymptoms(bodyPart);
+    public List<Symptom> getAllSymptoms() {
+        return symptomService.getAllSymptoms();
 //        return symptomService.getAllSymptoms();
 
     }

@@ -129,37 +129,40 @@ aside ul li a {
 }
 
 .hospitalList {
-  width: 187px;
+  width: 289px;
   height: 40px;
   margin-top: 10px;
   margin-left: 10px;
   display: inline-block;
-  border: 1.5px solid black;
+  border: 2px solid black;
   font-size: 21px;
   text-align: center;
   line-height: 40px;
+  border-radius: 15px;
 }
 
 .department {
-  width: 300px;
+  width: 700px;
   height: 40px;
   margin-left: 7px;
   margin-top: 10px;
   float: left;
-  border: 1.5px solid black;
+  border: 2px solid black;
   font-size: 21px;
   text-align: center;
   line-height: 40px;
+  border-radius: 15px;
 }
 
 .disease {
-  width: 500px;
+  width: 1003px;
   height: 70px;
   margin-left: 7px;
-  border: 1.5px solid black;
+  border: 2px solid black;
   font-size: 28px;
   text-align: center;
   line-height: 70px;
+  border-radius: 15px;
 }
 
 .diseaseInfo {
@@ -171,7 +174,8 @@ aside ul li a {
 .box {
   width: max-content;
   height: 35px;
-  border: 1px solid black;
+  border: 2px solid black;
+  border-radius: 5px;
   padding: 5px 30px;
   font-size: 17px;
   text-align: center;
@@ -190,21 +194,18 @@ aside ul li a {
 
 /*n2-2*/
 .tableDiv {
-  width: 800px;
-  height: 494px;
-  overflow-y: scroll;
-  margin-left: 107px;
-  margin-bottom: 50px;
+  width: 1000px;
+  height: max-content;
+  overflow: hidden;
+  margin: 0  auto 50px auto;
 }
 
 .super_table {
   width: 750px;
-  height: 494px;
+  height: max-content;
   opacity: 1;
-  border: 2px solid black;
-  border-collapse: collapse;
-  line-height: 0px;
-  /*margin-left: 87.5px;*/
+  /*border: 2px solid black;*/
+  margin : 0 auto;
 }
 
 /*.super_table tr {
@@ -212,11 +213,13 @@ aside ul li a {
 }*/
 
 .sub_table {
-  width: 750px;
-  height: 160px;
+  width: 650px;
+  height: max-content;
   opacity: 1;
   overflow: hidden;
-  border-bottom: 2px solid black;
+  border: 2px solid black;
+  border-radius: 15px;
+  margin: 0 auto;
 }
 
 .disease_image {
@@ -241,6 +244,7 @@ aside ul li a {
   float: left;
   border: 1.5px solid #000;
   font-size: 18px;
+  border-radius: 4px;
 }
 
 .searchIcon {
@@ -251,6 +255,7 @@ aside ul li a {
   margin-left: 10px;
   text-align: center;
   line-height: 40px;
+  border-radius: 4px;
 }
 
 /*n2-3*/
@@ -662,7 +667,7 @@ aside ul li a {
 }
 
 .DTable1 table td {
-  width: 300px;
+  /*width: 300px;*/
 }
 
 .DTable table th {
@@ -722,6 +727,7 @@ aside ul li a {
   font-size: 18px;
   padding: 15px;
   text-align: center;
+  cursor: pointer;
 }
 .complete {
   width: 100px;
@@ -732,6 +738,7 @@ aside ul li a {
   font-size: 18px;
   padding: 15px;
   text-align: center;
+  cursor: pointer;
 }
 .nothing {
   margin-left: 140px;
@@ -1046,4 +1053,58 @@ aside ul li a {
 }
 .sortSelect option{
   font-weight: 600;
+}
+.open-box {
+  overflow: hidden;
+  margin: 50px 0;
+  background: #f9f9f9;
+  border: #ddd 1px solid;
+  border-radius: 3px;
+}
+.open-box ul li:first-child {
+  width: 96%;
+}
+.open-box ul li {
+  float: left;
+  padding: 20px 3%;
+  list-style: none;
+}
+.pagination {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.page {
+  padding: 5px 10px;
+  margin-right: 5px;
+  cursor: pointer;
+  color: #333;
+}
+
+.page.active {
+  font-weight: bold;
+  color: #fff;
+  background-color: #333;
+}
+.filterButtons {
+  display: flex;
+  justify-content: flex-start;
+  margin-bottom: 20px;
+}
+
+.filterButtons button {
+  padding: 10px 20px;
+  margin-right: 10px;
+  background-color: #ccc;
+  color: black;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.filterButtons button.active {
+  background-color: #333;
+  color: #fff;
 }
