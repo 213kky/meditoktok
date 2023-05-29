@@ -1,6 +1,6 @@
 import "./TableComponent.css";
-
-export default function TableComponent({startTime, endTime, clickedDate}) {
+import axios from "axios";
+export default function TableComponent({doctor, startTime, endTime, clickedDate}) {
 
 
     const generateTimeSlots = () => {
@@ -47,9 +47,31 @@ export default function TableComponent({startTime, endTime, clickedDate}) {
     };
 
 
-    const handleClick = () => {
-        console.log("Reservation Counts:", reservationCounts);
-    };
+//    const handleClick = () => {
+//        console.log("Reservation Counts:", reservationCounts);
+//    };
+
+const handleClick = async () => {
+  try {
+const combinedList = [ { doctorId: doctor, date: clickedDate }, ...reservationCounts ];
+//  temp.doctorId =  doctor;
+//  temp.date = clickedDate;
+//  temp.push({ doctorId: doctor, date: clickedDate });
+//  temp.push(reservationCounts);
+
+
+
+  console.log(combinedList);
+    const response = await axios.post('/api/treservation', combinedList);
+
+    console.log('Reservation data sent successfully.');
+    // Handle successful response from the backend
+  } catch (error) {
+    console.log('Error sending reservation data:', error);
+    // Handle error during the request or response
+  }
+};
+
 
     const renderTimeSlots = (slots) => {
         const rows = [];
