@@ -8,3 +8,37 @@
   text-align: center; 
   text-size-adjust: 10px;
 }
+
+.time {
+  width: 380px; height: 180;
+  font-size: medium; text-align: center;
+  margin: 30px 10px;
+}
+
+
+.time tr td {
+  border:1px solid black;
+  padding: 15px;
+}
+
+.time th{
+  padding: 15px;
+  border: 0;
+}
+
+.time1 {
+  width: 380px; height: 180;
+  font-size: medium; text-align: center;
+  margin: 30px 10px;
+}
+
+
+.time1 tr td {
+  border:1px solid black;
+  padding: 15px;
+}
+
+.time1 th{
+  padding: 15px;
+  border: 0;
+}

@@ -40,7 +40,7 @@ export default function TableComponent({ startTime, endTime }) {
   const amSlots = timeSlots.slice(0, halfLength);
   const pmSlots = timeSlots.slice(halfLength);
 
-  const renderTimeSlots = (slots) => {
+  const renderTimeSlots = (slots, className) => {
     const rows = [];
     for (let i = 0; i < slots.length; i += 4) {
       const row = slots.slice(i, i + 4);
@@ -73,16 +73,16 @@ export default function TableComponent({ startTime, endTime }) {
               <th colSpan="4">오전</th>
             </tr>
           </thead>
-          <tbody>{renderTimeSlots(amSlots)}</tbody>
+          <tbody>{renderTimeSlots(amSlots, "time")}</tbody>
         </table>
 
-        <table className="time">
+        <table className="time1">
           <thead>
             <tr>
               <th colSpan="4">오후</th>
             </tr>
           </thead>
-          <tbody>{renderTimeSlots(pmSlots)}</tbody>
+          <tbody>{renderTimeSlots(pmSlots, "time1")}</tbody>
         </table>
       </div>
 
@@ -92,4 +92,3 @@ export default function TableComponent({ startTime, endTime }) {
     </div>
   );
 }
-

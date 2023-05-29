@@ -75,7 +75,7 @@
 
 }
 
-.time {
+/* .time {
   width: 380px; height: 180;
   font-size: medium; text-align: center;
   margin: 30px 10px;
@@ -90,7 +90,7 @@
 .time th{
   padding: 15px;
   border: 0;
-}
+} */
 
 .class input[type=date] {
   width: 300px;
