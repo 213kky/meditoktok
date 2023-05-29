@@ -1,14 +1,14 @@
 import './List.css'
 
-export default function List() {
+export default function List({name, tel, txt}) {
   return (
     <tr>
     <div className='T'>
-    <td className='name'>이름</td>
+    <td className='name'>{name}</td>
     <td className='line'> | </td>
-    <td className='num'>전화번호</td>
+    <td className='num'>{tel}</td>
     <td className='line'> | </td>
-    <td className='not'>특이사항</td>
+    <td className='not'>{txt}</td>
     </div>
     </tr>
   );

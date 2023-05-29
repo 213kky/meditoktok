@@ -11,11 +11,11 @@ export default function Patient({selectedDoctor}) {
     </div>
 
     <div className='List'>
-    <caption className='number'>2/7</caption>
+    <caption className='number'>3/7</caption>
     <table className='list'> 
-      <List/>
-      <List/>
-      <List/>
+      <List name="김광연" tel="010-1234-5678" txt="지속적인 두통"/>
+      <List name="김승민" tel="010-4557-1253" txt="없음"/>
+      <List name="전정원" tel="010-3563-2146" txt="잔기침"/>
     </table>
 
     </div>
