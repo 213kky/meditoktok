@@ -1,10 +1,10 @@
-export default function NowTr() {
+export default function NowTr({hosp, doc, date}) {
     return (
         <tr>
             <td colSpan="3">
-                <div>OOO병원</div>
-                <div>OOO</div>
-                <div>2023년 00월 00일 00시 00분</div>
+                <div>{hosp}</div>
+                <div>{doc}</div>
+                <div>{date}</div>
             </td>
             <td>
                 취소

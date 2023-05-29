@@ -21,8 +21,9 @@ export default function MyPage() {
                 </ul>
             </nav>
             <table className="nowTable">
-                <NowTr/>
-                <NowTr/>
+
+                <NowTr hosp="본병원" doc="김기수" date="2023년 06월 03일 14시 30분"/>
+                <NowTr hosp="삼성서울병원" doc="이민준" date="2023년 06월 07일 12시 30분"/>
             </table>
             <div className="tableSubject">예약 내역</div>
             <nav className="historyNav">
@@ -34,12 +35,12 @@ export default function MyPage() {
             </nav>
             <div className="tableScroll">
                 <table className="historyTable">
-                    <HistoryTr/>
-                    <HistoryTr/>
-                    <HistoryTr/>
-                    <HistoryTr/>
-                    <HistoryTr/>
-                    <HistoryTr/>
+                    <HistoryTr hosp="강북연세병원" doc="최서준" date="2023년 04월 03일 10시 30분"/>
+                    <HistoryTr hosp="방병원" doc="민도준" date="2023년 04월 30일 14시 30분"/>
+                    <HistoryTr hosp="세힘병원" doc="김예준" date="2023년 05월 03일 17시 30분"/>
+                    <HistoryTr hosp="본정형외과" doc="홍서예" date="2023년 05월 17일 18시 30분"/>
+                    <HistoryTr hosp="강북삼성병원" doc="하지민" date="2023년 05월 21일 21시 00분"/>
+                    <HistoryTr hosp="세란병원" doc="송지아" date="2023년 05월 29일 14시 30분"/>
                 </table>
             </div>
         </section>
