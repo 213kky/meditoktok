@@ -8,5 +8,5 @@ import java.util.List;
 
 @Repository
 public interface TimeTableRepository extends JpaRepository<TimeTable, Long> {
-    List<TimeTable> findByDoctorId(Long id);
+    List<TimeTable> findByDoctorIdAndTimeId(Long id, String time);
 }

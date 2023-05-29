@@ -36,8 +36,8 @@ public class TimeTableService {
         return timetableRepository.findAll();
     }
 
-    public List<TimeTable> getAllTimetablesByDoctorId(Long doctorId) {
-        List<TimeTable> timetables = timetableRepository.findByDoctorId(doctorId);
+    public List<TimeTable> getAllTimetablesByDoctorIdAndTimeId(Long doctorId, String time) {
+        List<TimeTable> timetables = timetableRepository.findByDoctorIdAndTimeId(doctorId, time);
         if (timetables.isEmpty()) {
             throw new NoSuchElementException("해당 의사의 시간표가 없습니다."); // 예외를 던져서 상위로 전달합니다.
         }

@@ -16,7 +16,7 @@ function Page3({originData}) {
   return (
     <section className="contents">
       <Dropdown onSelect={handleDoctorSelect} originData={originData}/>
-      <Patient />
+      <Patient selectedDoctor={selectedDoctor}/>
     </section>
 
   );

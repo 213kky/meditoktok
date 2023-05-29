@@ -27,12 +27,25 @@ public class HospitalController {
 //        return test.getHospName();
 //        return hospitalTest.toString();
 //    }
-    @PostMapping("/test/hospiinfo/save")
+//    @PostMapping("/test/hospiinfo/save")
+//    public String firstSave(@RequestBody HospiDto dto){
+////
+//        hospitalService.firstSave(dto);
+//        return "첫 병원정보 저장";
+//    }
+
+//    @PostMapping("/api/saveData")
+//    public String tesst(@RequestBody HosDto dto) {
+//        return "성공";
+//    }
+
+    @PostMapping("/api/saveData")
     public String firstSave(@RequestBody HospiDto dto){
 //
         hospitalService.firstSave(dto);
         return "첫 병원정보 저장";
     }
+
 
     @GetMapping("/manager1")
     public Hospital getHospitalById(@RequestParam long hospiId) throws Exception {

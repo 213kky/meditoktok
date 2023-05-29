@@ -1,28 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import './Dropdown.css';
-import axios from 'axios';
+
 
 
 function Dropdown({onSelect, originData}) {
   const [selectedOption, setSelectedOption] = useState('');
-  
-  const handleChange = async (event) => {
-    const selectedDoctor = event.target.value;
-    setSelectedOption(selectedDoctor);
+   function handleChange(event) {
+    setSelectedOption(event.target.value);
+    onSelect(event.target.value);
 
-    // try {
-    //   const response = await axios.post('/api/doctor', {
-    //     doctorName: selectedDoctor,
-    //   });
-    //   console.log(response.data);
-    // } catch (error) {
-    //   console.error('Error:', error);
-    // }
-  };
-
-  useEffect(() => {
-    onSelect(selectedOption);
-  }, [selectedOption, onSelect]);
+  }
+//  useEffect(() => {
+//    onSelect(selectedOption);
+//  }, [selectedOption]);
 
 
   return (

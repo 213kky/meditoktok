@@ -3,6 +3,7 @@ package com.meditoktok.meditoktok.controller;
 import com.meditoktok.meditoktok.domain.TimeTable;
 import com.meditoktok.meditoktok.service.TimeTableService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -24,11 +25,11 @@ public class TimeTableController {
         return timetable.getDate() + " " + timetable.getTimeId() /*convert(timetable.getTimeId())*//* 나중에 의사이름받아서 대체*/ + "일정이 생성되었습니다";
     }
 
-    @PostMapping("/test/checkDoctorSchedule")
-    public List<TimeTable> getAllTimetablesByDoctorId(@RequestParam Long id) {
-        List<TimeTable> tables = timetableService.getAllTimetablesByDoctorId(id);
-        return tables;
-    }
+//    @PostMapping("/test/checkDoctorSchedule")
+//    public List<TimeTable> getAllTimetablesByDoctorId(@RequestParam Long id) {
+//        List<TimeTable> tables = timetableService.getAllTimetablesByDoctorId(id);
+//        return tables;
+//    }
 
 
     @PostMapping("/api/treservation")
@@ -65,6 +66,15 @@ public class TimeTableController {
         } catch (Exception e) {
             e.printStackTrace();
             return ResponseEntity.badRequest().body("Invalid reservation data format.");
+        }
+    }
+    @PostMapping("/checkReservation")
+    public ResponseEntity<List<TimeTable>> checkReservation(@RequestBody TimeTableDto dto) {
+        try {
+            List<TimeTable> list = timetableService.getAllTimetablesByDoctorIdAndTimeId(dto.getDoctorId(), dto.getTimeId());
+            return ResponseEntity.ok(list);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
         }
     }
 
