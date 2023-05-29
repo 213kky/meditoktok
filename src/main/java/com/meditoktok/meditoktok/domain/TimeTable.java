@@ -15,9 +15,14 @@ public class TimeTable {
 
     private Long doctorId;
     private String date;
-    private Long timeId;
+    private String timeId;
     @JsonProperty("max")
     private Long max;
+
+    public TimeTable(String timeId, Long max) {
+        this.timeId = timeId;
+        this.max = max;
+    }
 
     public Long getId() {
         return id;
@@ -43,11 +48,11 @@ public class TimeTable {
         this.date = date;
     }
 
-    public Long getTimeId() {
+    public String getTimeId() {
         return timeId;
     }
 
-    public void setTimeId(Long timeId) {
+    public void setTimeId(String timeId) {
         this.timeId = timeId;
     }
 

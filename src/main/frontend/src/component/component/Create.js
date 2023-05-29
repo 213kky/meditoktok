@@ -13,6 +13,7 @@ export default function Create({ originData }) {
   const [endHour, setEndHour] = useState("");
   const [endMinute, setEndMinute] = useState("00");
   const [isTableVisible, setIsTableVisible] = useState(false);
+  const [clickedDate, setClickedDate] = useState(null);
 
   const handleDoctorSelect = (doctorName) => {
     setSelectedDoctor(doctorName);
@@ -69,7 +70,7 @@ export default function Create({ originData }) {
       <div className="R">
         <div className="Create">
           <div className="CD">
-            <Calendar />
+            <Calendar clickedDate={clickedDate} setClickedDate={setClickedDate}/>
           </div>
           <div className="SE">
             <div className="start">
@@ -164,6 +165,7 @@ export default function Create({ originData }) {
               doctor={selectedDoctor}
               startTime={formatTime(startPeriod, startHour, startMinute)}
               endTime={formatTime(endPeriod, endHour, endMinute)}
+              clickedDate={clickedDate.format("MM/DD/YYYY")}
             />
           )}
         </div>

@@ -9,7 +9,7 @@ export default function DiseaseSearch() {
             </div>
             <div className="tableDiv">
                 <table className="super_table">
-                    <DiseaseTr test={5441} test2={"염좌"}></DiseaseTr>
+                    <DiseaseTr test={5423} test2={"감기"}></DiseaseTr>
                     <DiseaseTr test={5466} test2={"천식"}></DiseaseTr>
                     <DiseaseTr test={5371} test2={"통풍"}></DiseaseTr>
                     <DiseaseTr test={5485} test2={"구내염"}></DiseaseTr>

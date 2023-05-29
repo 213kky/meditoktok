@@ -5,6 +5,7 @@ import com.meditoktok.meditoktok.repository.TimeTableRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 
@@ -15,6 +16,15 @@ public class TimeTableService {
 
     public TimeTable createTimetable(TimeTable timetable) {
         return timetableRepository.save(timetable);
+    }
+
+    public List<TimeTable> createTimetables(List<TimeTable> timetables) {
+        List<TimeTable> savedTimetables = new ArrayList<>();
+        for (TimeTable timetable : timetables) {
+            TimeTable savedTimetable = timetableRepository.save(timetable);
+            savedTimetables.add(savedTimetable);
+        }
+        return savedTimetables;
     }
 
     public TimeTable getTimetableById(Long id) {

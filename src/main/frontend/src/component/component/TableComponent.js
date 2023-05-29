@@ -1,94 +1,128 @@
 import "./TableComponent.css";
+import axios from "axios";
+export default function TableComponent({doctor, startTime, endTime, clickedDate}) {
 
-export default function TableComponent({ startTime, endTime }) {
-  const reservationCounts = [];
+
+    const generateTimeSlots = () => {
+        const start = new Date(`${clickedDate} ${startTime}`);
+        console.log("start : ", start);
+        const end = new Date(`${clickedDate} ${endTime}`);
+        console.log("end : ", end);
+        const timeSlots = [];
+
+        while (start < end) {
+            const time = start.toLocaleTimeString([], {
+                hour: "2-digit",
+                minute: "2-digit"
+            });
+            timeSlots.push({
+                time,
+                count: 0
+            });
+
+            start.setMinutes(start.getMinutes() + 30);
+        }
+
+        return timeSlots;
+    };
 
 
-  const generateTimeSlots = () => {
-    const start = new Date(`01/01/2000 ${startTime}`);
-    const end = new Date(`01/01/2000 ${endTime}`);
-    const timeSlots = [];
+    const timeSlots = generateTimeSlots();
+    const reservationCounts = generateTimeSlots();
+    console.log(timeSlots[0].time);
 
-    while (start < end) {
-      const time = start.toLocaleTimeString([], {
-        hour: "2-digit",
-        minute: "2-digit"
-      });
-      timeSlots.push({
-        time,
-        count: 0
-      });
+    const amSlots = timeSlots.filter(slot => {
+        return slot.time.includes("오전");
+    });
+    const pmSlots = timeSlots.filter(slot => {
+        return slot.time.includes("오후");
+    });
 
-      start.setMinutes(start.getMinutes() + 30);
-    }
 
-    return timeSlots;
-  };
+    const handleChange = (time, e) => {
+        const existingIndex = reservationCounts.findIndex(item => item.time === time);
+        if (reservationCounts[existingIndex]) {
+            reservationCounts[existingIndex].count = parseInt(e.target.value);
+        }
+    };
 
-  const handleChange = (index, e) => {
-    if (reservationCounts[index]) {
-      reservationCounts[index].count = e.target.value;
-    }
-  };
 
-  const handleClick = () => {
-    console.log("Reservation Counts:", reservationCounts);
-  };
+//    const handleClick = () => {
+//        console.log("Reservation Counts:", reservationCounts);
+//    };
 
-  const timeSlots = generateTimeSlots();
-  const halfLength = Math.ceil(timeSlots.length / 2);
-  const amSlots = timeSlots.slice(0, halfLength);
-  const pmSlots = timeSlots.slice(halfLength);
+const handleClick = async () => {
+  try {
+const combinedList = [ { doctorId: doctor, date: clickedDate }, ...reservationCounts ];
+//  temp.doctorId =  doctor;
+//  temp.date = clickedDate;
+//  temp.push({ doctorId: doctor, date: clickedDate });
+//  temp.push(reservationCounts);
 
-  const renderTimeSlots = (slots, className) => {
-    const rows = [];
-    for (let i = 0; i < slots.length; i += 4) {
-      const row = slots.slice(i, i + 4);
-      rows.push(row);
-    }
-    return rows.map((row, rowIndex) => (
-      <tr key={rowIndex}>
-        {row.map((slot, index) => (
-          <td key={index}>
-            <input
-              type="number"
-              min="0"
-              max="5"
-              onChange={(e) => handleChange(index + rowIndex * 4, e)}
-            />
-            <br />
-            {slot.time}
-          </td>
-        ))}
-      </tr>
-    ));
-  };
 
-  return (
-    <div className="Save" style={{ width: "410px", height: "550px", overflow: "auto", overflowX: "hidden" }}>
-      <div className="TT">
-        <table className="time">
-          <thead>
-            <tr>
-              <th colSpan="4">오전</th>
+
+  console.log(combinedList);
+    const response = await axios.post('/api/treservation', combinedList);
+
+    console.log('Reservation data sent successfully.');
+    // Handle successful response from the backend
+  } catch (error) {
+    console.log('Error sending reservation data:', error);
+    // Handle error during the request or response
+  }
+};
+
+
+    const renderTimeSlots = (slots) => {
+        const rows = [];
+        for (let i = 0; i < slots.length; i += 4) {
+            const row = slots.slice(i, i + 4);
+            rows.push(row);
+        }
+        console.log("rows: ", rows);
+        return rows.map((row, rowIndex) => (
+            <tr key={rowIndex}>
+                {row.map((slot, index) => (
+                    <td key={index}>
+                        <input
+                            type="number"
+                            min="0"
+                            max="5"
+                            onChange={(e) => handleChange(slot.time, e)}
+                        />
+                        <br/>
+                        {slot.time}
+                    </td>
+                ))}
             </tr>
-          </thead>
-          <tbody>{renderTimeSlots(amSlots, "time")}</tbody>
-        </table>
+        ));
+    };
 
-        <table className="time1">
-          <thead>
-            <tr>
-              <th colSpan="4">오후</th>
-            </tr>
-          </thead>
-          <tbody>{renderTimeSlots(pmSlots, "time1")}</tbody>
-        </table>
-      </div>
+    return (
+        <div className="Save" style={{width: "410px", height: "550px", overflow: "auto", overflowX: "hidden"}}>
+            <div className="TT">
+                <table className="time">
+                    <thead>
+                    <tr>
+                        <th colSpan="4">오전</th>
+                    </tr>
+                    </thead>
+                    <tbody>{renderTimeSlots(amSlots)}</tbody>
+                </table>
 
-      <button className="save" onClick={handleClick}>
-        저장
-      </button>
-    </div>
-  );
+                <table className="time">
+                    <thead>
+                    <tr>
+                        <th colSpan="4">오후</th>
+                    </tr>
+                    </thead>
+                    <tbody>{renderTimeSlots(pmSlots)}</tbody>
+                </table>
+            </div>
+
+            <button className="save" onClick={handleClick}>
+                저장
+            </button>
+        </div>
+    );
 }
