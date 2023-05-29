@@ -1,8 +1,7 @@
 package com.meditoktok.meditoktok.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.sql.DataSource;
 import java.sql.Connection;
@@ -29,9 +28,8 @@ public class TestController {
         return "localhost:3000으로 보낸 요청";
     }
 
-
-
-
-
-
+    @PostMapping("/send/date")
+    public String asdD(@RequestBody ResDto dto) {
+        return "asd";
+    }
 }

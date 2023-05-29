@@ -3,33 +3,80 @@ import moment from 'moment';
 import 'moment/locale/ko';
 import './Calendar.css';
 import TableComponent1 from './TableComponent1';
+import axios from "axios";
+import {useCookies} from "react-cookie";
 
 moment.locale('ko');
 
 function Calendar() {
   const [selectedDate, setSelectedDate] = useState(moment());
   const [isTableVisible, setIsTableVisible] = useState(false);
+  const [clickedDate, setClickedDate] = useState(null);
+
+  const [hospitalId, setHospitalId] = useState('');
+
+
+  const [cookies, setCookie] = useCookies(['memberInfo']);
+    const cookieValue = cookies['memberInfo'];
+    const doctorId = cookieValue.doctorId;
 
   const handleChange = (event) => {
     const { name, value } = event.target;
     setSelectedDate((prevDate) => prevDate.clone().set(name, value).startOf('month'));
   };
-  
+
   const handlePrevMonth = () => {
     setSelectedDate((prevDate) => prevDate.clone().subtract(1, 'month').startOf('month'));
   };
-  
+
   const handleNextMonth = () => {
     setSelectedDate((prevDate) => prevDate.clone().add(1, 'month').startOf('month'));
   };
 
-  const weekdaysShort = moment.weekdaysShort(true);
-  const months = moment.months();
-
-  const handleDateClick = (day) => {
+  const handleDateClick = async (day) => {
     setSelectedDate(day);
     setIsTableVisible(true);
+    setClickedDate(day);
+    console.log("handleDateClick",day.format('YYYY-MM-DD'));
+
+const formData = {
+      hospitalId: hospitalId,
+      selectedDate: selectedDate.format('YYYY-MM-DD'),
+    };
+    try {
+      const response = await axios.post('/send/date', formData);
+      console.log(formData);
+    } catch (error) {
+      console.error('Error:', error);
+    }
   };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+
+    const formData = {
+      hospitalId: hospitalId,
+      selectedDate: selectedDate.format('YYYY-MM-DD'),
+    };
+    const isFormValid = hospitalId && selectedDate;
+    if(isFormValid) {
+    console.log(formData);
+    axios
+        .post('/reservation', formData)
+        .then((response) => {
+          console.log(response.data);
+          if (response.data !== 'reservation') {
+          }
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    }else { }
+      
+  };
+
+  const weekdaysShort = moment.weekdaysShort(true);
+  const months = moment.months();
 
   return (
     <div className="calendar">
@@ -79,10 +126,11 @@ function Calendar() {
             ).map((week, i) => (
               <tr key={i}>
                 {week.map((day) => (
-                  <td
-                    key={day.format('YYYY-MM-DD')}
-                    onClick={() => handleDateClick(day)}
-                  >
+                <td
+                key={day.format('YYYY-MM-DD')}
+                className={day.isSame(clickedDate, 'day') ? 'clicked' : ''}
+                onClick={() => handleDateClick(day)}
+      >
                     {day.format('D')}
                   </td>
                 ))}
@@ -92,11 +140,10 @@ function Calendar() {
         </table>
       </div>
 
-
       <div className='tableC'>
-        {isTableVisible && (
+        {isTableVisible && clickedDate && (
           <div className="table-wrapper">
-            <TableComponent1 selectedDate={selectedDate} />
+            <TableComponent1 selectedDate={clickedDate} />
           </div>
         )}
       </div>
