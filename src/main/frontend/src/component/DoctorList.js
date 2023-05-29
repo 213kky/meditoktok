@@ -21,7 +21,7 @@ export default function DoctorList({doctorName}) {
                 {/*<Link id="show">▼</Link>*/}
             <div id="hide" class="bookBox">
                 <div class="bookSchedule">
-                    <div class="calendar"><Calendar/></div>
+                    <div class="calendarU"><Calendar/></div>
                     <div class="selectTime">
                         <table border="1" class="timeTable">
                             <th style={{height: "50px"}} colspan="4">오전</th>

@@ -325,8 +325,8 @@ aside ul li a {
   margin-left: 67px;
 }
 
-.calendar {
-  width: 300px;
+.calendarU {
+  /*width: 200px;*/
   height: 300px;
   float: left;
   border: 1.5px solid #000000;
@@ -354,7 +354,7 @@ aside ul li a {
 }
 
 .comment {
-  width: 695px;
+  width: 750px;
   height: 60px;
   margin-left: 10px;
   vertical-align: top;
@@ -373,7 +373,7 @@ aside ul li a {
 }
 
 .bookSchedule {
-  width: 800px;
+  width: 850px;
   height: 400px;
   border: 1.5px solid #000000;
 }
