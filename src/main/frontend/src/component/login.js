@@ -59,6 +59,7 @@ export default function Login(props) {
             <span> | </span>
             <Link to="/" >비밀번호 찾기</Link>
             <LoginKakao/>
+
         </section>
     );
 }
