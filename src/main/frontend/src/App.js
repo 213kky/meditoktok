@@ -1,23 +1,26 @@
 import './App.css';
 import User from "./User";
 import Manager from "./Manager";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import { NavermapsProvider } from 'react-naver-maps';
+import {useCookies} from "react-cookie";
 
 function App() {
-//     const isAdmin = true;
-    const [isAdmin, setIsAdmin] = useState(false);
-    const [isLogin, setIsLogin] = useState(false);
-    const handleToggleAdmin = () => {
-        setIsAdmin(!isAdmin);
-        console.log(isAdmin);
-    };
-
+    const [cookies, setCookie] = useCookies(['loginState']);
+    // const handleToggleAdmin = () => {
+    //     setIsAdmin(!isAdmin);
+    //     console.log(isAdmin);
+    // };
+    useEffect(() => {
+        if (!cookies.loginState) {
+            setCookie('loginState', { isLogin: false, isAdmin: false }, { path: '/' });
+        }
+    }, [cookies.loginState, setCookie]);
     return (
         <NavermapsProvider
             ncpClientId='jfncs1dl99'
         >
-            {isAdmin ? <Manager isLogin={isLogin} setIsLogin={setIsLogin} setIsAdmin={setIsAdmin} onToggleAdmin={handleToggleAdmin}/> : <User isLogin={isLogin} setIsLogin={setIsLogin} onToggleAdmin={handleToggleAdmin}/>}
+            {cookies.loginState?.isAdmin ? <Manager isLogin={cookies.loginState.isLogin}/> : <User isLogin={cookies.loginState.isLogin}/>}
         </NavermapsProvider>
     );
 

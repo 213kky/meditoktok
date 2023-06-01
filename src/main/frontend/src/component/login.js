@@ -4,11 +4,11 @@ import {Link, useNavigate} from "react-router-dom";
 import LoginKakao from "./LoginKakao";
 import { useCookies } from 'react-cookie';
 
-export default function Login(props) {
+export default function Login() {
     const [account, setAccount] = useState("");
     const [password, setPassword] = useState("");
     const navigate = useNavigate();
-    const [cookies, setCookie] = useCookies(['memberInfo']);
+    const [cookies, setCookie] = useCookies(['memberInfo','loginState']);
     const handleSubmit = (event) => {
         event.preventDefault();
         const formData = {
@@ -18,9 +18,10 @@ export default function Login(props) {
         axios.post('/login', formData)
           .then(response => {
             // 로그인 성공
-            props.setIsLogin(true);
             if (response.data.isAdmin) {
-              props.onToggleAdmin(true);
+                setCookie('loginState', {isLogin:true, isAdmin:true}, { path: '/' });
+            }else{
+                setCookie('loginState', {isLogin:true, isAdmin:false}, { path: '/' });
             }
             setCookie('memberInfo', response.data, { path: '/' });
             alert(`${response.data.name}님 환영합니다.`);

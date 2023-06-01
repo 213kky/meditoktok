@@ -26,6 +26,7 @@ import DiseaseResultMain from "./component/DiseaseResultMain";
 import FoundDisease from "./component/FoundDisease";
 
 function User(props) {
+
     function PrivateRoute() {
         const navigate = useNavigate();
 
@@ -49,7 +50,7 @@ function User(props) {
     return (
         <BrowserRouter>
 
-            <Header isLogin={props.isLogin} setIsLogin={props.setIsLogin} onToggleAdmin={props.onToggleAdmin}/>
+            <Header isLogin={props.isLogin}/>
             <Suspense fallback={<section className="contents">
                 <h2>Loading...</h2>
             </section>}>
@@ -63,7 +64,7 @@ function User(props) {
                     <Route path="/hospital_information" element={<HospitalInformation/>}/>
                     <Route path="/hospital_reservation/1" element={<Two/>}/>
                     <Route path="/my_page/change" element={<Change/>}/>
-                    <Route path="/login" element={<Login setIsLogin={props.setIsLogin} onToggleAdmin={props.onToggleAdmin}/>}/>
+                    <Route path="/login" element={<Login/>}/>
                     <Route path="/signup" element={<Signup/>}/>
                     <Route path="/signup/user" element={<UserSignUp/>}/>
                     <Route path="/signup/manager" element={<ManagerSignUp/>}/>

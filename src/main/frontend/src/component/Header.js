@@ -4,12 +4,12 @@ import App from "../App";
 
 export default function Header(props) {
     const [cookies, setCookie, removeCookie] = useCookies(['memberInfo']);
-    const cookieValue = cookies['memberInfo'];
+    const member = cookies['memberInfo'];
     return (
         <header>
             <div className="sign">
-                <span onClick={props.onToggleAdmin} style={{color:"white"}}>관리자 페이지로</span>
-                {props.isLogin ? <><span>{cookieValue.name}님</span><span>|</span><span onClick={()=>{removeCookie('memberInfo'); props.setIsLogin(false);}}><Link to="/">로그아웃</Link></span></>:  <><span><Link to="/login">로그인</Link></span><span>|</span><span><Link to="/signup">회원가입</Link></span></> }
+                {/*<span onClick={props.onToggleAdmin} style={{color:"white"}}>관리자 페이지로</span>*/}
+                {props.isLogin ? <><span>{member.name}님</span><span>|</span><span onClick={()=>{removeCookie('memberInfo'); setCookie('loginState', {isLogin:false, isAdmin:false}, { path: '/' });}}><Link to="/">로그아웃</Link></span></>:  <><span><Link to="/login">로그인</Link></span><span>|</span><span><Link to="/signup">회원가입</Link></span></> }
 
             </div>
             <div className="mainLogo"><Link to="/">메디톡톡</Link></div>
