@@ -43,7 +43,8 @@ export default function DiseaseInformation() {
         return info.map((item, index) => {
                 if (prevData === item.CNTNTS_CL_NM.__cdata) {
                     if (item.CNTNTS_CL_CN.__cdata.includes("https://chs.kdca.go.kr")) {
-                        return (<img style={{display: "block", margin: "0 auto"}} src={item.CNTNTS_CL_CN.__cdata} alt="이미지"/>);
+                        return (
+                            <img style={{display: "block", margin: "0 auto"}} src={item.CNTNTS_CL_CN.__cdata} alt="이미지"/>);
                     }
                     return (<span className="boxInfo">{item.CNTNTS_CL_CN.__cdata}</span>);
                 }
@@ -72,10 +73,14 @@ export default function DiseaseInformation() {
                     {renderInfo()}
                 </div>
                 <div className="open-box">
-                    <ul>
-                        <li><Link to="https://www.kogl.or.kr/info/licenseType4.do" target="_blank" title="공공누리 바로가기"><img
-                            src="https://health.kdca.go.kr/healthinfo/static/images/sub/open.png" alt="공공누리"/></Link></li>
-                        <li>본 공공저작물은 공공누리<strong> "출처표시+상업적이용금지+변경금지" </strong>조건에 따라 이용할 수 있습니다.</li>
+                    <ul style={{fontSize:"14px"}}>
+                        {/*<li><Link to="https://www.kogl.or.kr/info/licenseType4.do" target="_blank" title="공공누리 바로가기"><img*/}
+                        {/*    src="https://health.kdca.go.kr/healthinfo/static/images/sub/open.png" alt="공공누리"/></Link></li>*/}
+                        {/*<li style={{display:"inline-block"}}>본 공공저작물은 공공누리<strong> "출처표시+상업적이용금지+변경금지" </strong>조건에 따라 이용할 수 있습니다.</li>*/}
+                        <li>이 저작물은 질병관리청 국가건강정보포털의 "건강정보"에서 발췌하였으며, 해당 저작물은 국가건강정보포털 누리집<a href="https://health.kdca.go.kr" target="_blank">(health.kdca.go.kr)</a>에서 무료로 사용하실 수
+                            있습니다. <br/>이 저작물은 질병관리청 국가건강정보포털<a href="https://health.kdca.go.kr" target="_blank">(health.kdca.go.kr)</a>의 "건강정보"에서 발췌한 것입니다. <br/> 출처: 질병관리청 국가건강정보포털<a href="https://health.kdca.go.kr" target="_blank">(health.kdca.go.kr)</a>, "건강정보", 2023-06-02,
+                            <br/>웹 주소 <a href="https://health.kdca.go.kr/healthinfo/biz/health/gnrlzHealthInfo/gnrlzHealthInfo/gnrlzHealthInfoMain.do?lclasSn=1" target="_blank">(https://health.kdca.go.kr/healthinfo/biz/health/gnrlzHealthInfo/gnrlzHealthInfo/gnrlzHealthInfoMain.do?lclasSn=1)</a>
+                        </li>
                     </ul>
                 </div>
             </section>

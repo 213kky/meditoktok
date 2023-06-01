@@ -12,6 +12,8 @@ export default function HospitalInformation() {
     const [loading, setLoading] = useState(true);
     const [loading2, setLoading2] = useState(false);
     const [loading3, setLoading3] = useState(false);
+    const [isJoin, setIsJoin] = useState(false);
+    const [joinData, setJoinData] = useState(null);
     let items, items2, items3, renderList;
 
     useEffect(() => {
@@ -61,6 +63,26 @@ export default function HospitalInformation() {
                 });
         }
     }, [loading3]);
+    useEffect(() => {
+        const fetchData = async () => {
+            if (data !== null) {
+                try {
+                    const response = await axios.get('/join', {
+                        params: {
+                            ykiho: items.ykiho,
+                        },
+                    });
+                    setJoinData(response.data);
+
+                    console.log(response);
+                } catch (error) {
+                    console.error('Error:', error);
+                }
+            }
+        };
+
+        fetchData();
+    }, [data]);
 
     if (data === null) {
         return null
@@ -73,7 +95,7 @@ export default function HospitalInformation() {
     } else {
         if (data2.response.body.totalCount !== 0) {
             items2 = data2.response.body.items.item;
-        }else{
+        } else {
             items2 = null;
         }
     }
@@ -91,7 +113,7 @@ export default function HospitalInformation() {
                     );
                 });
             };
-        }else if(data3.response.body.totalCount == 1){
+        } else if (data3.response.body.totalCount == 1) {
             items3 = data3.response.body.items.item;
             renderList = () => {
                 return (
@@ -100,42 +122,75 @@ export default function HospitalInformation() {
                     </>
                 );
             }
-        }
-        else{
+        } else {
             items3 = null;
         }
     }
 
 
 
+    const renderNotJoin = () => {
+        return (
+            <>
+                <div className="hospitalName">{yadmNm}</div>
+                <div className="hospitalInfo">병원 정보</div>
+                <div className="hospitalInfoBox" style={{marginBottom:"50px"}}>
+                    <span>공지사항</span>
+                    {/*<div>{items.ykiho}</div>*/}
+                    <div>공지사항이 없습니다.</div>
+                    <span>병원 URL</span>
+                    <div>{items.hospUrl != null ? items.hospUrl : "URL이 존재하지 않습니다."}</div>
+                    <span>진료과목</span>
+                    <div>{data3.response.body.totalCount > 1 ? (items3.map((item3, index) => item3.dgsbjtCdNm + (index !== items3.length - 1 ? ", " : ""))) : (items3 != null ? items3.dgsbjtCdNm : "진료과목 정보가 존재하지 않습니다.")}</div>
+                    <span>의료진</span>
+                    {/*<div>{items3 != null ? (items3.map((item3, index)=> item3.dgsbjtCdNm+" : "+item3.dgsbjtPrSdrCnt+"명 ")) : "의료진 정보가 존재하지 않습니다."}</div>*/}
+                    <div>{items3 != null ? renderList() : "의료진 정보가 존재하지 않습니다."}</div>
+                    <span>운영시간</span>
+                    {/*다른 운영시간에 대한 정보가 없을 시 표현 생각 (주중, 주말, 요일별 진료시간, 점심시간 등등*/}
+                    <div>{items2 != null ? ("주중 운영시간 : " + items2.rcvWeek) : "운영시간 정보가 존재하지 않습니다."}</div>
+                    <span>주소</span>
+                    <div>{addr}</div>
+                    <span>전화번호</span>
+                    <div>{items.telno != null ? items.telno : "전화번호가 존재하지 않습니다."}</div>
+                </div>
+            </>
+        );
+    }
+    const renderJoin = () => {
+        return (
+            <>
+                <div className="hospitalName">{yadmNm}</div>
+                <div className="hospitalInfo">병원 정보</div>
+                <div className="hospitalInfoBox" >
+                    <span>공지사항</span>
+                    {/*<div>{items.ykiho}</div>*/}
+                    <div>{joinData.notes}</div>
+                    <span>병원 URL</span>
+                    <div>{joinData.url}</div>
+                    <span>진료과목</span>
+                    <div>{joinData.department}</div>
+                    <span>의료진</span>
+                    {/*<div>{items3 != null ? (items3.map((item3, index)=> item3.dgsbjtCdNm+" : "+item3.dgsbjtPrSdrCnt+"명 ")) : "의료진 정보가 존재하지 않습니다."}</div>*/}
+                    <div>{joinData.medicalStaffName}</div>
+                    <span>운영시간</span>
+                    {/*다른 운영시간에 대한 정보가 없을 시 표현 생각 (주중, 주말, 요일별 진료시간, 점심시간 등등*/}
+                    <div>{joinData.operatingHours}</div>
+                    <span>주소</span>
+                    <div>{joinData.address}</div>
+                    <span>전화번호</span>
+                    <div>{joinData.tell}</div>
+                </div>
+                <ul className="doctorList">
+                    <DoctorList doctorName={"의사1"}/>
+                    <DoctorList doctorName={"의사2"}/>
+                    <DoctorList doctorName={"의사3"}/>
+                </ul>
+            </>
+        );
+    }
     return (
         <section class="contents">
-            <div class="hospitalName">{yadmNm}</div>
-            <div class="hospitalInfo">병원 정보</div>
-            <div class="hospitalInfoBox">
-                <span>공지사항</span>
-                {/*<div>{items.ykiho}</div>*/}
-                <div>공지사항이 없습니다.</div>
-                <span>병원 URL</span>
-                <div>{items.hospUrl != null ? items.hospUrl : "URL이 존재하지 않습니다."}</div>
-                <span>진료과목</span>
-                <div>{data3.response.body.totalCount > 1 ? (items3.map((item3, index)=> item3.dgsbjtCdNm+(index !== items3.length-1?", ":""))): (items3 !=null ? items3.dgsbjtCdNm:"진료과목 정보가 존재하지 않습니다.")}</div>
-                <span>의료진</span>
-                {/*<div>{items3 != null ? (items3.map((item3, index)=> item3.dgsbjtCdNm+" : "+item3.dgsbjtPrSdrCnt+"명 ")) : "의료진 정보가 존재하지 않습니다."}</div>*/}
-                <div>{items3 != null ? renderList() : "의료진 정보가 존재하지 않습니다."}</div>
-                <span>운영시간</span>
-                {/*다른 운영시간에 대한 정보가 없을 시 표현 생각 (주중, 주말, 요일별 진료시간, 점심시간 등등*/}
-                <div>{items2 != null ? ("주중 운영시간 : "+items2.rcvWeek) : "운영시간 정보가 존재하지 않습니다."}</div>
-                <span>주소</span>
-                <div>{addr}</div>
-                <span>전화번호</span>
-                <div>{items.telno != null ? items.telno : "전화번호가 존재하지 않습니다."}</div>
-            </div>
-            <ul class="doctorList">
-                <DoctorList doctorName={"의사1"}/>
-                <DoctorList doctorName={"의사2"}/>
-                <DoctorList doctorName={"의사3"}/>
-            </ul>
+            {isJoin ? renderJoin() : renderNotJoin()}
         </section>
     );
 }
