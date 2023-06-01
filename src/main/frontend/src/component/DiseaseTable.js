@@ -167,10 +167,12 @@ export default function DiseaseTable() {
     }
     const searchSymptom = () => {
         setValue('');
+
         if (inputValue !== '') {
             const filteredSymptoms = symptoms.filter((symptom) =>
                 symptom.name.includes(inputValue)
             );
+
             if (filteredSymptoms.length === 0) {
                 const nothingText = document.getElementById("nothing");
                 nothingText.style.display = "block";
@@ -178,13 +180,18 @@ export default function DiseaseTable() {
                 const nothingText = document.getElementById("nothing");
                 nothingText.style.display = "none";
             }
+
             setSearchResults(filteredSymptoms);
         } else {
             alert("검색어를 입력해주세요");
             setValue('머리');
         }
+    };
+    function handleKeyPress(event) {
+        if (event.key === "Enter") {
+            searchSymptom();
+        }
     }
-
 
     return (
         <>
@@ -235,6 +242,8 @@ export default function DiseaseTable() {
                                             test="검색 결과"
                                             symptoms={searchResults}
                                             setSymptoms={setSearchResults}
+                                            all = {symptoms}
+                                            setAll = {setSymptoms}
                                         />
                                     )}
                                 </div>
@@ -245,8 +254,8 @@ export default function DiseaseTable() {
                 <div className="diseaseSearchFrame">
                     <div className="diseaseSearch">증상 검색
                         <input onChange={handleInputChange} value={inputValue} className="comment2"
-                               placeholder="증상을 입력해주세요."/>
-                        <div className="search" onClick={searchSymptom}>검색</div>
+                               placeholder="증상을 입력해주세요." onKeyPress={handleKeyPress}/>
+                        <div className="search" onClick={searchSymptom} >검색</div>
                     </div>
                     <div className="reset" onClick={handleReset}>선택 초기화</div>
                     <div className="complete" onClick={handleComplete}>선택 완료</div>

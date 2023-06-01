@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from "react";
 import axios from "axios";
 
-function DTable({onSelectedSymptoms, test, symptoms, setSymptoms}) {
+function DTable({onSelectedSymptoms, test, symptoms, setSymptoms, all, setAll}) {
     const handleCheckboxChange = (id) => {
         setSymptoms(symptoms.map(symptom => {
             if (symptom.id === id) {
@@ -18,6 +18,19 @@ function DTable({onSelectedSymptoms, test, symptoms, setSymptoms}) {
             }
             return symptom;
         }));
+        if (typeof setAll === 'function') {
+            setAll(all.map(a => {
+                if (a.id === id) {
+                    const updatedSymptom = {
+                        ...a,
+                        checked: !a.checked
+                    };
+                    return updatedSymptom;
+                }
+                return a;
+            }));
+        }
+
     };
 
     const renderTableRows = () => {
@@ -40,7 +53,7 @@ function DTable({onSelectedSymptoms, test, symptoms, setSymptoms}) {
                                     onChange={() => handleCheckboxChange(symptom.id)}
                                 />
                             </td>
-                            <td style={{width:"300px"}}>{symptom.name}</td>
+                            <td style={{width: "300px"}}>{symptom.name}</td>
                         </React.Fragment>
                     ))}
                     {row.length < 5 && <td colSpan={5 - row.length}></td>}
