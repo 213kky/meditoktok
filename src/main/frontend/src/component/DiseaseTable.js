@@ -9,15 +9,6 @@ export default function DiseaseTable() {
     const [symptoms, setSymptoms] = useState([]);
     const [selectedSymptoms, setSelectedSymptoms] = useState([]);
     const [value, setValue] = useState('머리');
-    const [partSymptoms, setPartSymptoms] = useState([]);
-    const [headSymptoms, setHeadSymptoms] = useState([]);
-    const [neckSymptoms, setNeckSymptoms] = useState([]);
-    const [chestSymptoms, setChestSymptoms] = useState([]);
-    const [abdomenSymptoms, setAbdomenSymptoms] = useState([]);
-    const [backSymptoms, setBackSymptoms] = useState([]);
-    const [hipSymptoms, setHipSymptoms] = useState([]);
-    const [legSymptoms, setLegSymptoms] = useState([]);
-    const [otherSymptoms, setOtherSymptoms] = useState([]);
     const [inputValue, setInputValue] = useState('');
     const [searchResults, setSearchResults] = useState([]);
     const [disease, setDisease] = useState([]);
@@ -51,54 +42,68 @@ export default function DiseaseTable() {
         fetchSymptoms();
     }, []);
 
-    useEffect(() => {
-        setHeadSymptoms(symptoms.filter((item) => item.bodyPart.includes('머리')));
-        setNeckSymptoms(symptoms.filter((item) => item.bodyPart.includes('목')));
-        setChestSymptoms(symptoms.filter((item) => item.bodyPart.includes('가슴')));
-        setAbdomenSymptoms(symptoms.filter((item) => item.bodyPart.includes('배')));
-        setBackSymptoms(symptoms.filter((item) => item.bodyPart.includes('등')));
-        setHipSymptoms(symptoms.filter((item) => item.bodyPart.includes('엉덩이')));
-        setLegSymptoms(symptoms.filter((item) => item.bodyPart.includes('다리')));
-        setOtherSymptoms(
-            symptoms.filter(
-                (item) =>
-                    item.bodyPart.includes("눈") ||
-                    item.bodyPart.includes("귀") ||
-                    item.bodyPart.includes("코") ||
-                    item.bodyPart.includes("입") ||
-                    item.bodyPart.includes("전신") ||
-                    item.bodyPart.includes("피부") ||
-                    item.bodyPart.includes("생식기") ||
-                    item.bodyPart.includes("골반") ||
-                    item.bodyPart.includes("손") ||
-                    item.bodyPart.includes("발") ||
-                    item.bodyPart.includes("기타")
-            )
-        );
-    }, [symptoms])
+    const handlePartMouseEnter = () => {
+        const otherBox = document.getElementById("searchContOther");
+        otherBox.style.display = "block";
+    };
+
+    const handlePartMouseLeave = () => {
+        const otherBox = document.getElementById("searchContOther");
+        otherBox.style.display = "none";
+    };
 
     const handlePartClick = (part) => {
-        setInputValue('');
-        setSearchResults([]);
-        setValue(part);
+        if (part === "그 외") {
+            const otherBox = document.getElementById("searchContOther");
+            otherBox.style.display = "block";
+        }else{
+            setInputValue('');
+            setSearchResults([]);
+            setValue(part);
+            const otherPart = document.getElementById("otherPart");
+            otherPart.className = '';
+        }
         // setPartSymptoms(symptoms.filter((item) => item.bodyPart.includes(part)));
     };
 
     const renderTableHeaders = () => {
-        const parts = ['머리', '목', '가슴', '배', '등', '엉덩이', '다리', '그외'];
-
+        const parts = ['머리', '목', '가슴', '배', '등', '엉덩이', '다리', '그 외'];
+        const otherParts = ['눈', '귀', '코', '입', '전신', '피부', '유방', '생식기', '골반', '손', '발', '기타'];
         return (
-            <tr>
-                {parts.map((part, index) => (
-                    <th
-                        key={index}
-                        onClick={() => handlePartClick(part)}
-                        className={`${part === value ? 'test' : ''}`}
-                    >
-                        {part}
-                    </th>
-                ))}
-            </tr>
+            <>
+                <tr>
+                    {parts.map((part, index) => (
+                        <th
+                            key={index}
+                            onClick={() => handlePartClick(part)}
+                            onMouseEnter={part === '그 외' ? handlePartMouseEnter : undefined}
+                            onMouseLeave={part === '그 외' ? handlePartMouseLeave : undefined}
+                            id={`${part === '그 외' ? 'otherPart' : ''}`}
+                            className={`${part === value ? 'test' : ''}`}
+                        >
+                            {part}
+                        </th>
+                    ))}
+
+                </tr>
+                <div className="searchContOther" id="searchContOther" style={{display: "none"}}
+                     onMouseEnter={handlePartMouseEnter}
+                     onMouseLeave={handlePartMouseLeave}>
+                    <ul>
+                        {otherParts.map((part, index)=>(
+                            <li
+                                key={index}
+                                onClick={()=>{
+                                    handlePartClick(part);
+                                    const otherPart = document.getElementById("otherPart");
+                                    otherPart.className = 'test';
+                                }}
+
+                            >{part}</li>
+                        ))}
+                    </ul>
+                </div>
+            </>
         );
     };
 
@@ -127,7 +132,7 @@ export default function DiseaseTable() {
             alert("증상을 선택해주세요");
         } else {
             setFlag(1);
-            console.log("선택한 증상 : ",selectedSymptoms);
+            console.log("선택한 증상 : ", selectedSymptoms);
             const arr = selectedSymptoms;
             let temp = disease;
             for (let i = 0; i < arr.length; i++) {
@@ -135,7 +140,7 @@ export default function DiseaseTable() {
             }
             if (temp.length > 0) {
                 setFilteredDisease(temp)
-                console.log("탐색완료 : ",temp);
+                console.log("탐색완료 : ", temp);
             } else {
                 setFilteredDisease([]);
             }
@@ -145,9 +150,11 @@ export default function DiseaseTable() {
     for (let i = 1; i <= Math.ceil(filteredDisease.length / itemsPerPage); i++) {
         pageNumbers.push(i);
     }
+
     function handlePageChange(pageNumber) {
         setCurrentPage(pageNumber);
     }
+
     const renderDiseaseList = () => {
         if (filteredDisease.length === 0) {
             return <tr>
@@ -187,6 +194,7 @@ export default function DiseaseTable() {
             setValue('머리');
         }
     };
+
     function handleKeyPress(event) {
         if (event.key === "Enter") {
             searchSymptom();
@@ -197,55 +205,27 @@ export default function DiseaseTable() {
         <>
             <div className="DTable">
                 <table>
-                    <tr>
+                    <tr style={{cursor:"pointer"}}>
                         {renderTableHeaders()}
                     </tr>
                     <tr style={{height: "200px"}} valign={"top"}>
                         <td colSpan='8'>
                             <div style={{width: '790px', height: "200px", overflowY: "scroll"}}>
                                 <div className="selectedSymptomsContainer">
-                                    {value === "머리" && (
-                                        <DTable onSelectedSymptoms={handleSelectedSymptoms} test={value}
-                                                symptoms={headSymptoms} setSymptoms={setHeadSymptoms}/>
-                                    )}
-                                    {value === "목" && (
-                                        <DTable onSelectedSymptoms={handleSelectedSymptoms} test={value}
-                                                symptoms={neckSymptoms} setSymptoms={setNeckSymptoms}/>
-                                    )}
-                                    {value === "가슴" && (
-                                        <DTable onSelectedSymptoms={handleSelectedSymptoms} test={value}
-                                                symptoms={chestSymptoms} setSymptoms={setChestSymptoms}/>
-                                    )}
-                                    {value === "배" && (
-                                        <DTable onSelectedSymptoms={handleSelectedSymptoms} test={value}
-                                                symptoms={abdomenSymptoms} setSymptoms={setAbdomenSymptoms}/>
-                                    )}
-                                    {value === "등" && (
-                                        <DTable onSelectedSymptoms={handleSelectedSymptoms} test={value}
-                                                symptoms={backSymptoms} setSymptoms={setBackSymptoms}/>
-                                    )}
-                                    {value === "엉덩이" && (
-                                        <DTable onSelectedSymptoms={handleSelectedSymptoms} test={value}
-                                                symptoms={hipSymptoms} setSymptoms={setHipSymptoms}/>
-                                    )}
-                                    {value === "다리" && (
-                                        <DTable onSelectedSymptoms={handleSelectedSymptoms} test={value}
-                                                symptoms={legSymptoms} setSymptoms={setLegSymptoms}/>
-                                    )}
-                                    {value === "그외" && (
-                                        <DTable onSelectedSymptoms={handleSelectedSymptoms} test={value}
-                                                symptoms={otherSymptoms} setSymptoms={setOtherSymptoms}/>
-                                    )}
-                                    {searchResults.length > 0 && (
+                                    {searchResults.length > 0 ? (
+                                        // 검색 시 로직 변경 필요 ( 검색 필터링을 DTable에서 진행하면 더 깔끔해질듯 )
                                         <DTable
                                             onSelectedSymptoms={handleSelectedSymptoms}
-                                            test="검색 결과"
+                                            part="검색 결과"
                                             symptoms={searchResults}
                                             setSymptoms={setSearchResults}
-                                            all = {symptoms}
-                                            setAll = {setSymptoms}
+                                            all={symptoms}
+                                            setAll={setSymptoms}
                                         />
-                                    )}
+                                    ) : (
+                                        <DTable onSelectedSymptoms={handleSelectedSymptoms} part={value}
+                                                symptoms={symptoms} setSymptoms={setSymptoms}/>
+                                    ) }
                                 </div>
                             </div>
                         </td>
@@ -255,7 +235,7 @@ export default function DiseaseTable() {
                     <div className="diseaseSearch">증상 검색
                         <input onChange={handleInputChange} value={inputValue} className="comment2"
                                placeholder="증상을 입력해주세요." onKeyPress={handleKeyPress}/>
-                        <div className="search" onClick={searchSymptom} >검색</div>
+                        <div className="search" onClick={searchSymptom}>검색</div>
                     </div>
                     <div className="reset" onClick={handleReset}>선택 초기화</div>
                     <div className="complete" onClick={handleComplete}>선택 완료</div>

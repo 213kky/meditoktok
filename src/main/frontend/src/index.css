@@ -1109,3 +1109,28 @@ aside ul li a {
   background-color: #333;
   color: #fff;
 }
+
+.searchContOther {
+  position: absolute;
+  top: 280px;
+  right: 418px;
+  height: 30px;
+  z-index: 11;
+  background-color: white;
+  border: 1px solid black;
+}
+.searchContOther ul {
+  margin-block-start: 0px;
+  margin-block-end: 0px;
+  padding-inline-start : 10px;
+}
+.searchContOther li{
+  list-style: none;
+  display: inline-block;
+  padding: 2px;
+  margin-right: 10px;
+}
+.searchContOther li:not(:last-child)::after {
+  content: "|";
+  margin-left: 10px;
+}
