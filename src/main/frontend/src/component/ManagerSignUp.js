@@ -176,6 +176,7 @@ console.log('의사정보 반환', formData);
         address: selectedHospital.addr,
         tell: selectedHospital.telno,
         url: selectedHospital.hospUrl,
+        ykiho: selectedHospital.ykiho,
         // 필요한 추가 필드들도 저장
       };
 

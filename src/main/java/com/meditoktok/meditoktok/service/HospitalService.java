@@ -30,6 +30,8 @@ public class HospitalService {
         hospital.setAddress(dto.getAddress());
         hospital.setTell(dto.getTell());
         hospital.setUrl(dto.getUrl());
+        hospital.setYkiho(dto.getYkiho());
+
         return hospitalRepository.save(hospital);
     }
 

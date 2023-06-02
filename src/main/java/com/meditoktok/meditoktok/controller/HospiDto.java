@@ -10,6 +10,15 @@ public class HospiDto {
     private String tell;
     private String url;
     private String notes;
+    private String ykiho;
+
+    public String getYkiho() {
+        return ykiho;
+    }
+
+    public void setYkiho(String ykiho) {
+        this.ykiho = ykiho;
+    }
 
     public Long getId() {
         return id;
