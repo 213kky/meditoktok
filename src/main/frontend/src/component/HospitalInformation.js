@@ -78,7 +78,7 @@ export default function HospitalInformation() {
                     setIsJoin(true);
                     console.log(response);
                 } catch (error) {
-                    console.error('Not Join Error : 가맹 병원이 아닙니다.');
+                    console.error('Not Join Error : 가맹 병원이 아닙니다.', error);
                 }
             }
         };

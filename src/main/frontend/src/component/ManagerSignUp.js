@@ -168,12 +168,17 @@ console.log('의사정보 반환', formData);
     let ls = "";
 
     for(let i = 0; i < data2.response.body.items.item.length; i++){
-        ls = ls + data2.response.body.items.item[i].dgsbjtCdNm + ":" + data2.response.body.items.item[i].dgsbjtPrSdrCnt+"명"
+        ls = ls + data2.response.body.items.item[i].dgsbjtCdNm + ":" + data2.response.body.items.item[i].dgsbjtPrSdrCnt+"명";
     }
+    let ll = "";
+    for(let i = 0; i < data2.response.body.items.item.length; i++){
+            ll = ll +data2.response.body.items.item[i].dgsbjtCdNm + (i !== data2.response.body.items.item.length - 1 ? ", " : "");
+        }
     if (selectedHospital) {
       const formData = {
         hospName: selectedHospital.yadmNm,
-        department: ls,
+        department: ll,
+        medicalStaffName: ls,
         operatingHour: data1.rcvWeek,
         address: selectedHospital.addr,
         tell: selectedHospital.telno,
@@ -187,6 +192,7 @@ axios.post('/api/saveData', formData)
       .then(response => {
         console.log(formData);
         setHospId(response.data);
+        console.log(formData.department);
         console.log('hospId', hospId);
         // 저장 성공 후의 동작을 정의
 

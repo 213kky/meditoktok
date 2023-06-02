@@ -34,7 +34,7 @@ public class HospitalService {
 
         return hospitalRepository.save(hospital);
     }
-    public Hospital getHospitalByYkiho(String ykiho) throws  Exception {
+    public Hospital getHospitalByYkiho(String ykiho) throws Exception {
         Optional<Hospital> optionalHospital = Optional.ofNullable(hospitalRepository.findByYkiho(ykiho));
         if (optionalHospital.isPresent()) {
             return optionalHospital.get();
