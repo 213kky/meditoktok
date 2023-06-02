@@ -7,7 +7,7 @@ export default function NowTr({hosp, doc, date, onCancel}) {
                 <div>{date}</div>
             </td>
             <td>
-                <button onClick={onCancel}>취소</button>
+                <div style={{textAlign:"center", cursor:"pointer", float:"none"}} onClick={onCancel}>취소</div>
             </td>
         </tr>
     );

@@ -59,12 +59,16 @@ const handleCancelReservation = async (reservationId) => {
       const formData = {
         id: cookieValue.id,
       };
-      try {
-        await axios.get(`/test/res/3?id=${reservationId}`);
-        fetchData(); // 예약 취소 후에 예약 정보 다시 가져오기
-      } catch (error) {
-        console.error('Error:', error);
+      const confirmed = window.confirm("정말 예약을 취소하시겠습니까?");
+      if(confirmed){
+          try {
+              await axios.get(`/test/res/3?id=${reservationId}`);
+              fetchData(); // 예약 취소 후에 예약 정보 다시 가져오기
+          } catch (error) {
+              console.error('Error:', error);
+          }
       }
+
     };
 
     data(); // data 함수 호출
