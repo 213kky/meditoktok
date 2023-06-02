@@ -12,6 +12,7 @@ export default function HospitalInformation() {
     const [loading, setLoading] = useState(true);
     const [loading2, setLoading2] = useState(false);
     const [loading3, setLoading3] = useState(false);
+    const [doctorLoading, setDoctorLoading] = useState(false);
     const [isJoin, setIsJoin] = useState(false);
     const [joinData, setJoinData] = useState(null);
     const [doctorList, setDoctorList] = useState([]);
@@ -88,12 +89,13 @@ export default function HospitalInformation() {
         const fetchData = async () => {
             if (isJoin) {
                 try {
-                    const response = await axios.get('/doctorList', {
+                    const response = await axios.get('/find/doctor', {
                         params: {
-                            hospiId: joinData.id,
+                            hosp: joinData.id,
                         },
                     });
                     setDoctorList(response.data);
+                    setDoctorLoading(true);
                     console.log(response);
                 } catch (error) {
                     console.error('Error',error);
@@ -201,13 +203,13 @@ export default function HospitalInformation() {
                     <div>{joinData.tell}</div>
                 </div>
                 <ul className="doctorList">
-                    {doctorList!==[] && doctorList.map((doctor, index)=>{
+                    {doctorLoading && doctorList.map((doctor, index)=>{
 
                         return(
-                            <DoctorList doctorId={doctor.id} doctorName={doctor.doctorName} doctorDepartment={doctor.doctorDepartment}/>
+                            <DoctorList yadmNm={yadmNm} doctorId={doctor.id} doctorName={doctor.doctorName} doctorDepartment={doctor.doctorDepartment}/>
                         );
                     })}
-                    <DoctorList doctorId={1} doctorName={"홍길동"} doctorDepartment={"정형외과"}/>
+                    {/*<DoctorList yadmNm={yadmNm} doctorId={4} doctorName={"홍길동"} doctorDepartment={"정형외과"}/>*/}
 
                 </ul>
             </>

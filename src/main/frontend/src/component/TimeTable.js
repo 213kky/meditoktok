@@ -1,26 +1,12 @@
 import {useEffect, useState} from "react";
 import axios from "axios";
 
-export default function TimeTable({doctorId, clickDate}) {
+export default function TimeTable({doctorId, clickDate, setClickedTime}) {
     const [timeData, setTimeData] = useState([]);
-    const dummy = [
-        { time: '09:00', max: '2/7' },
-        { time: '09:30', max: '2/7' },
-        { time: '10:00', max: '2/7' },
-        { time: '10:30', max: '2/7' },
-        { time: '11:00', max: '2/7' },
-        { time: '11:30', max: '2/7' },
-        { time: '12:00', max: '2/7' },
-        { time: '12:30', max: '2/7' },
-        { time: '13:00', max: '2/7' },
-        { time: '13:30', max: '2/7' },
-        { time: '14:00', max: '2/7' },
-        { time: '14:30', max: '2/7' },
-        { time: '15:00', max: '2/7' },
-        { time: '15:30', max: '2/7' },
-        { time: '16:00', max: '2/7' },
-        { time: '16:30', max: '2/7' },
-    ];
+    const [selectedTd, setSelectedTd] = useState(null);
+    const [loading, setLoading] = useState(false);
+    const [notReservation, setNotReservation] = useState(false);
+    const [count, setCount] = useState([]);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -32,9 +18,13 @@ export default function TimeTable({doctorId, clickDate}) {
                             reservationDate: clickDate,
                         },
                     });
+                    setLoading(false);
+
                     setTimeData(response.data);
+                    setNotReservation(false);
                     console.log(response);
                 } catch (error) {
+                    setNotReservation(true);
                     console.error('Error', error);
                 }
             }
@@ -43,44 +33,75 @@ export default function TimeTable({doctorId, clickDate}) {
         fetchData();
     }, [clickDate]);
 
-    // if (timeData !== []) {
-    //
-    //     setAmTable(timeData.map((item, index) => {
-    //             if(item.timeId < "12:00"){
-    //                 return item;
-    //             }
-    //         })
-    //     )
-    //     setPmTable(timeData.map((item, index)=>{
-    //         if(item.timeId >= "12:00"){
-    //             return item;
-    //         }
-    //     }))
-    // }
-    function separateTime(data) {
-        const amTable = [];
-        const pmTable = [];
+    useEffect(() => {
+        const fetchData = async () => {
+            if (timeData.length > 0) {
+                try {
+                    const promises = timeData.map(async (item) => {
+                        const response = await axios.post('/api/count', {
+                                doctorId: doctorId,
+                                reservationDate: `${clickDate} ${item.timeId}`,
+                        });
+                        return { time: item.timeId, count: response.data };
+                    });
 
-        data.forEach(item => {
-            if (item.time < '12:00') {
-                amTable.push(item);
-            } else {
-                pmTable.push(item);
+                    const countData = await Promise.all(promises);
+                    setLoading(true);
+                    setCount(countData);
+                } catch (error) {
+                    console.error('Error', error);
+                }
             }
-        });
+        };
 
-        return { amTable, pmTable };
+        fetchData();
+    }, [timeData]);
+
+    const handleTdClick = (index) => {
+        setSelectedTd(index);
+    };
+    function separateTime(data, countData) {
+        if (timeData.length > 0 && countData.length > 0 && loading) {
+            const amTable = [];
+            const pmTable = [];
+
+            data.forEach(item => {
+                const countItem = countData.find(count => count.time === item.timeId);
+                if (item.timeId < '12:00' && countItem) {
+                    amTable.push({ ...item, count: countItem.count });
+                } else {
+                    pmTable.push({ ...item, count: countItem.count });
+                }
+            });
+
+            return { amTable, pmTable };
+        }
+
+        return { amTable: [], pmTable: [] };
     }
-    const { amTable, pmTable } = separateTime(dummy);
-    function generateCode(data) {
+
+    const { amTable, pmTable } = separateTime(timeData, count);
+
+    function renderTable(data) {
         const rows = [];
         let currentRow = [];
 
         for (let i = 0; i < data.length; i++) {
+            const tdStyle = selectedTd === data[i].timeId ? { backgroundColor: 'yellow', cursor: 'pointer' } : data[i].count === data[i].max
+                ? { backgroundColor: 'gray', cursor: 'default' } : { cursor: 'pointer' };
+
+
+
+            const canClick = data[i].count !== data[i].max;
             currentRow.push(
-                <td key={i}>
-                    <div>{data[i].time}</div>
-                    <div>{data[i].max}</div>
+                <td key={data[i].timeId} style={tdStyle} onClick={() => {
+                    if (canClick) {
+                        setClickedTime(`${clickDate} ${data[i].timeId}`);
+                        handleTdClick(data[i].timeId);
+                    }
+                }} >
+                    <div>{data[i].timeId}</div>
+                    <div>{data[i].count}/{data[i].max}</div>
                 </td>
             );
 
@@ -92,13 +113,13 @@ export default function TimeTable({doctorId, clickDate}) {
 
         return rows;
     }
-    //현재 예약된 인원을 알아야 함.
     return (
         <table border="1" className="timeTable">
-            <th style={{height: "50px"}} colSpan="4">오전</th>
-            {generateCode(amTable)}
-            <th style={{height: "50px"}} colSpan="4">오후</th>
-            {generateCode(pmTable)}
+            {notReservation ? <div>{clickDate} <br/>예약 일정이 설정되지 않았습니다.</div>: <><th style={{height: "50px"}} colSpan="4">오전</th>
+                {loading&&renderTable(amTable)}
+                <th style={{height: "50px"}} colSpan="4">오후</th>
+                {loading&&renderTable(pmTable)}</>}
+
         </table>
     );
 }

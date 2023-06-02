@@ -1,5 +1,6 @@
 package com.meditoktok.meditoktok.controller;
 
+import com.meditoktok.meditoktok.domain.Hospital;
 import com.meditoktok.meditoktok.domain.TimeTable;
 import com.meditoktok.meditoktok.service.TimeTableService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,12 @@ import java.util.NoSuchElementException;
 public class TimeTableController {
     @Autowired
     private TimeTableService timetableService;
+
+    @GetMapping("/timeTable")
+    public List<TimeTable> getDoctorTimeTable(@RequestParam long doctorId, String reservationDate) throws Exception {
+        List<TimeTable> timeTable = timetableService.getAllTimetablesByDoctorIdAndDate(doctorId, reservationDate);
+        return timeTable;
+    }
 
     @PostMapping("/test/createtime")
     public String timeSetting(@RequestBody TimeTable timetable) {

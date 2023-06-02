@@ -75,14 +75,6 @@ public class TimeTable {
         this.timeId = timeId;
     }
 
-    public Long getCount() {
-        return max;
-    }
-
-    public void setCount(Long count) {
-        this.max = count;
-    }
-
     public String  convert(Long a) {
 
         int hours = 9;

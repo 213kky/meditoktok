@@ -7,7 +7,6 @@
 }
 
 .Cd {
- float: left;
  margin: 20px;
  margin-top: 40px;
 }
@@ -15,7 +14,6 @@
 .Ptime {
   width: 380px; height: 150px;
   font-size: medium; text-align: center;
-  margin-left: 480px;
   margin-top: 20px;
 }
 

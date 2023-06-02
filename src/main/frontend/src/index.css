@@ -370,6 +370,7 @@ aside ul li a {
   background-color: white;
   border: 1.5px solid #000000;
   font-size: 17px;
+  cursor: pointer;
 }
 
 .bookSchedule {
