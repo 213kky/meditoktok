@@ -165,7 +165,7 @@ export default function Create({ originData }) {
               doctor={selectedDoctor}
               startTime={formatTime(startPeriod, startHour, startMinute)}
               endTime={formatTime(endPeriod, endHour, endMinute)}
-              clickedDate={clickedDate.format("MM/DD/YYYY")}
+              clickedDate={clickedDate.format("YYYY-MM-DD")}
             />
           )}
         </div>

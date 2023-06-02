@@ -47,7 +47,11 @@ public class HospitalController {
         return id;
     }
 
-
+    @GetMapping("/join")
+    public Hospital getHospitalByYkiho(@RequestParam String ykiho) throws Exception {
+        Hospital hospital = hospitalService.getHospitalByYkiho(ykiho);
+        return hospital;
+    }
     @GetMapping("/manager1")
     public Hospital getHospitalById(@RequestParam long hospiId) throws Exception {
         Hospital hospital = hospitalService.getHospitalById(hospiId);

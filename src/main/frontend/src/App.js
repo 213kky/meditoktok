@@ -11,9 +11,6 @@ function App() {
     //     setIsAdmin(!isAdmin);
     //     console.log(isAdmin);
     // };
-    useEffect(()=>{
-        setCookie('loginState', { isLogin: false, isAdmin: false }, { path: '/' });
-    },[]);
 
     useEffect(() => {
         if (!cookies.loginState) {
