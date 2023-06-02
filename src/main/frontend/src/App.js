@@ -11,6 +11,10 @@ function App() {
     //     setIsAdmin(!isAdmin);
     //     console.log(isAdmin);
     // };
+    useEffect(()=>{
+        setCookie('loginState', { isLogin: false, isAdmin: false }, { path: '/' });
+    },[]);
+
     useEffect(() => {
         if (!cookies.loginState) {
             setCookie('loginState', { isLogin: false, isAdmin: false }, { path: '/' });
@@ -20,7 +24,7 @@ function App() {
         <NavermapsProvider
             ncpClientId='jfncs1dl99'
         >
-            {cookies.loginState?.isAdmin ? <Manager isLogin={cookies.loginState.isLogin}/> : <User isLogin={cookies.loginState.isLogin}/>}
+            {cookies.loginState?.isAdmin ? <Manager isLogin={cookies.loginState?.isLogin}/> : <User isLogin={cookies.loginState?.isLogin}/>}
         </NavermapsProvider>
     );
 
