@@ -164,4 +164,12 @@ public class ReservationService {
         }
     }
 
+    public Long countByReservationDateLikeAndDoctorId(Long doctorId, String reservationDate) {
+        try {
+            return reservationRepository.countByDoctorIdAndReservationDateLike(doctorId, reservationDate);
+        } catch (Exception e) {
+            throw new RuntimeException("잘못된 날짜를 집어넣은것 같습니다.", e);
+        }
+    }
+
 }

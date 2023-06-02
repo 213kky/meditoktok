@@ -28,22 +28,22 @@ DoctorService doctorService;
      */
 
     @PostMapping("/signup/admain")
-    public String signup(@RequestBody AdminJoinDto adminJoinDto) {
+    public String signup(@RequestBody Admin adminJoinDto) {
         try {
 
 
-            HospiDto hospiDto = new HospiDto();
-//            hospiDto.set(admin.getId());
-            hospiDto.setHospName(adminJoinDto.getHospName());
-            hospiDto.setDepartment(adminJoinDto.getDepartment());
-            hospiDto.setMedicalStaffName(adminJoinDto.getMedicalStaffName());
-            hospiDto.setOperatingHours(adminJoinDto.getOperatingHours());
-            hospiDto.setAddress(adminJoinDto.getAddress());
-            hospiDto.setTell(adminJoinDto.getTell());
-            hospiDto.setUrl(adminJoinDto.getUrl());
+//            Hospital hospiDto = new Hospital();
+////            hospiDto.set(admin.getId());
+//            hospiDto.setHospName(adminJoinDto.getHospName());
+//            hospiDto.setDepartment(adminJoinDto.getDepartment());
+//            hospiDto.setMedicalStaffName(adminJoinDto.getMedicalStaffName());
+//            hospiDto.setOperatingHours(adminJoinDto.getOperatingHours());
+//            hospiDto.setAddress(adminJoinDto.getAddress());
+//            hospiDto.setTell(adminJoinDto.getTell());
+//            hospiDto.setUrl(adminJoinDto.getUrl());
 
 
-            Long h = hospitalService.firstSave(hospiDto).getId();
+//            Long h = hospitalService.firstSave(hospiDto).getId();
 
 
             Admin admin = new Admin();
@@ -53,21 +53,21 @@ DoctorService doctorService;
             admin.setPhoneNumber(adminJoinDto.getPhoneNumber());
             admin.setName(adminJoinDto.getName());
             admin.setBirth(adminJoinDto.getBirth());
-            admin.setIsAdmin(adminJoinDto.getAdmin());
+            admin.setIsAdmin(true);
             admin.setMailAgree(adminJoinDto.getMailAgree());
-            admin.setHospiId(h);
+            admin.setHospiId(adminJoinDto.getHospiId());
              adminService.signup(admin);
 
 
 
-            List<Doctor> doctors = adminJoinDto.getDoctorList();
-            for (Doctor temp : doctors) {
-                Doctor doctor = new Doctor();
-                doctor.setDoctorName(temp.getDoctorName());
-                doctor.setDoctorDepartment(temp.getDoctorDepartment());
-                doctor.setHospiId(h);
-                doctorService.firstSave(doctor);
-            }
+//            List<Doctor> doctors = adminJoinDto.getDoctorList();
+//            for (Doctor temp : doctors) {
+//                Doctor doctor = new Doctor();
+//                doctor.setDoctorName(temp.getDoctorName());
+//                doctor.setDoctorDepartment(temp.getDoctorDepartment());
+//                doctor.setHospiId(h);
+//                doctorService.firstSave(doctor);
+//            }
 
 
             // 테이블생성 쿼리 병원정보 불러와서 DB에 저장하는 -> 바로 api로 요청

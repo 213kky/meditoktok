@@ -1,6 +1,6 @@
 package com.meditoktok.meditoktok.service;
 
-import com.meditoktok.meditoktok.controller.HospiDto;
+
 import com.meditoktok.meditoktok.domain.Hospital;
 import com.meditoktok.meditoktok.repository.HospitalRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +19,7 @@ public class HospitalService {
 //        return byHospName.get();
 //    }
 
-    public Hospital firstSave(HospiDto dto) throws IllegalArgumentException {
+    public Hospital firstSave(Hospital dto) throws IllegalArgumentException {
         // 병원 정보 저장
 
         Hospital hospital = new Hospital();
@@ -45,7 +45,7 @@ public class HospitalService {
         }
     }
 
-    public Hospital updateHospital(HospiDto dto) throws Exception {
+    public Hospital updateHospital(Hospital dto) throws Exception {
         // 병원 정보 수정
 //        if (hospital.getId() == null) {
 //            throw new IllegalArgumentException("Hospital ID cannot be null");

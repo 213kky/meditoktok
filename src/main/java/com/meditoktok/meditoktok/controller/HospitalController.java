@@ -39,11 +39,12 @@ public class HospitalController {
 //        return "성공";
 //    }
 
+    //병원 저장하면서 병원 Id값 반환 do
     @PostMapping("/api/saveData")
-    public String firstSave(@RequestBody HospiDto dto){
+    public Long firstSave(@RequestBody Hospital dto){
 //
-        hospitalService.firstSave(dto);
-        return "첫 병원정보 저장";
+        Long id = hospitalService.firstSave(dto).getId();
+        return id;
     }
 
 
@@ -60,7 +61,7 @@ public class HospitalController {
 //    }
 
     @PostMapping("/manager12")
-    public String change(@RequestBody HospiDto dto) throws Exception{
+    public String change(@RequestBody Hospital dto) throws Exception{
         hospitalService.updateHospital(dto);
         return "병원 정보가 수정되었습니다.";
     }

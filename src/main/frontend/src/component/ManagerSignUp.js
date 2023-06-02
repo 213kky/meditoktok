@@ -24,6 +24,7 @@ const [data2, setData2] = useState(null);
 const [doctorName, setDoctorName] = useState("");
 const [department1, setDepartment1] = useState("");
 const [doctors, setDoctors] = useState([{ name: "", department: "" }]);
+const [hospId, setHospId] = useState(0);
 console.log('doctors', doctors);
 const handleAddDoctor = () => {
     setDoctors([...doctors, { name: "", department: "" }]);
@@ -128,8 +129,9 @@ const handleSaveDoctorData = () => {
   }
 
   const formData = {
-    hospName: selectedHospital.yadmNm,
+//    hospName: selectedHospital.yadmNm,
     doctors: doctors,
+    hospiId: hospId,
   };
 console.log('의사정보 반환', formData);
   axios
@@ -184,7 +186,10 @@ console.log('의사정보 반환', formData);
 axios.post('/api/saveData', formData)
       .then(response => {
         console.log(formData);
+        setHospId(response.data);
+        console.log('hospId', hospId);
         // 저장 성공 후의 동작을 정의
+
       })
       .catch(error => {
         console.error(error);
@@ -211,9 +216,10 @@ axios.post('/api/saveData', formData)
       birth: birth,
       isAdmin: 1,
       mailAgree: mailAgree,
+      hospiId: hospId,
     };
     const isFormValid = account.length > 0 && password.length > 0 && email.length > 0 && phoneNumber.length > 0 && name.length > 0 && birth.length > 0;
-    if (isFormValid) {
+    if (isFormValid && hospId !== 0) {
       axios.post('/signup/admain', formData)
         .then(response => {
           console.log(response);
@@ -225,8 +231,10 @@ axios.post('/api/saveData', formData)
         .catch(error => {
           console.error(error);
         });
-    } else {
-      alert("값을 모두 입력해주세요");
+    } else if(!isFormValid){
+        alert("값을 모두 입력해주세요");
+    } else{
+        alert("병원을 선택해주세요");
     }
   };
 

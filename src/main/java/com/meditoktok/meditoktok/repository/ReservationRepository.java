@@ -17,6 +17,8 @@ public interface ReservationRepository extends JpaRepository<Reservation, Long> 
 
     @Query(value = "SELECT * FROM reservations WHERE reservation_date LIKE CONCAT('%', :value, '%')", nativeQuery = true)
     List<Reservation> findByReservationDateLike(@Param("value") String value);
+    @Query(value = "SELECT COUNT(*) FROM reservations WHERE doctor_id = :doctorId AND reservation_date LIKE CONCAT('%', :reservationDate, '%')", nativeQuery = true)
+    Long countByDoctorIdAndReservationDateLike(@Param("doctorId")Long doctorId, @Param("reservationDate") String reservationDate);
 
 
 }

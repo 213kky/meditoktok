@@ -65,6 +65,11 @@ public class ReservationController {
             throw new RuntimeException("예약 검색중 오류", e);
         }
     }
+    @PostMapping("/api/count")
+    public Long countReservationPatientByReservationDateLikeAndDoctorId(@RequestBody TimeTableDto dto) {
+        return reservationService.countByReservationDateLikeAndDoctorId(dto.getDoctorId(), dto.getReservationDate());
+
+    }
 
 }
 

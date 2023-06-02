@@ -1,6 +1,6 @@
 package com.meditoktok.meditoktok.service;
 
-import com.meditoktok.meditoktok.controller.HospiDto;
+
 import com.meditoktok.meditoktok.domain.Doctor;
 import com.meditoktok.meditoktok.domain.Hospital;
 import com.meditoktok.meditoktok.domain.Reservation;
