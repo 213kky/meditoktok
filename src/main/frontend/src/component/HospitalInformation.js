@@ -14,6 +14,7 @@ export default function HospitalInformation() {
     const [loading3, setLoading3] = useState(false);
     const [isJoin, setIsJoin] = useState(false);
     const [joinData, setJoinData] = useState(null);
+    const [doctorList, setDoctorList] = useState([]);
     let items, items2, items3, renderList;
 
     useEffect(() => {
@@ -76,13 +77,32 @@ export default function HospitalInformation() {
                     setIsJoin(true);
                     console.log(response);
                 } catch (error) {
-                    console.error('Not Join Error:', error);
+                    console.error('Not Join Error : 가맹 병원이 아닙니다.');
                 }
             }
         };
 
         fetchData();
     }, [data]);
+    useEffect(()=>{
+        const fetchData = async () => {
+            if (isJoin) {
+                try {
+                    const response = await axios.get('/doctorList', {
+                        params: {
+                            hospiId: joinData.id,
+                        },
+                    });
+                    setDoctorList(response.data);
+                    console.log(response);
+                } catch (error) {
+                    console.error('Error',error);
+                }
+            }
+        };
+
+        fetchData();
+    },[isJoin])
 
     if (data === null) {
         return null
@@ -181,9 +201,14 @@ export default function HospitalInformation() {
                     <div>{joinData.tell}</div>
                 </div>
                 <ul className="doctorList">
-                    <DoctorList doctorName={"의사1"}/>
-                    <DoctorList doctorName={"의사2"}/>
-                    <DoctorList doctorName={"의사3"}/>
+                    {doctorList!==[] && doctorList.map((doctor, index)=>{
+
+                        return(
+                            <DoctorList doctorId={doctor.id} doctorName={doctor.doctorName} doctorDepartment={doctor.doctorDepartment}/>
+                        );
+                    })}
+                    <DoctorList doctorId={1} doctorName={"홍길동"} doctorDepartment={"정형외과"}/>
+
                 </ul>
             </>
         );
