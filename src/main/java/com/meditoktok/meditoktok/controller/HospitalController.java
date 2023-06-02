@@ -49,6 +49,7 @@ public class HospitalController {
 
     @GetMapping("/join")
     public Hospital getHospitalByYkiho(@RequestParam String ykiho) throws Exception {
+        System.out.println(ykiho);
         Hospital hospital = hospitalService.getHospitalByYkiho(ykiho);
         return hospital;
     }

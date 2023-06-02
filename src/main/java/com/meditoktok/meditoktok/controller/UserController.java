@@ -101,5 +101,11 @@ public class UserController {
         }
     }
 
+    @PostMapping("/change/userInfo")
+    public String updateUser(@RequestBody UserChangeDto dto) throws Exception {
+        userService.updateUser(dto);
+        return "회원정보가 변경되었습니다.";
+    }
+
 
 }

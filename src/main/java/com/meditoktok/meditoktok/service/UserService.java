@@ -1,5 +1,7 @@
 package com.meditoktok.meditoktok.service;
 
+import com.meditoktok.meditoktok.controller.UserChangeDto;
+import com.meditoktok.meditoktok.domain.Hospital;
 import com.meditoktok.meditoktok.domain.User;
 import com.meditoktok.meditoktok.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -56,6 +58,25 @@ public class UserService {
         } else {
             // User를 찾을 수 없을 때 처리
             throw new Exception("유저를 찾을 수 없습니다.");
+        }
+    }
+// 사용자 정보 수정
+    public User updateUser(UserChangeDto dto) throws Exception {
+        if (dto.getId() == null) {
+            throw new IllegalArgumentException("유저 고유값을 입력하지 않아 유저를 찾을 수 없습니다");
+        }
+        Optional<User> optionalUser = userRepository.findById(dto.getId());
+        if (optionalUser.isPresent()) {
+            User user = optionalUser.get();
+            user.setPw(dto.getPw());
+            user.setEmail(dto.getEmail());
+            user.setPhoneNumber(dto.getTel());
+
+
+
+            return userRepository.save(user);
+        } else {
+            throw new Exception("유저를 찾을 수 없습니다");
         }
     }
 

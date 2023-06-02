@@ -1,4 +1,4 @@
-export default function NowTr({hosp, doc, date}) {
+export default function NowTr({hosp, doc, date, onCancel}) {
     return (
         <tr>
             <td colSpan="3">
@@ -7,7 +7,7 @@ export default function NowTr({hosp, doc, date}) {
                 <div>{date}</div>
             </td>
             <td>
-                취소
+                <button onClick={onCancel}>취소</button>
             </td>
         </tr>
     );

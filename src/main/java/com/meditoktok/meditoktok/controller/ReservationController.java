@@ -29,7 +29,7 @@ public class ReservationController {
     }
 
     //예약확인 유저가 예약한 모든 목록
-    @PostMapping("/test/res/1")
+    @GetMapping("/test/res/1")
     public List<Reservation> confirm(@RequestParam long id) {
         List<Reservation> res = reservationService.getReservationsByUserId(id);
         return res;
