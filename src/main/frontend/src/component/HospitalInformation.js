@@ -73,7 +73,7 @@ export default function HospitalInformation() {
                         },
                     });
                     setJoinData(response.data);
-
+                    setIsJoin(true);
                     console.log(response);
                 } catch (error) {
                     console.error('Error:', error);
