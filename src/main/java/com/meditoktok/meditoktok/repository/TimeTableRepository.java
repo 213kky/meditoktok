@@ -9,4 +9,5 @@ import java.util.List;
 @Repository
 public interface TimeTableRepository extends JpaRepository<TimeTable, Long> {
     List<TimeTable> findByDoctorIdAndTimeId(Long id, String time);
+    List<TimeTable> findByDoctorIdAndReservationDate(Long id, String reservationDate);
 }

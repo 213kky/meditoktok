@@ -118,13 +118,13 @@ import { useNavigate } from 'react-router-dom';
 
 moment.locale('ko');
 
-function Calendar1({selectedDoctor}) {
+function Calendar1({selectedDoctor, onTimeClick , onFilter, handleTimeCount}) {
   const [selectedDate, setSelectedDate] = useState(moment());
   const [isTableVisible, setIsTableVisible] = useState(false);
   const [clickedDate, setClickedDate] = useState(null);
-
+  const [reservationData, setReservationData] = useState([]);
   const [hospitalId, setHospitalId] = useState('');
-
+  const [reservationList, setReservationList] = useState([]);
 
   const [cookies, setCookie] = useCookies(['memberInfo']);
     const cookieValue = cookies['memberInfo'];
@@ -145,6 +145,22 @@ function Calendar1({selectedDoctor}) {
 
 
 
+
+
+const handleTimeClick = (time) => {
+    const filteredReservations = reservationList.filter((item) => {
+      const reservationTime = item.reservationDate.split(' ')[1];
+      return reservationTime === time;
+    });
+
+    // filteredReservations를 사용하여 원하는 작업을 수행
+
+    console.log('Filtered Reservations:', filteredReservations);
+
+    // 상위 컴포넌트로 filteredReservations 전달
+    onFilter(filteredReservations);
+  };
+
   const handleDateClick = async (day) => {
     setSelectedDate(day);
     setIsTableVisible(true);
@@ -155,14 +171,36 @@ const formData = {
       doctorId: selectedDoctor,
       reservationDate: day.format('YYYY-MM-DD'),
     };
+
     try {
       console.log("cl",selectedDoctor)
       const response = await axios.post('/send/date', formData);
       console.log("formData: ",formData);
+      console.log(response.data);
+      setReservationData(response.data);
+
+      const reservationList = await axios.get('/test/test', {
+                          params: {
+                              reservationDate: day.format('YYYY-MM-DD'),
+                          },
+                      });
+                      setReservationList(reservationList.data);
+console.log('reservationList', reservationList.data);
+
     } catch (error) {
       console.error('Error:', error);
     }
   };
+
+
+
+
+
+
+
+
+
+
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -190,7 +228,10 @@ const formData = {
 
   const weekdaysShort = moment.weekdaysShort(true);
   const months = moment.months();
-
+const handleClick = (count) => {
+    // 클릭한 {time.count} 값을 처리하는 로직을 작성합니다.
+    console.log('Clicked count:', count);
+  };
   return (
     <div className="calendar">
       <div className="dropdowns">
@@ -256,7 +297,7 @@ const formData = {
       <div className='tableC'>
         {isTableVisible && clickedDate && (
           <div className="table-wrapper">
-            <TableComponent1 selectedDate={clickedDate} />
+            <TableComponent1 selectedDate={clickedDate} reservationData = {reservationData} reservationList={reservationList} handleTimeClick={handleTimeClick} handleTimeCount={handleTimeCount} />
           </div>
         )}
       </div>

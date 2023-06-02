@@ -12,15 +12,34 @@ public class TimeTable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-
+    @JsonProperty("doctorId")
     private Long doctorId;
-    private String date;
+    @JsonProperty("reservationDate")
+    private String reservationDate;
     private String timeId;
     @JsonProperty("max")
     private Long max;
-
+    public TimeTable() {
+        // 기본 생성자 구현
+    }
     public TimeTable(String timeId, Long max) {
         this.timeId = timeId;
+        this.max = max;
+    }
+
+    public String getReservationDate() {
+        return reservationDate;
+    }
+
+    public void setReservationDate(String reservationDate) {
+        this.reservationDate = reservationDate;
+    }
+
+    public Long getMax() {
+        return max;
+    }
+
+    public void setMax(Long max) {
         this.max = max;
     }
 
@@ -41,11 +60,11 @@ public class TimeTable {
     }
 
     public String getDate() {
-        return date;
+        return reservationDate;
     }
 
     public void setDate(String date) {
-        this.date = date;
+        this.reservationDate = date;
     }
 
     public String getTimeId() {

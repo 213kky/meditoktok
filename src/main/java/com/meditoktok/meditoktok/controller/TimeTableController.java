@@ -6,12 +6,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.NoSuchElementException;
 
 @RestController
 public class TimeTableController {
@@ -75,6 +77,36 @@ public class TimeTableController {
             return ResponseEntity.ok(list);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+        }
+    }
+
+//    @PostMapping("/send/date")
+//    public List<TimeTable> checkReservation2(@RequestBody TimeTableDto dto) throws Exception {
+//        try {
+//            List<TimeTable> list = timetableService.getAllTimetablesByDoctorIdAndDate(dto.getDoctorId(), dto.getDate());
+//            return list;
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//            throw new Exception("Error occurred during timetable retrieval."); // 예외 던지기
+//        }
+//    }
+
+    @PostMapping("/send/date")
+    public List<TimeTable> checkReservation2(@RequestBody TimeTableDto dto) {
+        System.out.println(dto.getReservationDate());
+//        return "연결성공";
+        try {
+            System.out.println(dto.getReservationDate());
+            List<TimeTable> list = new ArrayList<>();
+            list =  timetableService.getAllTimetablesByDoctorIdAndDate(dto.getDoctorId(), dto.getReservationDate());
+            System.out.println(list);
+            return list;
+        } catch (NoSuchElementException e) {
+            e.printStackTrace();
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "해당 의사의 시간표가 없ㄴ습니다.");
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "시간표 검색 중 오류가 발생했습니다.");
         }
     }
 

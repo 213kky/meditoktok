@@ -45,6 +45,16 @@ public class TimeTableService {
         return timetables;
     }
 
+    public List<TimeTable> getAllTimetablesByDoctorIdAndDate(Long doctorId, String reservationDate) {
+        List<TimeTable> timetables = timetableRepository.findByDoctorIdAndReservationDate(doctorId, reservationDate);
+        if (timetables.isEmpty()) {
+            throw new NoSuchElementException("해당 의사의 시간표가 없습니다."); // 예외를 던져서 상위로 전달합니다.
+        }
+
+        return timetables;
+    }
+
+
     public TimeTable updateTimetable(TimeTable timetable) {
         return timetableRepository.save(timetable);
     }

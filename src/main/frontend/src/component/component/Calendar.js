@@ -2,38 +2,29 @@ import React, { useState } from 'react';
 import moment from 'moment';
 import 'moment/locale/ko';
 import './Calendar.css';
-import axios from 'axios';
 
 moment.locale('ko');
 
-function Calendar({ clickedDate, setClickedDate }) {
+function Calendar({clickedDate, setClickedDate}) {
   const [selectedDate, setSelectedDate] = useState(moment());
 
   const handleChange = (event) => {
     const { name, value } = event.target;
     setSelectedDate((prevDate) => prevDate.clone().set(name, value).startOf('month'));
   };
-
+  
   const handlePrevMonth = () => {
     setSelectedDate((prevDate) => prevDate.clone().subtract(1, 'month').startOf('month'));
   };
-
+  
   const handleNextMonth = () => {
     setSelectedDate((prevDate) => prevDate.clone().add(1, 'month').startOf('month'));
   };
 
-  const handleDateClick = async (clickedDate) => {
+  
+  const handleDateClick = (clickedDate) => {
     setClickedDate(clickedDate);
-    console.log(clickedDate.format('YYYY-MM-DD'));
-
-    // try {
-    //   const response = await axios.post('/api/selected-date', {
-    //     selectedDate: clickedDate.format('YYYY-MM-DD'),
-    //   });
-    //   console.log(response.data);
-    // } catch (error) {
-    //   console.error('Error:', error);
-    // }
+console.log(clickedDate.format('YYYY-MM-DD')); // 선택된 날짜 출력
   };
 
   const weekdaysShort = moment.weekdaysShort(true);

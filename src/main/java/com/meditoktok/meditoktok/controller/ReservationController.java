@@ -2,6 +2,7 @@ package com.meditoktok.meditoktok.controller;
 
 import com.meditoktok.meditoktok.domain.Reservation;
 import com.meditoktok.meditoktok.domain.User;
+import com.meditoktok.meditoktok.repository.ReservationRepository;
 import com.meditoktok.meditoktok.service.ReservationService;
 import com.meditoktok.meditoktok.service.UserService;
 import com.mysql.cj.log.Log;
@@ -15,7 +16,8 @@ public class ReservationController {
 
     @Autowired
     ReservationService reservationService;
-
+@Autowired
+    ReservationRepository reservationRepository;
 
     // 예약
     @PostMapping("/test/res")
@@ -52,6 +54,16 @@ public class ReservationController {
     public String delete(@RequestParam("id") long id) {
         reservationService.deleteReservation(id);
         return id + " : 삭제";
+    }
+
+    @GetMapping("/test/test")
+    public List<Reservation> test12(@RequestParam String reservationDate) {
+        try {
+            List<Reservation> res = reservationService.getReservationsByReservationDateLike(reservationDate);
+            return res;
+        } catch (Exception e) {
+            throw new RuntimeException("예약 검색중 오류", e);
+        }
     }
 
 }

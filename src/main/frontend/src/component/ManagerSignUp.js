@@ -20,7 +20,31 @@ export default function ManagerSignUp() {
 const [selectedHospital, setSelectedHospital] = useState(null);
 const [data1, setData1] = useState(null);
 const [data2, setData2] = useState(null);
+ const [showForm, setShowForm] = useState(false);
+const [doctorName, setDoctorName] = useState("");
+const [department1, setDepartment1] = useState("");
+const [doctors, setDoctors] = useState([{ name: "", department: "" }]);
+console.log('doctors', doctors);
+const handleAddDoctor = () => {
+    setDoctors([...doctors, { name: "", department: "" }]);
+  };
+  const handleRemoveDoctor = (index) => {
+      const updatedDoctors = [...doctors];
+      updatedDoctors.splice(index, 1);
+      setDoctors(updatedDoctors);
+    };
 
+    const handleDoctorNameChange = (index, value) => {
+        const updatedDoctors = [...doctors];
+        updatedDoctors[index].name = value;
+        setDoctors(updatedDoctors);
+      };
+
+      const handleDoctorDepartmentChange = (index, value) => {
+        const updatedDoctors = [...doctors];
+        updatedDoctors[index].department = value;
+        setDoctors(updatedDoctors);
+      };
 
 //const handleSubmit = (event) => {
 //        event.preventDefault();
@@ -97,20 +121,41 @@ const [data2, setData2] = useState(null);
 
 
 
+const handleSaveDoctorData = () => {
+  if (!selectedHospital) {
+    console.error("병원을 선택하세요.");
+    return;
+  }
 
+  const formData = {
+    hospName: selectedHospital.yadmNm,
+    doctors: doctors,
+  };
+console.log('의사정보 반환', formData);
+  axios
+    .post('/api/saveDoctorData', formData)
+    .then(response => {
+      console.log(formData);
+      // 저장 성공 후의 동작을 정의
+    })
+    .catch(error => {
+      console.error(error);
+      // 저장 실패 후의 동작을 정의
+    });
+};
 
 
 
  const handleHospitalSelect = (hospital) => {
    setSelectedHospital(hospital); // 선택한 병원을 상태 변수에 저장
-   handleSaveData();
+
  };
 
- useEffect(() => {
-   if (selectedHospital) {
-     handleSaveData(); // 선택한 병원이 변경될 때마다 handleSaveData 함수 호출
-   }
- }, [selectedHospital]);
+// useEffect(() => {
+//   if (selectedHospital) {
+//     handleSaveData(); // 선택한 병원이 변경될 때마다 handleSaveData 함수 호출
+//   }
+// }, [selectedHospital]);
 
 
   const handleSaveData = () => {
@@ -145,6 +190,10 @@ axios.post('/api/saveData', formData)
         // 저장 실패 후의 동작을 정의
       });
     }
+
+    setDoctorName("");
+        setDepartment1("");
+        setShowForm(true);
   };
 
 
@@ -251,7 +300,44 @@ console.log('selectedHospital', selectedHospital);
                   {/* 추가 정보 출력 */}
                 </div>
               )}
-        <button onClick={handleSaveData}>데이터 저장</button>
+        <button type="button" onClick={handleSaveData}>데이터 저장</button>
+{doctors.map((doctor, index) => (
+          <div key={index}>
+            <h2>의사 정보 {index + 1}</h2>
+            <div>
+              <div>이름</div>
+              <input
+                type="text"
+                value={doctor.name}
+                onChange={(event) =>
+                  handleDoctorNameChange(index, event.target.value)
+                }
+              />
+            </div>
+            <div>
+              <div>진료과</div>
+              <input
+                type="text"
+                value={doctor.department}
+                onChange={(event) =>
+                  handleDoctorDepartmentChange(index, event.target.value)
+                }
+              />
+            </div>
+            {index > 0 && (
+              <button type="button" onClick={() => handleRemoveDoctor(index)}>
+                의사 정보 삭제
+              </button>
+            )}
+          </div>
+        ))}
+
+        <button type="button" onClick={handleAddDoctor}>
+          의사 정보 추가
+        </button>
+        <button type="button" onClick={handleSaveDoctorData}>
+          의사 정보 저장
+        </button>
       </form>
     </section>
   );

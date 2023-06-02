@@ -155,5 +155,13 @@ public class ReservationService {
         }
         reservationRepository.deleteById(id);
     }
+    // 관리자페이지3에서 날짜별 예약조회
+    public List<Reservation> getReservationsByReservationDateLike(String reservationDate) {
+        try {
+            return reservationRepository.findByReservationDateLike(reservationDate);
+        } catch (Exception e) {
+            throw new RuntimeException("잘못된 날짜를 집어넣은것 같습니다.", e);
+        }
+    }
 
 }

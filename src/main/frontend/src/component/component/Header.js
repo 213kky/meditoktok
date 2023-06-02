@@ -5,6 +5,7 @@ import {useCookies} from "react-cookie";
 export default function Header(props) {
     const [cookies, setCookie, removeCookie] = useCookies(['memberInfo', 'loginState']);
     const cookieValue = cookies['memberInfo'];
+    console.log(cookieValue);
     return (
         <div className="header">
             <div class="log">

@@ -1,24 +1,57 @@
-import './Patient.css'
-import List from './List.js'
-import Calendar1 from "../component/Calendar1";
+    import './Patient.css'
+    import List from './List.js'
+    import Calendar1 from "../component/Calendar1";
+    import { useState } from "react";
+    export default function Patient({selectedDoctor}) {
+    const [reservationList, setReservationList] = useState([]);
+    const [reservationData, setReservationData] = useState([]);
 
-export default function Patient({selectedDoctor}) {
+    //const handleData = (data) => {
+    //    // 상위 컴포넌트에서 데이터를 처리하는 로직을 작성
+    //    console.log('Received data:', data);
+    //  };
 
-  return (
-    <div>
-    <div className="Cal">
-      <div className='Cd'><Calendar1 selectedDoctor={selectedDoctor}/></div>
-    </div>
+    const [count, setCount] = useState(0);
 
-    <div className='List'>
-    <caption className='number'>3/7</caption>
-    <table className='list'> 
-      <List name="김광연" tel="010-1234-5678" txt="지속적인 두통"/>
-      <List name="김승민" tel="010-4557-1253" txt="없음"/>
-      <List name="전정원" tel="010-3563-2146" txt="잔기침"/>
-    </table>
+      const handleTimeCount = (count) => {
+          // count 값을 이용한 원하는 작업을 수행합니다
+          setCount(count);
+          console.log('받은 count:', count);
+          // ...
+        };
 
-    </div>
-    </div>
-  )
-}
+
+    const [filteredReservations, setFilteredReservations] = useState([]);
+
+      const handleFilteredReservations = (filteredData) => {
+        setFilteredReservations(filteredData);
+      };
+
+
+
+    console.log('filteredReservations', filteredReservations);
+    console.log('handleCountReservation', filteredReservations.length)
+
+      return (
+        <div>
+        <div className="Cal">
+          <div className='Cd'><Calendar1 selectedDoctor={selectedDoctor}  onFilter={handleFilteredReservations} handleTimeCount={handleTimeCount}/></div>
+        </div>
+
+        <div className='List'>
+        <caption className='number'>{filteredReservations.length}/{count}</caption>
+        <table className='list'>
+          {filteredReservations.map((reservation, index) => (
+                  <List
+                    key={index}
+                    name={reservation.patientName}
+                    tel={reservation.phoneNumber}
+                    txt={reservation.notes}
+                  />
+                ))}
+        </table>
+
+        </div>
+        </div>
+      )
+    }
