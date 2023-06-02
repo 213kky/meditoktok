@@ -34,7 +34,14 @@ public class HospitalService {
 
         return hospitalRepository.save(hospital);
     }
-
+    public Hospital getHospitalByYkiho(String ykiho) throws  Exception {
+        Optional<Hospital> optionalHospital = Optional.ofNullable(hospitalRepository.findByYkiho(ykiho));
+        if (optionalHospital.isPresent()) {
+            return optionalHospital.get();
+        } else {
+            throw new Exception("병원을 찾을 수 없습니다");
+        }
+    }
     public Hospital getHospitalById(Long id) throws Exception {
         // ID로 병원 정보 조회
         Optional<Hospital> optionalHospital = hospitalRepository.findById(id);

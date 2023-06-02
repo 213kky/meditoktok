@@ -76,7 +76,7 @@ export default function HospitalInformation() {
                     setIsJoin(true);
                     console.log(response);
                 } catch (error) {
-                    console.error('Error:', error);
+                    console.error('Not Join Error:', error);
                 }
             }
         };
