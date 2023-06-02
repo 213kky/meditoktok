@@ -186,21 +186,21 @@ export default function HospitalInformation() {
                 <div className="hospitalInfoBox" >
                     <span>공지사항</span>
                     {/*<div>{items.ykiho}</div>*/}
-                    <div>{joinData.notes}</div>
+                    <div>{joinData.notes != null ? joinData.notes : <>공지사항이 없습니다.</> }</div>
                     <span>병원 URL</span>
-                    <div>{joinData.url}</div>
+                    <div>{joinData.url != null ? joinData.url : <>URL이 존재하지 않습니다.</> }</div>
                     <span>진료과목</span>
-                    <div>{joinData.department}</div>
+                    <div>{joinData.department != null ? joinData.department : <>진료과목 정보가 없습니다.</> }</div>
                     <span>의료진</span>
                     {/*<div>{items3 != null ? (items3.map((item3, index)=> item3.dgsbjtCdNm+" : "+item3.dgsbjtPrSdrCnt+"명 ")) : "의료진 정보가 존재하지 않습니다."}</div>*/}
-                    <div>{joinData.medicalStaffName}</div>
+                    <div>{joinData.medicalStaffName != null ? joinData.medicalStaffName : <>의료진 정보가 없습니다.</> }</div>
                     <span>운영시간</span>
                     {/*다른 운영시간에 대한 정보가 없을 시 표현 생각 (주중, 주말, 요일별 진료시간, 점심시간 등등*/}
-                    <div>{joinData.operatingHours}</div>
+                    <div>{joinData.operatingHours != null ? joinData.operatingHours : <>운영시간 정보가 존재하지 않습니다.</> }</div>
                     <span>주소</span>
-                    <div>{joinData.address}</div>
+                    <div>{joinData.address != null ? joinData.address : <>주소 정보가 없습니다.</> }</div>
                     <span>전화번호</span>
-                    <div>{joinData.tell}</div>
+                    <div>{joinData.tell != null ? joinData.tell : <>전화번호가 존재하지 않습니다.</> }</div>
                 </div>
                 <ul className="doctorList">
                     {doctorLoading && doctorList.map((doctor, index)=>{
