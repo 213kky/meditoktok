@@ -17,11 +17,11 @@ export default function HospitalInformation() {
     const [joinData, setJoinData] = useState(null);
     const [doctorList, setDoctorList] = useState([]);
     let items, items2, items3, renderList;
-
+    console.log("addr : ", addr);
     useEffect(() => {
         if (loading) {
             console.log("요양기호 가져오기");
-            axios.get(`https://apis.data.go.kr/B551182/hospInfoServicev2/getHospBasisList?serviceKey=G3OZp5dYqrTm0I9gNRRu%2BXouEslD9Gs7F%2BYz9LUKT8%2F%2BJjRHdzSmmSwbLnJ7vR6znJD4hftgOK5ZZ%2FCE9iG3XA%3D%3D&pageNo=1&numOfRows=1&addr=${addr}&yadmNm=${yadmNm}`)
+            axios.get(`https://apis.data.go.kr/B551182/hospInfoServicev2/getHospBasisList?serviceKey=G3OZp5dYqrTm0I9gNRRu%2BXouEslD9Gs7F%2BYz9LUKT8%2F%2BJjRHdzSmmSwbLnJ7vR6znJD4hftgOK5ZZ%2FCE9iG3XA%3D%3D&pageNo=1&numOfRows=1&emdongNm=${addr}&yadmNm=${yadmNm}`)
                 .then(response => {
                     setData(response.data);
                 })
