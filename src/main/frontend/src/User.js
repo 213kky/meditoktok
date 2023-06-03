@@ -20,10 +20,6 @@ import FindAccount from "./component/FindAccount";
 import Test from "./component/Test";
 import React, {Suspense, useEffect} from "react";
 import LoginKakao from './component/LoginKakao';
-import DiseaseTable from "./component/DiseaseTable";
-import SymptomReset from "./component/SymptomReset";
-import DiseaseResultMain from "./component/DiseaseResultMain";
-import FoundDisease from "./component/FoundDisease";
 
 function User(props) {
 
