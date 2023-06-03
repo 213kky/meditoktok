@@ -13,31 +13,6 @@ public class HospitalController {
     @Autowired
     HospitalService hospitalService;
 
-//    @PostMapping("/test11")
-//    public String test(@RequestBody HospitalTest hospitalTest) {
-
-//        Optional<Hospital> byHospName = Optional.ofNullable(hospitalRepository.findByHospName(hospitalTest.getId()));
-//        if(byHospName.isPresent()){
-//            return byHospName.get().getHospName();
-//        }
-//        else {
-//            throw new RuntimeException("정보에 해당하는 아이디가 없습니다.");
-//        }
-//        Hospital test = hospitalService.test(hospitalTest.getId());
-//        return test.getHospName();
-//        return hospitalTest.toString();
-//    }
-//    @PostMapping("/test/hospiinfo/save")
-//    public String firstSave(@RequestBody HospiDto dto){
-////
-//        hospitalService.firstSave(dto);
-//        return "첫 병원정보 저장";
-//    }
-
-//    @PostMapping("/api/saveData")
-//    public String tesst(@RequestBody HosDto dto) {
-//        return "성공";
-//    }
 
     //병원 저장하면서 병원 Id값 반환 do
     @PostMapping("/api/saveData")
