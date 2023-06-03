@@ -22,8 +22,11 @@ export default function MyMap(props) {
     const [circleCenter, setCircleCenter] = useState(null)
     const [circleRadius, setCircleRadius] = useState(1000)
     const [circleZoom, setCircleZoom] = useState(15)
-    const myRef = useRef([])
-
+    const myRef = useRef([]);
+    const [mapData, setMapData] = useState([]);
+    const [coordinates, setCoordinates] = useState({});
+    const [sameCoordinates, setSameCoordinates] = useState({});
+    const [sameIndex, setSameIndex] = useState([]);
     function calculateDistance(lat1, lon1, lat2, lon2) {
         const earthRadius = 6371; // 지구 반지름 (단위: km)
 
@@ -56,10 +59,16 @@ export default function MyMap(props) {
             if (props.mode === 0) {
                 props.setInputValue('');
             }
-            axios.get(`https://apis.data.go.kr/B551182/hospInfoServicev2/getHospBasisList?ServiceKey=%2Fzt1jmOZn0y5Q8ql8mxBIKRoXvyqetyRjCvZUNCV6OCXxnnYWFFZUnNcW5E2yCax4iZMPg%2FAbMM%2FpAw7%2BeYhtQ%3D%3D&pageNo=1&numOfRows=100&xPos=${map.getCenter().lng()}&yPos=${map.getCenter().lat()}&radius=1000`)
+            let url;
+            if(props.mode === 0){
+                url = `https://apis.data.go.kr/B551182/hospInfoServicev2/getHospBasisList?ServiceKey=%2Fzt1jmOZn0y5Q8ql8mxBIKRoXvyqetyRjCvZUNCV6OCXxnnYWFFZUnNcW5E2yCax4iZMPg%2FAbMM%2FpAw7%2BeYhtQ%3D%3D&pageNo=1&numOfRows=100&xPos=${map.getCenter().lng()}&yPos=${map.getCenter().lat()}&radius=1000`;
+            }else if(props.mode === 1){
+                url = `https://apis.data.go.kr/B551182/hospInfoServicev2/getHospBasisList?ServiceKey=%2Fzt1jmOZn0y5Q8ql8mxBIKRoXvyqetyRjCvZUNCV6OCXxnnYWFFZUnNcW5E2yCax4iZMPg%2FAbMM%2FpAw7%2BeYhtQ%3D%3D&pageNo=1&numOfRows=100&dgsbjtCd=${props.code}&xPos=${map.getCenter().lng()}&yPos=${map.getCenter().lat()}&radius=1000`;
+            }
+            axios.get(url)
                 .then(response => {
                     props.setTotalCount(response.data.response.body.totalCount)
-                    if(response.data.response.body.totalCount===1){
+                    if (response.data.response.body.totalCount === 1) {
                         props.setHospitals(response.data.response.body.items.item)
                     }
                     if (response.data.response.body.totalCount > 1) {
@@ -97,17 +106,23 @@ export default function MyMap(props) {
     //             })
     //     }
     // }, [loading])
-    function reSearch() {//나중에 모드에 따른 진료 과목 추가해야 함
+   async function reSearch() {//나중에 모드에 따른 진료 과목 추가해야 함
         console.log("재검색");
         props.setTotalCount(null)
         if (props.mode === 0) {
             props.setInputValue('');
         }
+        let url;
+        if(props.mode === 0) {
+            url = `https://apis.data.go.kr/B551182/hospInfoServicev2/getHospBasisList?ServiceKey=%2Fzt1jmOZn0y5Q8ql8mxBIKRoXvyqetyRjCvZUNCV6OCXxnnYWFFZUnNcW5E2yCax4iZMPg%2FAbMM%2FpAw7%2BeYhtQ%3D%3D&pageNo=1&numOfRows=100&xPos=${map.getCenter().lng()}&yPos=${map.getCenter().lat()}&radius=${circleRadius}`;
+        }else if(props.mode === 1){
+            url = `https://apis.data.go.kr/B551182/hospInfoServicev2/getHospBasisList?ServiceKey=%2Fzt1jmOZn0y5Q8ql8mxBIKRoXvyqetyRjCvZUNCV6OCXxnnYWFFZUnNcW5E2yCax4iZMPg%2FAbMM%2FpAw7%2BeYhtQ%3D%3D&pageNo=1&numOfRows=100&dgsbjtCd=${props.code}&xPos=${map.getCenter().lng()}&yPos=${map.getCenter().lat()}&radius=${circleRadius}`;
+        }
         //numOfRows=10 --> 표시되는 행의 수 (테스트를 위해 10으로 설정)
-        axios.get(`https://apis.data.go.kr/B551182/hospInfoServicev2/getHospBasisList?ServiceKey=%2Fzt1jmOZn0y5Q8ql8mxBIKRoXvyqetyRjCvZUNCV6OCXxnnYWFFZUnNcW5E2yCax4iZMPg%2FAbMM%2FpAw7%2BeYhtQ%3D%3D&pageNo=1&numOfRows=100&xPos=${map.getCenter().lng()}&yPos=${map.getCenter().lat()}&radius=${circleRadius}`)
+       await axios.get(url)
             .then(response => {
                 props.setTotalCount(response.data.response.body.totalCount)
-                if(response.data.response.body.totalCount===1){
+                if (response.data.response.body.totalCount === 1) {
                     props.setHospitals(response.data.response.body.items.item)
                 }
                 if (response.data.response.body.totalCount > 1) {
@@ -278,13 +293,13 @@ export default function MyMap(props) {
                 </>
             )
         }
-        const items = data.response.body.items.item;
+        const items =  data.response.body.items.item;
         return items.map((item, index) => {
                 return (
                     <>
                         <InfoWindow ref={el => myRef.current[index] = el} content={
                             '<div style="padding:10px;">' +
-                            item.yadmNm +
+                            `${item.yadmNm}` +
                             '</div>' +
                             `<a style="padding: 10px; text-decoration: underline; font-size: 13px; color: blue;" href=/hospital_information/?yadmNm=${item.yadmNm}&addr=${item.sgguCdNm} >` + '병원 정보 페이지' + '</a>'}/>
                         <Marker position={new navermaps.LatLng(item.YPos, item.XPos)} onClick={() => {
@@ -292,6 +307,8 @@ export default function MyMap(props) {
                                 myRef.current[index].close()
                             } else {
                                 myRef.current[index].open(map, new navermaps.LatLng(item.YPos, item.XPos))
+                                // x, y 좌표를 구해서 상태값에 저장
+                                setCoordinates({"lat": item.YPos, "lng": item.XPos})
                             }
                         }}/>
 
@@ -301,6 +318,33 @@ export default function MyMap(props) {
         )
 
     }
+
+    useEffect(() => {
+        setMapData(data);
+    }, [data]);
+
+    useEffect(() => {
+        if (data !== null) {
+            const items = data.response.body.items.item
+            let count = 0;
+            let arr = [];
+            items.map((item, index) => {
+                if (item.YPos === coordinates.lat && item.XPos === coordinates.lng) { //1개는 무조건 같은 좌표가 있음.
+                    count++;
+                    if(count>1){
+                        console.log("same coordinates : ", coordinates);
+                        setSameCoordinates({"lat": item.YPos, "lng": item.XPos})
+                    }
+                    arr.push(item)
+                }
+            })
+            if(arr.length > 1){
+                console.log("temp Array : ",arr);
+                setSameIndex(arr);
+            }
+        }
+        // 비교작업을 해서 얻은 값들마 또다른 상태값에 저장
+    }, [data, mapData, coordinates]) // [] -> 좌표값은 넣은 상태값을 넣는다.
 
     useEffect(() => {
         if (!map) {

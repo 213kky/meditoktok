@@ -1,4 +1,4 @@
-import {Link} from "react-router-dom";
+import {Link, useLocation} from "react-router-dom";
 import React, {useState, useRef} from "react";
 import MyMap from "./MyMap";
 import MyRegion from "./MyRegion";
@@ -10,6 +10,10 @@ export default function Two() {
     const [sortSelect, setSortSelect] = useState('abc');
     const [hospitals, setHospitals] = useState([]);
     const [totalCount, setTotalCount] = useState(null);
+    const location = useLocation();
+    const queryParams = new URLSearchParams(location.search);
+    const code = queryParams.get('code'); //현재 DiseaseInformation에서 하나의 코드값만 넘김 code[0] 진료과가 여러 개인 경우 생각해 봐야 함
+    console.log("병원 검색 페이지 code :",code);
     const handleToggleMap = () => {
         setIsMap(true);
     };
@@ -121,8 +125,8 @@ export default function Two() {
                     </div>
                 </div>
                 <div className={`${isMap ? 'mapBox' : 'regionBox'}`}>
-                    {isMap ? <MyMap mode={1} setTotalCount={setTotalCount} setHospitals={setHospitals}/> :
-                        <MyRegion mode={1} setData={setData}/>}
+                    {isMap ? <MyMap mode={1} code={code} setTotalCount={setTotalCount} setHospitals={setHospitals}/> :
+                        <MyRegion mode={1} code={code} setData={setData}/>}
                 </div>
             </div>
             <div className="hospitalListBox">

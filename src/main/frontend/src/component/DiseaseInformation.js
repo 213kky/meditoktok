@@ -8,6 +8,9 @@ export default function DiseaseInformation() {
     const queryParams = new URLSearchParams(location.search);
     const cntntsSn = queryParams.get('cntntsSn');
     const department = queryParams.get('department');
+    const code = queryParams.get('code').split(', ');
+    console.log("code: ",code);
+
     const [data, setData] = useState(null);
 
     // useEffect(() => {
@@ -66,7 +69,7 @@ export default function DiseaseInformation() {
                 <div>
                     <div className="disease">{data ? data.XML.svc.CNTNTSSJ.__cdata : null}</div>
                     <div className="department">{department}</div>
-                    <div className="hospitalList"><Link to="/hospital_reservation/1">병원목록</Link></div>
+                    <div className="hospitalList"><Link to={`/hospital_reservation/1?code=${code[0]}`}>병원목록</Link></div>
                 </div>
                 {/*<div className="disease_image1">질병 사진</div>*/}
                 <div className="diseaseInfo" style={{marginTop: "10px",}}>
