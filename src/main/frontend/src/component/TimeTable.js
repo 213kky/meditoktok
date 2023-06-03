@@ -12,7 +12,7 @@ export default function TimeTable({doctorId, clickDate, setClickedTime}) {
         const fetchData = async () => {
             if (clickDate !== null) {
                 try {
-                    const response = await axios.post('/timeTable', {
+                    const response = await axios.get('/timeTable', {
                         params: {
                             doctorId: doctorId,
                             reservationDate: clickDate,
