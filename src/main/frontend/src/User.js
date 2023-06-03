@@ -9,9 +9,9 @@ import QuickMenu from "./component/QuickMenu"
 import DiseaseInformation from "./component/DiseaseInformation";
 import HospitalInformation from "./component/HospitalInformation";
 import Two from "./component/Two";
-import Change from "./component/change";
+import Change from "./component/Change";
 import EmptyPage from "./component/EmptyPage";
-import Login from "./component/login";
+import Login from "./component/Login";
 import Signup from "./component/SignUp";
 import MainPage from "./component/MainPage";
 import UserSignUp from "./component/UserSignUp";

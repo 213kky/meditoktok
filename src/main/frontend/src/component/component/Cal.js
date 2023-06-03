@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Datepicker from './Datepicker';
+import DatePicker from './DatePicker';
 
 function App() {
   const [selectedDate, setSelectedDate] = useState(new Date());
@@ -12,7 +12,7 @@ function App() {
   return (
     <div>
       <h1>Select Date</h1>
-      <Datepicker selectedDate={selectedDate} onChange={handleDateChange} />
+      <DatePicker selectedDate={selectedDate} onChange={handleDateChange} />
       {/* 다른 컴포넌트들 */}
     </div>
   );

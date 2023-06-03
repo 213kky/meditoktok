@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './button.css';
+import './Button.css';
 
 function EditButton({ item, onEdit }) {
   const [showModal, setShowModal] = useState(false);

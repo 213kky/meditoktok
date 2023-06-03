@@ -1,9 +1,9 @@
 import React, {useState, useEffect} from 'react';
-import './Hospitalinfo.css';
+import './HospitalInfo.css';
 import axios from "axios";
 import {useCookies} from "react-cookie";
 
-export default function Hospitalinfo(props) {
+export default function HospitalInfo(props) {
     const [editMode, setEditMode] = useState(false);
     const [department, setDepartment] = useState('');
     const [doctors, setDoctors] = useState('');
