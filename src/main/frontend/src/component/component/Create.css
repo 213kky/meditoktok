@@ -9,6 +9,7 @@
   height: 550px;
   margin-left: 20px;
   margin-right: 150px;
+  margin-bottom: 100px;
 }
 
 .CD {
@@ -114,8 +115,7 @@
 }
 
 .TC {
-  margin-top: -553px;
-  margin-bottom: 100px;
+  margin-top: -653px;
 }
 
 .period {
