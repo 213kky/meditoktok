@@ -1,6 +1,8 @@
 import "./TableComponent.css";
 import axios from "axios";
-export default function TableComponent({doctor, startTime, endTime, clickedDate}) {
+import {useEffect} from "react";
+
+export default function TableComponent({doctor, startTime, endTime, clickedDate, setIsTableVisible, defaultCount}) {
 
 
     const generateTimeSlots = () => {
@@ -29,7 +31,7 @@ export default function TableComponent({doctor, startTime, endTime, clickedDate}
 
     const timeSlots = generateTimeSlots();
     const reservationCounts = generateTimeSlots();
-    console.log(timeSlots[0].time);
+    // console.log(timeSlots[0].time);
 
     const amSlots = timeSlots.filter(slot => {
         return slot.time.includes("오전");
@@ -38,7 +40,11 @@ export default function TableComponent({doctor, startTime, endTime, clickedDate}
         return slot.time.includes("오후");
     });
 
-
+    useEffect(()=>{
+        for(let i=0; i<reservationCounts.length; i++){
+            reservationCounts[i].count = defaultCount;
+        }
+    },[defaultCount])
     const handleChange = (time, e) => {
         const existingIndex = reservationCounts.findIndex(item => item.time === time);
         if (reservationCounts[existingIndex]) {
@@ -51,27 +57,27 @@ export default function TableComponent({doctor, startTime, endTime, clickedDate}
 //        console.log("Reservation Counts:", reservationCounts);
 //    };
 
-const handleClick = async () => {
-  try {
-const combinedList = [ { doctorId: doctor, date: clickedDate }, ...reservationCounts ];
+    const handleClick = async () => {
+        try {
+            const combinedList = [{doctorId: doctor, date: clickedDate}, ...reservationCounts];
 //  temp.doctorId =  doctor;
 //  temp.date = clickedDate;
 //  temp.push({ doctorId: doctor, date: clickedDate });
 //  temp.push(reservationCounts);
 
 
+            console.log(combinedList);
+            const response = await axios.post('/api/createReservation', combinedList);
 
-  console.log(combinedList);
-    const response = await axios.post('/api/createReservation', combinedList);
-
-    console.log('Reservation data sent successfully.');
-    alert('예약설정이 저장되었습니다..');
-    // Handle successful response from the backend
-  } catch (error) {
-    console.log('Error sending reservation data:', error);
-    // Handle error during the request or response
-  }
-};
+            console.log('Reservation data sent successfully.');
+            alert('예약 설정이 저장되었습니다.');
+            setIsTableVisible(false);
+            // Handle successful response from the backend
+        } catch (error) {
+            console.log('Error sending reservation data:', error);
+            // Handle error during the request or response
+        }
+    };
 
 
     const renderTimeSlots = (slots) => {
@@ -86,6 +92,7 @@ const combinedList = [ { doctorId: doctor, date: clickedDate }, ...reservationCo
                 {row.map((slot, index) => (
                     <td key={index}>
                         <input
+                            defaultValue={defaultCount}
                             type="number"
                             min="0"
                             max="5"
@@ -120,8 +127,16 @@ const combinedList = [ { doctorId: doctor, date: clickedDate }, ...reservationCo
                     <tbody>{renderTimeSlots(pmSlots)}</tbody>
                 </table>
             </div>
-
-            <button className="save" onClick={handleClick}>
+            <button className="save" style={{float: "left"}} onClick={() => {
+                const confirmed = window.confirm("해당 날짜의 예약 설정을 정말 취소하시겠습니까?");
+                if (confirmed) {
+                    setIsTableVisible(false)
+                }
+                ;
+            }}>
+                취소
+            </button>
+            <button className="save" style={{display: "inline-block"}} onClick={handleClick}>
                 저장
             </button>
         </div>
