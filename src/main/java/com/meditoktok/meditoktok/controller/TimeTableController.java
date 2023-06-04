@@ -41,7 +41,7 @@ public class TimeTableController {
 //    }
 
 
-    @PostMapping("/api/treservation")
+    @PostMapping("/api/createReservation")
     public ResponseEntity<String> processReservation(@RequestBody List<Map<String, String>> reservationData) {
         try {
             List<TimeTable> doctorTimeTables = new ArrayList<>();

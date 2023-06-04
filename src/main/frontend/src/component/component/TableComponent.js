@@ -62,9 +62,10 @@ const combinedList = [ { doctorId: doctor, date: clickedDate }, ...reservationCo
 
 
   console.log(combinedList);
-    const response = await axios.post('/api/treservation', combinedList);
+    const response = await axios.post('/api/createReservation', combinedList);
 
     console.log('Reservation data sent successfully.');
+    alert('예약설정이 저장되었습니다..');
     // Handle successful response from the backend
   } catch (error) {
     console.log('Error sending reservation data:', error);
