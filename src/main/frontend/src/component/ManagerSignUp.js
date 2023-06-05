@@ -140,6 +140,7 @@ export default function ManagerSignUp() {
             .post('/api/saveDoctorData', formData)
             .then(response => {
                 console.log(formData);
+                alert('의사정보가 저장되었습니다.');
                 // 저장 성공 후의 동작을 정의
             })
             .catch(error => {
@@ -196,7 +197,7 @@ export default function ManagerSignUp() {
                     console.log(formData.department);
                     console.log('hospId', hospId);
                     // 저장 성공 후의 동작을 정의
-
+                    alert(selectedHospital.yadmNm + ' 병원 정보가 저장되었습니다.');
                 })
                 .catch(error => {
                     console.error(error);
