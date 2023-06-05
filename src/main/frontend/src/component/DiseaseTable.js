@@ -166,7 +166,7 @@ export default function DiseaseTable() {
         const currentItems = filteredDisease.slice(indexOfFirstItem, indexOfLastItem);
 
         return currentItems.map((item, index) => {
-            console.log(item);
+            console.log("renderDiseaseList : ",item);
             return (
                 <DiseaseTr disease={item} key={index}></DiseaseTr>
             );

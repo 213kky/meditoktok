@@ -44,7 +44,7 @@ export default function FindAccount() {
                     <label>이메일:</label>
                     <input type="email" value={email} onChange={(e) => setEmail(e.target.value)}/>
                 </div>
-                <button type="submit">로그인</button>
+                <button type="submit">아이디 찾기</button>
             </form>
 
         </section>
