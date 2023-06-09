@@ -26,6 +26,7 @@ export default function ManagerSignUp() {
     const [doctors, setDoctors] = useState([{name: "", department: ""}]);
     const [hospId, setHospId] = useState(0);
     const [totalCount, setTotalCount] = useState(null);
+    const [oprating, setOperating] = useState("");
     console.log('doctors', doctors);
     const handleAddDoctor = () => {
         setDoctors([...doctors, {name: "", department: ""}]);
@@ -101,6 +102,7 @@ export default function ManagerSignUp() {
                 .then(response => {
                     console.log("병원1", response.data);
                     setData1(response.data);
+                    setOperating(response.data.response.body.items.item.rcvWeek);
                 })
                 .catch(error => {
                     console.error(error);
@@ -181,7 +183,7 @@ export default function ManagerSignUp() {
                 hospName: selectedHospital.yadmNm,
                 department: ll,
                 medicalStaffName: ls,
-                operatingHour: data1.rcvWeek,
+                operatingHours: oprating,
                 address: selectedHospital.addr,
                 tell: selectedHospital.telno,
                 url: selectedHospital.hospUrl,
@@ -192,7 +194,7 @@ export default function ManagerSignUp() {
             // 여기에 formData를 활용하여 데이터 저장 로직을 추가하세요
             axios.post('/api/saveData', formData)
                 .then(response => {
-                    console.log(formData);
+                    console.log('formData저장정보' , formData);
                     setHospId(response.data);
                     console.log(formData.department);
                     console.log('hospId', hospId);
